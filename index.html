@@ -193,6 +193,16 @@ html[dir="ltr"] .hero{border-right-width:1px;border-left:5px solid #c4ff30}
 html[dir="ltr"] .split-card{border-right-width:1px;border-left-width:5px}
 html[dir="ltr"] .plan-ex{text-align:left}
 html[dir="ltr"] .hero:after{left:auto;right:-54px}
+/* V11 nutrition */
+.navbtn{font-size:10px;min-width:0}.navbar{gap:2px;padding:7px 4px}
+#diet-form select{display:block;width:100%;background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:14px}
+#diet-form input[type=date]{width:100%;min-width:0}
+.diet-check{display:flex;align-items:flex-start;gap:10px;line-height:1.8;color:var(--txt);font-size:12px}.diet-check input{margin-top:6px;flex-shrink:0;width:19px;height:19px;accent-color:var(--acc2)}
+.diet-hero{border-color:#466825;background:linear-gradient(145deg,#1b2b11,var(--card))}.diet-hero h2{font-size:24px;margin:8px 0}.diet-hero p{font-size:13px;line-height:1.9}
+.diet-weeks{display:flex;gap:5px;margin:18px 0;flex-wrap:wrap}.diet-weeks .tab{flex:1;min-width:54px;padding:10px 4px;font-size:12px}
+.diet-day summary{display:flex;justify-content:space-between;align-items:center;font-weight:800;cursor:pointer}.diet-day summary small{display:block;font-size:11px;color:var(--mut);font-weight:400;direction:ltr;text-align:start;margin-top:3px}
+.diet-meals>div{padding:14px 0;border-bottom:1px solid var(--line)}.diet-meals b{font-size:12px;color:var(--acc)}.diet-meals p{font-size:14px;line-height:1.9;margin:5px 0 0}.diet-energy{font-size:29px;font-weight:800;color:var(--acc);margin:12px 0}.diet-energy small{font-size:12px;color:var(--mut);display:block}.diet-day.card{padding:16px}
+summary{cursor:pointer}a{color:#b5e577}#diet-form .ib-grid>div{min-width:0}
 </style>
 </head>
 <body>
@@ -203,6 +213,7 @@ html[dir="ltr"] .hero:after{left:auto;right:-54px}
   <button class="navbtn" data-v="lib"><span class="ic">━</span><span class="nl">التمارين</span></button>
   <button class="navbtn" data-v="friends"><span class="ic">◉</span><span class="nl">الشلة</span></button>
   <button class="navbtn" data-v="inbody"><span class="ic">⚖</span><span class="nl">InBody</span></button>
+  <button class="navbtn" data-v="diet"><span class="ic">◒</span><span class="nl">الأكل</span></button>
   <button class="navbtn" data-v="settings"><span class="ic">⚙</span><span class="nl">الإعدادات</span></button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -395,7 +406,7 @@ const view = document.getElementById("view");
 const navbar = document.getElementById("navbar");
 let nav = "home";
 
-const NAV_LABELS = { home:["الرئيسية","Home"], lib:["التمارين","Exercises"], friends:["الشلة","Crew"], inbody:["InBody","InBody"], settings:["الإعدادات","Settings"] };
+const NAV_LABELS = { home:["الرئيسية","Home"], lib:["التمارين","Exercises"], friends:["الشلة","Crew"], inbody:["InBody","InBody"], diet:["الأكل","Food"], settings:["الإعدادات","Settings"] };
 function render(){
   applyLang();
   if(!S.lang){ renderLangPick(); return; }
@@ -407,6 +418,7 @@ function render(){
   else if(nav==="lib") renderLib();
   else if(nav==="friends") renderFriends();
   else if(nav==="inbody") renderInbody();
+  else if(nav==="diet") renderDiet();
   else renderSettings();
 }
 
@@ -730,7 +742,7 @@ function renderSettings(){
     if(keys[i] && keys[i]!==S.split){ S.split = keys[i]; S.dayIndex = 0; S.lastDone = null; save(); pushMyStatusUpsert(); render(); toast(t("النظام اتغير، هنبدأ من أول يوم","Split changed, starting from day one")); }
   };
   view.querySelector("#export").onclick = ()=>{
-    const blob = new Blob([JSON.stringify({name:S.name,split:S.split,dayIndex:S.dayIndex,lastDone:S.lastDone,history:S.history,log:S.log,sups:S.sups||{},inbody:S.inbody||[],freeSel:S.freeSel||[],lang:S.lang||"ar"},null,1)], {type:"application/json"});
+    const blob = new Blob([JSON.stringify({name:S.name,split:S.split,dayIndex:S.dayIndex,lastDone:S.lastDone,history:S.history,log:S.log,sups:S.sups||{},inbody:S.inbody||[],diet:S.diet||null,freeSel:S.freeSel||[],lang:S.lang||"ar"},null,1)], {type:"application/json"});
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "elgamed-backup-"+todayStr()+".json";
@@ -744,7 +756,7 @@ function renderSettings(){
       try{
         const d = JSON.parse(rd.result);
         if(!d || typeof d!=="object" || typeof d.name!=="string" || d.name.length>50 || !SPLITS[d.split] || !Array.isArray(d.history) || !d.log || typeof d.log!=="object" || !Number.isInteger(d.dayIndex) || d.dayIndex<0) throw 0;
-        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:S.friends||[],sharing:!!S.sharing,friendCode:S.friendCode||null,sups:(d.sups&&typeof d.sups==="object")?d.sups:{},inbody:Array.isArray(d.inbody)?d.inbody.filter(x=>x&&typeof x.date==="string").slice(0,500):[],freeSel:Array.isArray(d.freeSel)?d.freeSel.filter(g=>GROUPS[g]):[],lang:(d.lang==="ar"||d.lang==="en")?d.lang:(S.lang||"ar")}; save(); nav="home"; render(); toast(t("اتستوردت ✅","Imported ✅"));
+        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:S.friends||[],sharing:!!S.sharing,friendCode:S.friendCode||null,sups:(d.sups&&typeof d.sups==="object")?d.sups:{},inbody:Array.isArray(d.inbody)?d.inbody.filter(x=>x&&typeof x.date==="string").slice(0,500):[],diet:validDietImport(d.diet),freeSel:Array.isArray(d.freeSel)?d.freeSel.filter(g=>GROUPS[g]):[],lang:(d.lang==="ar"||d.lang==="en")?d.lang:(S.lang||"ar")}; save(); nav="home"; render(); toast(t("اتستوردت ✅","Imported ✅"));
       }catch(e){ toast(t("الملف ده مش نسخة صح","This file isn't a valid backup")); }
     };
     rd.readAsText(f);
@@ -890,6 +902,120 @@ function renderInbody(){
     S.inbody=(S.inbody||[]).filter(x=>x.date!==b.dataset.ibdel);
     save(); renderInbody(); toast(t("اتمسحت","Deleted"));
   });
+}
+
+/* ---------- Month meal planner: device-local, no network calls ---------- */
+let dietWeek=0;
+function validDietImport(d){
+ if(!d||typeof d!=="object")return null;
+ const p={height:Number(d.height),weight:Number(d.weight),age:d.age===null?null:Number(d.age),bmr:d.bmr===null?null:Number(d.bmr),start:String(d.start||""),sex:["m","f"].includes(d.sex)?d.sex:"",activity:["low","light","moderate"].includes(d.activity)?d.activity:"low",food:d.food==="veg"?"veg":"mixed",goal:["lose","gain"].includes(d.goal)?d.goal:"balance",adult:d.adult===true,medical:d.medical===true,done:Array.isArray(d.done)?d.done.slice(0,30).map(x=>x===true):[]};
+ return dietValidate(p)?null:p;
+}
+function dietDate(start,n){const d=new Date(start+'T12:00:00');d.setDate(d.getDate()+n);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');}
+function dietValidate(p){
+ if(!p.adult||p.medical) return t('الخطة العامة للبالغين الأصحاء فقط. لو أقل من 18 سنة، أو في حمل/رضاعة، أو حساسية أكل، أو مرض مزمن/أدوية مؤثرة، أو اضطراب أكل: راجع دكتور أو أخصائي تغذية لخطة تناسبك.','This general plan is for healthy adults only. Under 18, pregnancy/breastfeeding, food allergies, chronic conditions/medicines affecting diet, or an eating disorder need a clinician or dietitian.');
+ if(!Number.isFinite(p.height)||p.height<120||p.height>230||!Number.isFinite(p.weight)||p.weight<35||p.weight>250)return t('راجع الطول (120–230 سم) والوزن (35–250 كجم).','Check height (120–230 cm) and weight (35–250 kg).');
+ if(p.weight/((p.height/100)**2)<18.5) return t('وزنك بالنسبة لطولك محتاج تقييم فردي قبل خطة عامة. الأفضل أخصائي تغذية، مش خطة تخسيس تلقائية.','Your weight for your height needs individual assessment before a general plan. See a dietitian rather than using an automatic weight-loss plan.');
+ if(p.age!==null&&(!Number.isInteger(p.age)||p.age<18||p.age>100))return t('اكتب عمر صحيح من 18 إلى 100 أو سيبه فاضي.','Enter a whole age from 18 to 100 or leave it blank.');
+ if(p.bmr!==null&&(!Number.isFinite(p.bmr)||p.bmr<800||p.bmr>3000))return t('راجع BMR من ورقة الجهاز (800–3000) أو سيبه فاضي.','Check the BMR from the scan (800–3000), or leave it blank.');
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(p.start)||Number.isNaN(new Date(p.start+'T12:00:00').getTime()))return t('اختار تاريخ بداية صحيح.','Choose a valid start date.');
+ return '';
+}
+function dietEnergy(p){
+ const resting=p.bmr||(p.age&&['m','f'].includes(p.sex)?10*p.weight+6.25*p.height-5*p.age+(p.sex==='m'?5:-161):null);
+ if(!resting)return null;
+ const mult={low:1.2,light:1.375,moderate:1.55}[p.activity]||1.2;
+ return {resting:Math.round(resting),maintenance:Math.round(resting*mult/50)*50,source:p.bmr?'scan':'equation',mult};
+}
+function dietMeals(p,n){
+ const veg=p.food==='veg',week=Math.floor(n/7),i=(n+week)%7;
+ const breakfast=[
+ ['2 بيضة + نصف رغيف بلدي + خيار وطماطم','2 eggs + half a baladi flatbread + cucumber and tomato'],
+ ['كوب فول مطبوخ + نصف رغيف بلدي + سلطة','1 cup cooked fava beans + half a baladi flatbread + salad'],
+ ['نصف كوب شوفان جاف مع كوب لبن + موزة صغيرة','Half a cup dry oats with 1 cup milk + a small banana'],
+ ['كوب زبادي سادة + نصف كوب شوفان + ثمرة فاكهة','1 cup plain yoghurt + half a cup oats + a piece of fruit'],
+ ['جبنة قريش بحجم كف اليد + نصف رغيف بلدي + خضار','Palm-sized cottage cheese + half a baladi flatbread + vegetables'],
+ ['2 بيضة بالخضار + شريحتين توست حبوب كاملة','2 eggs with vegetables + 2 slices wholegrain toast'],
+ ['كوب فول بالليمون + نصف رغيف بلدي + خضار','1 cup fava beans with lemon + half a baladi flatbread + vegetables']
+ ];
+ const lunchMixed=[
+ ['كف فراخ مشوية + كوب أرز مطبوخ + طبق سلطة كبير','A palm of grilled chicken + 1 cup cooked rice + a large salad'],
+ ['كف سمك مشوي + بطاطس متوسطة مشوية + خضار','A palm of grilled fish + a medium baked potato + vegetables'],
+ ['كوب ونصف عدس مطبوخ + نصف رغيف بلدي + سلطة','1½ cups cooked lentils + half a baladi flatbread + salad'],
+ ['كف لحم قليل الدهن + كوب مكرونة مطبوخة + خضار','A palm of lean meat + 1 cup cooked pasta + vegetables'],
+ ['كوب ونصف حمص مطبوخ + كوب برغل مطبوخ + سلطة','1½ cups cooked chickpeas + 1 cup cooked bulgur + salad'],
+ ['كف سردين مشوي + كوب أرز مطبوخ + خضار','A palm of grilled sardines + 1 cup cooked rice + vegetables'],
+ ['كف فراخ بالفرن + بطاطس متوسطة + سلطة','A palm of oven-baked chicken + a medium potato + salad']
+ ];
+ const lunchVeg=[
+ ['كوب ونصف عدس مطبوخ + كوب أرز مطبوخ + سلطة','1½ cups cooked lentils + 1 cup cooked rice + salad'],
+ ['كوب ونصف فاصوليا بيضا مطبوخة + بطاطس متوسطة + خضار','1½ cups cooked white beans + a medium potato + vegetables'],
+ ['كوب ونصف حمص مطبوخ + نصف رغيف بلدي + سلطة','1½ cups cooked chickpeas + half a baladi flatbread + salad'],
+ ['كوب ونصف لوبيا مطبوخة + كوب مكرونة مطبوخة + خضار','1½ cups cooked black-eyed peas + 1 cup cooked pasta + vegetables'],
+ ['كوب ونصف عدس مطبوخ + كوب برغل مطبوخ + سلطة','1½ cups cooked lentils + 1 cup cooked bulgur + salad'],
+ ['كوب ونصف فاصوليا حمراء مطبوخة + كوب أرز مطبوخ + خضار','1½ cups cooked kidney beans + 1 cup cooked rice + vegetables'],
+ ['كوب ونصف حمص بالفرن + بطاطس متوسطة + سلطة','1½ cups baked chickpeas + a medium potato + salad']
+ ];
+ const dinner=[
+ ['جبنة قريش بحجم كف اليد + نصف رغيف بلدي + سلطة','Palm-sized cottage cheese + half a baladi flatbread + salad'],
+ ['كوب شوربة عدس كثيفة + شريحتين توست حبوب كاملة + سلطة','1 cup thick lentil soup + 2 slices wholegrain toast + salad'],
+ ['2 بيضة + بطاطس صغيرة مشوية + خضار','2 eggs + a small baked potato + vegetables'],
+ ['كوب فول مطبوخ + نصف رغيف بلدي + سلطة','1 cup cooked fava beans + half a baladi flatbread + salad'],
+ ['كوب زبادي سادة + جبنة قريش نصف كف + شريحتين توست + خضار','1 cup plain yoghurt + half a palm of cottage cheese + 2 slices toast + vegetables'],
+ ['كوب حمص مطبوخ بالليمون + نصف رغيف بلدي + سلطة','1 cup cooked chickpeas with lemon + half a baladi flatbread + salad'],
+ ['2 بيضة بالخضار + نصف رغيف بلدي','2 eggs with vegetables + half a baladi flatbread']
+ ];
+ const snack=['ثمرة فاكهة + كوب زبادي سادة. وزّع 5 حصص على الأقل من الفاكهة والخضار على اليوم.','A piece of fruit + 1 cup plain yoghurt. Spread at least 5 portions of fruit and vegetables across the day.'];
+ return [breakfast[i],(veg?lunchVeg:lunchMixed)[i],dinner[(i+week)%7],snack];
+}
+function dietGoal(p){return p.goal==='gain'?t('لو هدفك زيادة الوزن: ممكن تضيف وجبة خفيفة من لبن وشوفان أو ساندوتش جبنة لو محتاج، وراجع وزنك وأداءك بعد أسبوعين. مش وعد بزيادة عضل.','For weight gain, you can add a milk-and-oats snack or a cheese sandwich if needed, then review weight and performance after two weeks. This does not promise muscle gain.'):p.goal==='lose'?t('لو هدفك تقليل الوزن: ابدأ بوجبات منتظمة وقلل المشروبات المحلاة والحلويات المتكررة، من غير تجويع أو حذف وجبات. الكميات هنا نقطة بداية عامة، مش عجز سعرات محسوب.','For weight loss, start with regular meals and reduce sugary drinks and frequent sweets, without starvation or skipping meals. These portions are a general starting point, not a calculated calorie deficit.'):t('للتوازن: حافظ على وجبات منتظمة، وعدّل الكميات حسب الشبع والنشاط وتغيّر الوزن.','For balance, keep meals regular and adjust portions to appetite, activity and weight trend.');}
+function dietPlanText(p){
+ let out=[t('الجامد | خطة أكل 30 يوم','El Gamed | 30-day meal outline'),p.start+' → '+dietDate(p.start,29),t('خطة عامة وليست وصفة طبية أو جدول سعرات محسوب.','General guidance, not medical advice or a calorie-matched menu.'),dietGoal(p)];
+ for(let n=0;n<30;n++){out.push('\n'+t('اليوم ','Day ')+(n+1)+' | '+dietDate(p.start,n));dietMeals(p,n).forEach((m,i)=>out.push(t(['الفطار','الغدا','العشا','سناك'][i],['Breakfast','Lunch','Dinner','Snack'][i])+': '+t(...m)));}
+ return out.join('\n');
+}
+function renderDiet(){
+ const p=S.diet||{},energy=p.start?dietEnergy(p):null;
+ const last=(S.inbody||[]).filter(x=>Number.isFinite(+x.weight)&&+x.weight>0).slice().sort((a,b)=>a.date.localeCompare(b.date)).pop();
+ const field=(id,ar,en,value,min,max)=>`<div><label for="${id}">${t(ar,en)}</label><input id="${id}" type="number" inputmode="decimal" step="any" min="${min}" max="${max}" value="${esc(String(value??''))}"></div>`;
+ const opts=(id,ar,en,vals,val)=>`<label for="${id}">${t(ar,en)}</label><select id="${id}">${vals.map(([v,a,e])=>`<option value="${v}" ${v===val?'selected':''}>${t(a,e)}</option>`).join('')}</select>`;
+ let plan='';
+ if(p.start&&!dietValidate(p)){
+ const start=dietWeek*7,end=Math.min(start+7,30);
+ plan=`<section class="card diet-hero"><div class="eyebrow">30 ${t('يوم • خطتك المحفوظة','DAYS • SAVED OUTLINE')}</div><h2>${t('أكلك مرتب للشهر','Your month, planned')}</h2><p class="note">${esc(p.start)} → ${dietDate(p.start,29)} · <span id="diet-progress">${p.done?.filter(Boolean).length||0}/30</span> ${t('يوم اتعمل','days checked')}</p><p>${dietGoal(p)}</p><p class="note">${t('وجبات منزلية مقترحة، مش نظام علاجي ولا جدول موزون مطابق لسعراتك. الشهور مختلفة، الخطة مدتها 30 يوم.','Suggested home meals, not a therapeutic diet or a weighed menu matching your calories. This outline spans 30 days, not a calendar month.')}</p></section>
+ ${energy?`<div class="card"><b>${t('تقدير للطاقة، مش هدف ملزم','Energy estimate, not a prescription')}</b><div class="diet-energy">≈ ${energy.maintenance} <small>${t('سعر/يوم للمحافظة','kcal/day maintenance')}</small></div><p class="note">${energy.source==='scan'?t('BMR المدخل من الجهاز','Entered scan BMR'):'Mifflin–St Jeor'}: ${energy.resting} × ${energy.mult}. ${t('الحرق الأساسي لوحده مش أكلك اليومي. ده تقدير ممكن يزيد أو يقل بوضوح؛ الوجبات تحت مش محسوبة للوصول للرقم ده.','Resting energy alone is not your daily food allowance. This is an uncertain estimate; the meals below are not calculated to hit this number.')}</p></div>`:`<p class="note">${t('من الطول والوزن بس نقدر نرتب وجبات عامة، مش نحدد سعرات دقيقة. تقدير الطاقة اختياري بإضافة العمر والجنس والنشاط، أو BMR من الجهاز.','Height and weight alone support a general meal outline, not precise calories. Optionally add age, sex and activity, or scan BMR, for an energy estimate.')}</p>`}
+ <div class="diet-weeks" role="group" aria-label="${t('الأسابيع','Weeks')}">${[0,1,2,3,4].map(w=>`<button class="tab ${w===dietWeek?'on':''}" data-dw="${w}">${t('أسبوع ','Week ')}${w+1}</button>`).join('')}</div>
+ <p class="note">${t('الكوب حوالي 240 مل. الأرز والمكرونة والبقول بعد الطبخ؛ الشوفان جاف. كف البروتين بعد الطبخ ومن غير عضم. أضف زيت نباتي بكمية صغيرة، وكُل خضار بألوان مختلفة.','A cup is about 240 ml. Rice, pasta and pulses are cooked; oats are dry. A protein palm is cooked and boneless. Use small amounts of unsaturated oil and vary vegetable colours.')}</p>
+ ${Array.from({length:end-start},(_,j)=>{let n=start+j;return `<details class="card diet-day" ${j===0?'open':''}><summary><span>${t('اليوم ','Day ')}${n+1}<small>${dietDate(p.start,n)}</small></span><span>${p.done?.[n]?'✓':'+'}</span></summary><div class="diet-meals">${dietMeals(p,n).map((m,i)=>`<div><b>${t(['الفطار','الغدا','العشا','سناك'][i],['Breakfast','Lunch','Dinner','Snack'][i])}</b><p>${t(...m)}</p></div>`).join('')}</div><label class="diet-check"><input type="checkbox" data-dd="${n}" ${p.done?.[n]?'checked':''}>${t('خلصت اليوم','Day completed')}</label></details>`;}).join('')}
+ <div class="card"><h3>${t('جهّز للأسبوع','Weekly prep')}</h3><p class="note">${t('اختار من البقول، البيض، اللبن والزبادي والجبنة القريش، ومعاهم فراخ وسمك لو بتاكلهم. هات شوفان وعيش حبوب كاملة وأرز وبطاطس وخضار وفاكهة متنوعة. الكميات حسب الأيام وعدد الأشخاص، مش قائمة شراء محسوبة.','Choose pulses, eggs, milk, plain yoghurt and cottage cheese, plus chicken and fish if you eat them. Get oats, wholegrain bread, rice, potatoes and varied produce. Quantities depend on the days and number of people; this is not a calculated shopping list.')}</p><p class="note">${t('راجع الخطة بعد أسبوعين: الجوع، الطاقة، الأداء ومتوسط الوزن. لو دوخة أو إرهاق مستمر، وقف أي تقليل وراجع مختص. مفيش نزول وزن مضمون.','Review after two weeks: hunger, energy, training and average weight. If dizziness or ongoing fatigue develops, stop restriction and seek professional advice. No weight change is guaranteed.')}</p><button class="btn ghost" id="diet-download">${t('تنزيل الشهر كنص','Download month as text')}</button></div>`;
+ }
+ view.innerHTML=`<h1>${t('الأكل','Nutrition')} <span class="mut" style="font-size:15px">V11</span></h1><p class="sub">${t('مكان مستقل لخطة أكل 30 يوم. من InBody أو الطول والوزن، من غير اشتراك.','A separate home for a 30-day meal outline. Use InBody or height and weight, with no subscription.')}</p>${plan}
+ <details class="card" ${!p.start?'open':''}><summary><b>${p.start?t('تعديل البيانات / خطة جديدة','Edit inputs / new outline'):t('ابدأ خطة الشهر','Start your month')}</b></summary><form id="diet-form">
+ ${last?`<button type="button" class="btn small ghost" id="diet-scan" style="margin-top:14px">${t('استخدم آخر InBody','Use latest InBody')} (${esc(last.date)})</button><p class="note" id="diet-scan-note">${t('ينقل الوزن وBMR لو موجود. راجعهم لو القراءة قديمة.','Copies weight and BMR if available. Check them if the scan is old.')}</p>`:''}
+ <div class="ib-grid">${field('diet-height','الطول (سم)','Height (cm)',p.height,120,230)}${field('diet-weight','الوزن (كجم)','Weight (kg)',p.weight,35,250)}</div>
+ ${opts('diet-goal','هدفك','Your goal',[['balance','أكل متوازن','Balanced eating'],['lose','تقليل الوزن بهدوء','Gradual weight loss'],['gain','زيادة الوزن بهدوء','Gradual weight gain']],p.goal||'balance')}
+ ${opts('diet-food','نوع الأكل','Food preference',[['mixed','متنوع (لحوم وأسماك وبيض وألبان)','Mixed (meat, fish, eggs, dairy)'],['veg','نباتي مع بيض وألبان','Vegetarian with eggs and dairy']],p.food||'mixed')}
+ <label for="diet-start">${t('بداية الـ 30 يوم','30-day start date')}</label><input type="date" id="diet-start" required value="${esc(p.start||todayStr())}">
+ <details style="margin-top:18px"><summary>${t('اختياري: تقدير احتياج الطاقة','Optional: estimated energy needs')}</summary><p class="note">${t('سيبهم فاضيين لو عايز ترتيب الوجبات بس. مفيش تخمين للعمر أو الجنس.','Leave these blank for a meal outline only. Age and sex are never guessed.')}</p>${field('diet-age','العمر (سنة)','Age (years)',p.age,18,100)}
+ ${opts('diet-sex','الجنس المستخدم في المعادلة','Sex used by the equation',[['','بدون تحديد','Not specified'],['m','ذكر','Male'],['f','أنثى','Female']],p.sex||'')}
+ ${opts('diet-activity','نشاط يومك كله، مش الجيم بس','Whole-day activity, not gym alone',[['low','قليل: قعدة أغلب اليوم','Low: mostly seated'],['light','خفيف: حركة ومشي خفيف','Light: some movement and walking'],['moderate','متوسط: حركة وتمرين منتظم','Moderate: movement and regular exercise']],p.activity||'low')}
+ ${field('diet-bmr','BMR من الجهاز فقط (اختياري)','Scan BMR only (optional)',p.bmr,800,3000)}</details>
+ <label class="diet-check"><input type="checkbox" id="diet-adult" ${p.adult?'checked':''}>${t('عمري 18 سنة أو أكتر','I am 18 or older')}</label>
+ <label class="diet-check"><input type="checkbox" id="diet-medical">${t('عندي حساسية أكل، أو مرض مزمن/أدوية مؤثرة على التغذية، أو اضطراب أكل، أو حمل/رضاعة','I have food allergies, chronic conditions/medicines affecting diet, an eating disorder, or pregnancy/breastfeeding')}</label>
+ <p id="diet-error" role="alert" style="color:var(--red)"></p><button class="btn" type="submit">${p.start?t('إنشاء شهر جديد (يستبدل الحالي)','Create new month (replaces current)'):t('رتب لي 30 يوم','Build my 30-day outline')}</button></form></details>
+ <p class="note">${t('بياناتك والخطة على جهازك فقط، لا بتتبعت للشلة ولا لأي خدمة ذكاء اصطناعي. بتدخل في النسخة الاحتياطية، فاحتفظ بيها في مكان آمن. ده ترتيب وجبات بقواعد ثابتة مش تحليل طبي لصورة InBody.','Your inputs and outline stay on this device, not sent to the crew or an AI service. They are included in backups, so store backups safely. This is a rule-based meal outline, not medical interpretation of an InBody image.')}</p>
+ <details class="card"><summary>${t('المصادر وحدود الخطة','Sources and limits')}</summary><p class="note">${t('الوجبات أمثلة من مجموعات الأكل المتوازن. مش علاج ولا خطة رياضي محترف أو نباتي صرف. تقدير الطاقة للبالغين الأصحاء، مش قياس فعلي.','Meals are examples using balanced food groups, not treatment or plans for elite athletes or vegans. Energy is estimated for healthy adults, not measured.')}</p><p><a href="https://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/the-eatwell-guide/" target="_blank" rel="noopener">NHS Eatwell Guide</a></p><p><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener">Mifflin–St Jeor</a></p><p><a href="https://reference.medscape.com/calculator/846/mifflin-st-jeor-equation-calculator" target="_blank" rel="noopener">${t('المعادلة ومعاملات النشاط','Equation and activity factors')}</a></p></details>`;
+ view.querySelectorAll('[data-dw]').forEach(b=>b.onclick=()=>{dietWeek=+b.dataset.dw;renderDiet();window.scrollTo(0,0);});
+ view.querySelectorAll('[data-dd]').forEach(b=>b.onchange=()=>{S.diet.done=S.diet.done||[];S.diet.done[+b.dataset.dd]=b.checked;save();view.querySelector('#diet-progress').textContent=S.diet.done.filter(Boolean).length+'/30';b.closest('details').querySelector('summary>span:last-child').textContent=b.checked?'✓':'+';});
+ const scan=view.querySelector('#diet-scan');if(scan)scan.onclick=()=>{view.querySelector('#diet-weight').value=last.weight;view.querySelector('#diet-bmr').value=last.bmr||'';view.querySelector('#diet-scan-note').textContent=t('اتنقل الوزن وBMR المتاحين من قراءة ','Copied available weight and BMR from ')+last.date;};
+ const dl=view.querySelector('#diet-download');if(dl)dl.onclick=()=>{const url=URL.createObjectURL(new Blob([dietPlanText(S.diet)],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='elgamed-meals-'+p.start+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);};
+ view.querySelector('#diet-form').onsubmit=e=>{
+ e.preventDefault();const val=id=>view.querySelector('#diet-'+id).value, num=id=>val(id).trim()===''?null:Number(val(id));
+ const next={height:num('height'),weight:num('weight'),age:num('age'),sex:val('sex'),activity:val('activity'),bmr:num('bmr'),goal:val('goal'),food:val('food'),start:val('start'),adult:view.querySelector('#diet-adult').checked,medical:view.querySelector('#diet-medical').checked,done:[]};
+ const err=dietValidate(next);if(err){view.querySelector('#diet-error').textContent=err;return;}
+ if(p.start&&!confirm(t('تستبدل الشهر الحالي وتمسح علامات الأيام؟','Replace the current month and clear its checkmarks?')))return;
+ S.diet=next;dietWeek=0;save();renderDiet();window.scrollTo(0,0);
+ };
 }
 
 /* ---------- nav + boot ---------- */
