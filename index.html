@@ -502,13 +502,13 @@ async function renderFriends(){
   view.querySelector('#disableShare').onclick=async()=>{if(!confirm('تمسح حالتك من النت وتوقف المشاركة؟'))return;
     try{const uid=await identity();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;
       S.sharing=false;S.friendCode=null;save();renderFriends();}catch(e){toast('المسح متعملش، اتصل بالنت وجرب تاني');}};
-  const ok=await pushMyStatusUpsert();if(nav!=='friends')return;
+  const ok=await pushMyStatusUpsert();if(nav!=='friends'||!document.querySelector('#mycode'))return;
   view.querySelector('#mycode').textContent=S.friendCode||'تعذر الاتصال';
   view.querySelector('#sync').textContent=ok?'حالتك اتحدثت دلوقتي':'التحديث متعملش، اتصل بالنت وجرب تاني';
-  try{const rows=await fetchFriends();if(nav!=='friends')return;
+  try{const rows=await fetchFriends();if(nav!=='friends'||!document.querySelector('#mycode'))return;
     view.querySelector('#flist').innerHTML=rows.length?rows.map(r=>`<div class="friend"><div class="n">${esc(r.name)}</div><span class="badge ${r.status_date===todayStr()?'':'off'}">${r.status_date===todayStr()?esc(r.day):'آخر حالة: '+esc(r.day)}</span><p class="mut" style="font-size:11px">${r.status_date===todayStr()?'محدث النهاردة':r.status_date?'مش متأكدين من تمرين النهاردة، آخر تحديث '+esc(r.status_date):'المشاركة واقفة'}</p><button class="hist-toggle" data-remove="${r.code}">إزالة من الشلة</button></div>`).join(''):'لسه مضفتش حد. خد الكود من صاحبك.';
     view.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{S.friends=S.friends.filter(x=>x!==b.dataset.remove);save();renderFriends();});
-  }catch(e){if(nav==='friends')view.querySelector('#flist').textContent='التحديث مش متاح، جرب تاني.';}
+  }catch(e){if(nav==='friends'&&view.querySelector('#flist'))view.querySelector('#flist').textContent='التحديث مش متاح، جرب تاني.';}
 }
 
 function renderSettings(){
