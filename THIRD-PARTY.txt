@@ -1,0 +1,205 @@
+# Third-party assets
+
+Images from wger. Converted to WebP and resized, no other visual modifications. Each image retains its license.
+
+- Incline Bench Press - Dumbbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/16/Incline-press-1.png).
+- Incline Bench Press - Dumbbell: erikocobra, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/537/9f3c7817-3e3d-417d-8b08-2c0a1aa5fe03.jpg).
+- Incline Dumbbell Fly: yuhonas/free-exercise-db, [CC0](https://creativecommons.org/publicdomain/zero/1.0/), [source](https://wger.de/media/exercise-images/308/2ca22a0a-9843-4bb4-9d12-faf5c8c89180.jpg).
+- Incline Dumbbell Fly: yuhonas/free-exercise-db, [CC0](https://creativecommons.org/publicdomain/zero/1.0/), [source](https://wger.de/media/exercise-images/308/dd825dd1-8b8c-4db1-bbdd-f2c81e65b7ff.jpg).
+- Butterfly: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/98/Butterfly-machine-2.png).
+- Butterfly: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/98/Butterfly-machine-1.png).
+- Push-Ups | Decline: anon1337, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1112/81f40bee-4adf-4317-8476-1a87706e3031.png).
+- Decline Bench Press Barbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/100/Decline-bench-press-1.png).
+- Decline Bench Press Barbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/100/Decline-bench-press-2.png).
+- Dips: cshep442, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/194/34600351-8b0b-4cb0-8daa-583537be15b0.png).
+- Chest Press: roneydya, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/129/b263c968-e067-4750-916a-d8758a7df23e.webp).
+- Chest Press: wger.de, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/129/dbad8cd0-5eeb-4de2-8d9e-80c7770735fd.png).
+- Bench Press: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/192/Bench-press-1.png).
+- Bench Press: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/192/Bench-press-2.png).
+- Pull-ups: Imobard, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/475/b0554016-16fd-4dbe-be47-a2a17d16ae0e.jpg).
+- Close-grip supinated lat pulldown: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1127/4942b7c0-6bda-4983-88e5-86547c3d445e.png).
+- Close-grip Lat Pull Down: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/158/0d51a0f2-622f-434b-beb8-1a003c54712a.png).
+- Close-grip Lat Pull Down: tuckerm, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/158/02e8a7c3-dc67-434e-a4bc-77fdecf84b49.webp).
+- Bent Over Rowing: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-1.png).
+- Bent Over Rowing: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-2.png).
+- Seated Cable Row: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1117/2555c4c3-a84d-47db-b83b-cbf721f12e45.png).
+- Seated Cable Row: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1117/e74255c0-67a0-4309-b78d-2d79e6ff8c11.png).
+- Rack Deadlift: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/161/Dead-lifts-2.png).
+- Rack Deadlift: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/161/Dead-lifts-1.png).
+- Single Arm Plank to Row: wger community, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1022/f74644fa-f43e-46bd-8603-6e3a2ee8ee2d.jpg).
+- Single Arm Plank to Row: wger community, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1022/eef8fb9d-ae72-4e23-81da-4d62f2734332.jpg).
+- Hyperextensions: wger.de, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/301/2d5c2f99-b8ff-4095-b515-4c2a85afde70.png).
+- Hyperextensions: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/128/Hyperextensions-1.png).
+- Shoulder Press, on Machine: wger.de, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/53/Shoulder-press-machine-2.png).
+- Shoulder Press, on Machine: wger.de, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/53/Shoulder-press-machine-1.png).
+- Military Press mit SZ-Bar: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/418/fa2a2207-43cb-4dc0-bc2a-039e32544790.png).
+- Lateral Raises: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-2.png).
+- Lateral Raises: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-1.png).
+- Front Raises: philip, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/256/b7def5bc-2352-499b-b9e5-fff741003831.png).
+- Upright Row, on Multi Press: anto.kreegyr, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/691/297d4ce1-7e9e-4adb-8f5c-7d54054be885.jpg).
+- Upright Row, on Multi Press: anto.kreegyr, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/691/72bb8231-8994-453f-8a3f-85b061dcffb8.jpg).
+- Shrugs, Barbells: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/150/Barbell-shrugs-1.png).
+- Shrugs, Barbells: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/150/Barbell-shrugs-2.png).
+- Lateral Rows on Cable, One Armed: philip, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/349/9d969203-9cb6-4d47-9c31-fef53bfe1de5.png).
+- Lateral Rows on Cable, One Armed: philip, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/349/8dc5ad63-a93a-496f-9473-ac414236e58d.png).
+- Rear Delt Raises: cshep442, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/487/ad724e5c-b1ed-49e8-9279-a17545b0dd0b.png).
+- Rear Delt Raises: cshep442, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/487/692c598c-0493-42a5-be8b-b9d2e9adcd00.png).
+- Reverse Grip Barbell Curls: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1290/c05818bf-1c81-46df-9f24-42e354265388.png).
+- Biceps Curls With Barbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/74/Bicep-curls-1.png).
+- Biceps Curls With Barbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/74/Bicep-curls-2.png).
+- Biceps Curls With Dumbbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/81/Biceps-curl-1.png).
+- Biceps Curls With Dumbbell: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/81/Biceps-curl-2.png).
+- Hammer Curls: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/86/Bicep-hammer-curl-1.png).
+- Hammer Curls: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/86/Bicep-hammer-curl-2.png).
+- Preacher Curls: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/193/Preacher-curl-3-1.png).
+- Preacher Curls: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/193/Preacher-curl-3-2.png).
+- Cable Concentration Curl: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1109/00b0a0bf-c14a-4f13-bb14-62c09030a1aa.png).
+- Triceps Pushdown: anto.kreegyr, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1185/c5ca283d-8958-4fd8-9d59-a3f52a3ac66b.jpg).
+- Tricep Pushdown on Cable: cshep442, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/805/7a437824-e2cc-46e1-804a-674f0ea31d25.png).
+- Dumbbell Goblet Squat: philip, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/203/1c052351-2af0-4227-aeb0-244008e4b0a8.jpeg).
+- Dumbbell Goblet Squat: philip, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/203/2ab30113-4e08-4d39-9d23-d901ce2c0971.jpeg).
+- Leg Press on Hackenschmidt Machine: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-1-1024x721.png).
+- Leg Press on Hackenschmidt Machine: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-2-1024x721.png).
+- Dumbbell Lunges Walking: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/113/Walking-lunges-1.png).
+- Dumbbell Lunges Walking: nishant0712, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/206/6ec66efd-e74f-4142-bed1-0a0ac74e3294.png).
+- Leg Extension: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/369/78c915d1-e46d-4d30-8124-65d68664c3ef.png).
+- Leg Extension: BFad07, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/369/4d621b17-f6cb-4107-97c0-9f44e9a2dbc6.webp).
+- Leg Curls (laying): Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-1.png).
+- Leg Curls (laying): Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-2.png).
+- Romanian Deadlift: pjwirth, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/507/13d526ab-12fc-461e-828a-051dd7c13fb1.png).
+- Double Leg Calf Raise: erikocobra, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1243/53d4fabe-c994-4907-873f-8d82813a9832.png).
+- Bulgarian split squats left: Franpol, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/988/6283b258-a4d7-4833-84f7-a38987022d3d.png).
+- Crunches: wger.de, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/91/Crunches-1.png).
+- Crunches: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/91/Crunches-2.png).
+- Plank: utkb, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/458/b7bd9c28-9f1d-4647-bd17-ab6a3adf5770.png).
+- Plank: utkb, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/458/902e6836-394e-458b-b94e-101d714294e2.png).
+- Leg Raises, Lying: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/125/Leg-raises-2.png).
+- Leg Raises, Lying: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/125/Leg-raises-1.png).
+- Russian Twist: lion, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1193/70ca5d80-3847-4a8c-8882-c6e9e485e29e.png).
+- Sit Up Elbow Thrust: Moffi, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1479/0305d98e-0887-4c0c-8992-7c220814efc2.webp).
+- Ab wheel: lhegedus, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1573/a9ab402b-61ef-4d60-b91a-df52bf7f41a9.jpg).
+- Ab wheel: lhegedus, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/1573/662db55d-68d0-4297-8215-3dcf6c21c778.jpg).
+- Barbell Ab Rollout: sevae, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), [source](https://wger.de/media/exercise-images/41/34b37423-269f-43d4-9d29-d2a90eeaa6b4.png).
+- Incline Crunches: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/56/Decline-crunch-1.png).
+- Incline Crunches: Everkinetic, [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), [source](https://wger.de/media/exercise-images/56/Decline-crunch-2.png).
+
+Cairo font: SIL Open Font License 1.1, see fonts/OFL.txt.
+Supabase JS: MIT, see vendor/LICENSE.
+
+
+Copyright 2009 The Cairo Project Authors (https://github.com/Gue3bara/Cairo)
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+http://scripts.sil.org/OFL
+
+
+-----------------------------------------------------------
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+-----------------------------------------------------------
+
+PREAMBLE
+The goals of the Open Font License (OFL) are to stimulate worldwide
+development of collaborative font projects, to support the font creation
+efforts of academic and linguistic communities, and to provide a free and
+open framework in which fonts may be shared and improved in partnership
+with others.
+
+The OFL allows the licensed fonts to be used, studied, modified and
+redistributed freely as long as they are not sold by themselves. The
+fonts, including any derivative works, can be bundled, embedded, 
+redistributed and/or sold with any software provided that any reserved
+names are not used by derivative works. The fonts and derivatives,
+however, cannot be released under any other type of license. The
+requirement for fonts to remain under this license does not apply
+to any document created using the fonts or their derivatives.
+
+DEFINITIONS
+"Font Software" refers to the set of files released by the Copyright
+Holder(s) under this license and clearly marked as such. This may
+include source files, build scripts and documentation.
+
+"Reserved Font Name" refers to any names specified as such after the
+copyright statement(s).
+
+"Original Version" refers to the collection of Font Software components as
+distributed by the Copyright Holder(s).
+
+"Modified Version" refers to any derivative made by adding to, deleting,
+or substituting -- in part or in whole -- any of the components of the
+Original Version, by changing formats or by porting the Font Software to a
+new environment.
+
+"Author" refers to any designer, engineer, programmer, technical
+writer or other person who contributed to the Font Software.
+
+PERMISSION & CONDITIONS
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Font Software, to use, study, copy, merge, embed, modify,
+redistribute, and sell modified and unmodified copies of the Font
+Software, subject to the following conditions:
+
+1) Neither the Font Software nor any of its individual components,
+in Original or Modified Versions, may be sold by itself.
+
+2) Original or Modified Versions of the Font Software may be bundled,
+redistributed and/or sold with any software, provided that each copy
+contains the above copyright notice and this license. These can be
+included either as stand-alone text files, human-readable headers or
+in the appropriate machine-readable metadata fields within text or
+binary files as long as those fields can be easily viewed by the user.
+
+3) No Modified Version of the Font Software may use the Reserved Font
+Name(s) unless explicit written permission is granted by the corresponding
+Copyright Holder. This restriction only applies to the primary font name as
+presented to the users.
+
+4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
+Software shall not be used to promote, endorse or advertise any
+Modified Version, except to acknowledge the contribution(s) of the
+Copyright Holder(s) and the Author(s) or with their explicit written
+permission.
+
+5) The Font Software, modified or unmodified, in part or in whole,
+must be distributed entirely under this license, and must not be
+distributed under any other license. The requirement for fonts to
+remain under this license does not apply to any document created
+using the Font Software.
+
+TERMINATION
+This license becomes null and void if any of the above conditions are
+not met.
+
+DISCLAIMER
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+OTHER DEALINGS IN THE FONT SOFTWARE.
+
+
+MIT License
+
+Copyright (c) 2020 Supabase
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
