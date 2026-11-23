@@ -101,13 +101,13 @@ label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:14px 
 .cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .cal-h b{font-size:15px;font-weight:800}.cal-h button{background:var(--card2);border:1.5px solid var(--line);color:var(--txt,#fff);border-radius:10px;width:38px;height:36px;font-size:18px;cursor:pointer;font-family:inherit}
 .cal-h button:disabled{opacity:.35}
-.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;direction:rtl}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
 .cal-w{font-size:10.5px;color:var(--mut);text-align:center;padding-bottom:2px}
 .cal-d{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:13px;font-weight:700;background:var(--card2);color:var(--mut);border:1.5px solid transparent}
 .cal-d.on{background:var(--grad);color:#0b1a06;border-color:transparent}
 .cal-d.td{border-color:#93c5fd}.cal-d.e{background:none}
 .cal-cnt{margin-top:10px;font-size:14px;font-weight:800;text-align:center}
-.plan-ex{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--txt);font:inherit;font-size:13.5px;padding:9px 2px;text-align:right;cursor:pointer}
+.plan-ex{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--txt);font:inherit;font-size:13.5px;padding:9px 2px;text-align:start;cursor:pointer}
 .plan-ex span{color:#93c5fd;font-size:11px;white-space:nowrap}
 .ex.hl{outline:2px solid #c7ff3d;box-shadow:0 0 0 4px rgba(199,255,61,.18)}
 .navbar{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));right:12px;left:12px;max-width:456px;margin:0 auto;
@@ -185,17 +185,25 @@ input[type=date]{width:100%;background:var(--card2);border:1.5px solid var(--lin
 .ib-vals{color:var(--mut);font-size:12px;white-space:nowrap}
 .ib-d{font-weight:800;white-space:nowrap;font-size:12.5px}
 .good{color:#4ade80}.bad{color:#f87171}.neu{color:#93c5fd}
+
+/* LTR layout overrides */
+.langbtn{background:var(--card2);border:1.5px solid var(--line);color:var(--txt);border-radius:10px;padding:6px 12px;font:800 12px Cairo,Arial,sans-serif;cursor:pointer;align-self:center}
+html[dir="ltr"] .hero,html[dir="ltr"] .done-card{text-align:left}
+html[dir="ltr"] .hero{border-right-width:1px;border-left:5px solid #c4ff30}
+html[dir="ltr"] .split-card{border-right-width:1px;border-left-width:5px}
+html[dir="ltr"] .plan-ex{text-align:left}
+html[dir="ltr"] .hero:after{left:auto;right:-54px}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
 <div class="app" id="view"></div>
 <div class="navbar hide" id="navbar">
-  <button class="navbtn" data-v="home"><span class="ic">⌂</span>الرئيسية</button>
-  <button class="navbtn" data-v="lib"><span class="ic">━</span>التمارين</button>
-  <button class="navbtn" data-v="friends"><span class="ic">◉</span>الشلة</button>
-  <button class="navbtn" data-v="inbody"><span class="ic">⚖</span>InBody</button>
-  <button class="navbtn" data-v="settings"><span class="ic">⚙</span>الإعدادات</button>
+  <button class="navbtn" data-v="home"><span class="ic">⌂</span><span class="nl">الرئيسية</span></button>
+  <button class="navbtn" data-v="lib"><span class="ic">━</span><span class="nl">التمارين</span></button>
+  <button class="navbtn" data-v="friends"><span class="ic">◉</span><span class="nl">الشلة</span></button>
+  <button class="navbtn" data-v="inbody"><span class="ic">⚖</span><span class="nl">InBody</span></button>
+  <button class="navbtn" data-v="settings"><span class="ic">⚙</span><span class="nl">الإعدادات</span></button>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>window.SUPA = {"enabled": true, "url": "https://vyjuinskghnfndvchlkv.supabase.co", "anonKey": "sb_publishable_cazN6xdYu_i1j0GLskPNhA_LRAm__gD"};</script>
@@ -207,41 +215,42 @@ input[type=date]{width:100%;background:var(--card2);border:1.5px solid var(--lin
 const KEY = "gymtracker.v1";
 const SUPA = window.SUPA || {enabled:false};
 
-const GROUPS = { chest:"صدر", back:"ضهر", shoulders:"كتف", arms:"دراع", legs:"أرجل", abs:"بطن" };
+const GROUPS = { chest:["صدر","Chest"], back:["ضهر","Back"], shoulders:["كتف","Shoulders"], arms:["دراع","Arms"], legs:["أرجل","Legs"], abs:["بطن","Abs"] };
 const GROUP_ICONS = { chest:"🦅", back:"🧗", shoulders:"🤷", arms:"💪", legs:"🦵", abs:"🧱" };
+const TAG_EN = { biceps:"Biceps", triceps:"Triceps", forearms:"Forearms", "أمامية":"Quads", "خلفية":"Hamstrings", "سمانة":"Calves", "جلووتس":"Glutes", "ضامة":"Adductors", "ترابيس":"Traps", "لاتس":"Lats", "ظهر أوسط":"Mid Back", "ظهر سفلي":"Lower Back", "صدر علوي":"Upper Chest", "صدر أوسط":"Mid Chest", "صدر سفلي":"Lower Chest", "كتف أمامي":"Front Delts", "كتف جانبي":"Side Delts", "كتف خلفي":"Rear Delts", "جناب":"Obliques", "بطن":"Abs" };
 
 const SPLITS = {
-  arnold: { name:"أرنولد سبليت", desc:"صدر+ضهر / كتف+دراع / أرجل — أسلوب أرنولد شوارزنيجر",
+  arnold: { name:"أرنولد سبليت", nameEn:"Arnold Split", desc:"صدر+ضهر / كتف+دراع / أرجل — أسلوب أرنولد شوارزنيجر", descEn:"Chest+Back / Shoulders+Arms / Legs — the Arnold Schwarzenegger way",
     days:[
-      {label:"صدر + ضهر", parts:[["chest"],["back"]]},
-      {label:"كتف + دراع", parts:[["shoulders"],["arms"]]},
-      {label:"أرجل + بطن", parts:[["legs"],["abs"]]},
+      {label:"صدر + ضهر", labelEn:"Chest + Back", parts:[["chest"],["back"]]},
+      {label:"كتف + دراع", labelEn:"Shoulders + Arms", parts:[["shoulders"],["arms"]]},
+      {label:"أرجل + بطن", labelEn:"Legs + Abs", parts:[["legs"],["abs"]]},
     ]},
-  ppl: { name:"بوش بول ليج (Push Pull Legs)", desc:"دفع (صدر+كتف+تراي) / سحب (ضهر+باي) / أرجل",
+  ppl: { name:"بوش بول ليج (Push Pull Legs)", nameEn:"Push Pull Legs", desc:"دفع (صدر+كتف+تراي) / سحب (ضهر+باي) / أرجل", descEn:"Push (chest+shoulders+triceps) / Pull (back+biceps) / Legs",
     days:[
-      {label:"دفع — صدر + كتف + تراي", parts:[["chest"],["shoulders"],["arms","triceps"]]},
-      {label:"سحب — ضهر + باي", parts:[["back"],["arms","biceps"]]},
-      {label:"أرجل + بطن", parts:[["legs"],["abs"]]},
+      {label:"دفع — صدر + كتف + تراي", labelEn:"Push — Chest + Shoulders + Triceps", parts:[["chest"],["shoulders"],["arms","triceps"]]},
+      {label:"سحب — ضهر + باي", labelEn:"Pull — Back + Biceps", parts:[["back"],["arms","biceps"]]},
+      {label:"أرجل + بطن", labelEn:"Legs + Abs", parts:[["legs"],["abs"]]},
     ]},
-  bro: { name:"برو سبليت (عضلة كل يوم)", desc:"كل يوم عضلة واحدة: صدر، ضهر، كتف، دراع، أرجل، بطن",
+  bro: { name:"برو سبليت (عضلة كل يوم)", nameEn:"Bro Split (one muscle a day)", desc:"كل يوم عضلة واحدة: صدر، ضهر، كتف، دراع، أرجل، بطن", descEn:"One muscle per day: chest, back, shoulders, arms, legs, abs",
     days:[
-      {label:"صدر", parts:[["chest"]]},
-      {label:"ضهر", parts:[["back"]]},
-      {label:"كتف", parts:[["shoulders"]]},
-      {label:"دراع", parts:[["arms"]]},
-      {label:"أرجل", parts:[["legs"]]},
-      {label:"بطن", parts:[["abs"]]},
+      {label:"صدر", labelEn:"Chest", parts:[["chest"]]},
+      {label:"ضهر", labelEn:"Back", parts:[["back"]]},
+      {label:"كتف", labelEn:"Shoulders", parts:[["shoulders"]]},
+      {label:"دراع", labelEn:"Arms", parts:[["arms"]]},
+      {label:"أرجل", labelEn:"Legs", parts:[["legs"]]},
+      {label:"بطن", labelEn:"Abs", parts:[["abs"]]},
     ]},
-  upperlower: { name:"علوي / سفلي", desc:"يوم جسم علوي ويوم جسم سفلي بالتبادل",
+  upperlower: { name:"علوي / سفلي", nameEn:"Upper / Lower", desc:"يوم جسم علوي ويوم جسم سفلي بالتبادل", descEn:"Alternating upper-body and lower-body days",
     days:[
-      {label:"جسم علوي", parts:[["chest"],["back"],["shoulders"],["arms"]]},
-      {label:"جسم سفلي + بطن", parts:[["legs"],["abs"]]},
+      {label:"جسم علوي", labelEn:"Upper Body", parts:[["chest"],["back"],["shoulders"],["arms"]]},
+      {label:"جسم سفلي + بطن", labelEn:"Lower Body + Abs", parts:[["legs"],["abs"]]},
     ]},
-  fullbody: { name:"جسم كامل", desc:"كل المجموعات في كل تمرين",
+  fullbody: { name:"جسم كامل", nameEn:"Full Body", desc:"كل المجموعات في كل تمرين", descEn:"Every muscle group in every workout",
     days:[
-      {label:"جسم كامل", parts:[["chest"],["back"],["shoulders"],["arms"],["legs"],["abs"]]},
+      {label:"جسم كامل", labelEn:"Full Body", parts:[["chest"],["back"],["shoulders"],["arms"],["legs"],["abs"]]},
     ]},
-  free: { name:"تمرين حر", desc:"مفيش نظام ثابت — إنت اللي بتختار عضلات كل يوم وتمارينك بنفسك",
+  free: { name:"تمرين حر", nameEn:"Free Workout", desc:"مفيش نظام ثابت — إنت اللي بتختار عضلات كل يوم وتمارينك بنفسك", descEn:"No fixed plan — you pick the muscles and exercises for each day yourself",
     days:[] },
 };
 
@@ -250,31 +259,60 @@ let S = load();
 function load(){
   try{
     const raw = localStorage.getItem(KEY);
-    if(raw){ const s = JSON.parse(raw); if(s && typeof s==="object" && Array.isArray(s.history) && s.log) return Object.assign({friends:[],sharing:false,sups:{},inbody:[],freeSel:[]},s); }
+    if(raw){ const s = JSON.parse(raw); if(s && typeof s==="object" && Array.isArray(s.history) && s.log) return Object.assign({friends:[],sharing:false,sups:{},inbody:[],freeSel:[],lang:"ar"},s); }
   }catch(e){}
-  return { name:"", split:null, dayIndex:0, lastDone:null, log:{}, history:[], friendCode:null, friends:[], sups:{}, inbody:[], freeSel:[] };
+  return { name:"", split:null, dayIndex:0, lastDone:null, log:{}, history:[], friendCode:null, friends:[], sups:{}, inbody:[], freeSel:[], lang:null };
 }
 function save(){ localStorage.setItem(KEY, JSON.stringify(S)); }
+
+/* ---------- language ---------- */
+function curLang(){ return S.lang==="en" ? "en" : "ar"; }
+function t(ar,en){ return curLang()==="en" ? en : ar; }
+function G(g){ const x=GROUPS[g]; return x ? t(x[0],x[1]) : g; }
+function tagLabel(k){ if(curLang()==="en") return TAG_EN[k]||k; return ({biceps:"باي",triceps:"تراي",forearms:"ساعد"})[k]||k; }
+function spName(sp){ return t(sp.name, sp.nameEn||sp.name); }
+function spDesc(sp){ return t(sp.desc, sp.descEn||sp.desc); }
+function dayLbl(d){ return t(d.label, d.labelEn||d.label); }
+function applyLang(){
+  const l = curLang();
+  document.documentElement.lang = l;
+  document.documentElement.dir = l==="ar" ? "rtl" : "ltr";
+  document.title = t("الجامد","El Gamed");
+}
+function setLang(l){
+  S.lang = l; save(); applyLang(); render();
+}
+function renderLangPick(){
+  navbar.classList.add("hide");
+  view.innerHTML = `
+    <div class="center" style="margin-top:56px"><span class="brand">الجامد</span><div class="eyebrow" style="margin-top:14px">LIFT. LOG. REPEAT.</div></div>
+    <div class="card" style="margin-top:22px">
+      <b style="font-size:15px;font-weight:800;display:block;text-align:center;margin-bottom:14px">اختار لغتك · Choose your language</b>
+      <button class="btn" id="lar" style="margin-bottom:10px">العربية</button>
+      <button class="btn ghost" id="len">English</button>
+    </div>`;
+  view.querySelector("#lar").onclick = ()=>setLang("ar");
+  view.querySelector("#len").onclick = ()=>setLang("en");
+}
 
 function todayStr(){
   const d = new Date();
   return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
 function dayAgo(str){
-  const t = todayStr();
-  if(str===t) return "النهاردة";
-  const a = new Date(str+"T12:00:00"), b = new Date(t+"T12:00:00");
+  const t0 = todayStr();
+  if(str===t0) return t("النهاردة","Today");
+  const a = new Date(str+"T12:00:00"), b = new Date(t0+"T12:00:00");
   const diff = Math.round((b-a)/86400000);
-  if(diff===1) return "إمبارح";
-  if(diff>1 && diff<=10) return "من "+diff+" أيام";
-  if(diff>10) return "من "+diff+" يوم";
+  if(diff===1) return t("إمبارح","Yesterday");
+  if(diff>1) return t("من "+diff+" أيام", diff+" days ago");
   return esc(str);
 }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function toast(msg){
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.style.display="block";
-  clearTimeout(t._h); t._h = setTimeout(()=>t.style.display="none", 2200);
+  const tt = document.getElementById("toast");
+  tt.textContent = msg; tt.style.display="block";
+  clearTimeout(tt._h); tt._h = setTimeout(()=>tt.style.display="none", 2200);
 }
 function streak(){
   if(!S.history.length) return 0;
@@ -292,6 +330,8 @@ function streak(){
 function exByGroup(group, sub){
   return EXERCISES.filter(e=>e.group===group && (!sub || e.sub===sub || (group!=="arms")));
 }
+function exName(e){ return curLang()==="en" ? e.en : e.ar; }
+function exCue(e){ return curLang()==="en" ? (e.cueEn||e.cue) : e.cue; }
 function lastLog(id){
   const arr = S.log[id];
   return arr && arr.length ? arr[arr.length-1] : null;
@@ -307,9 +347,9 @@ async function identity(){
   try{return await authReady;}catch(e){authReady=null;throw e;}
 }
 function todayLabel(){
-  if(S.lastDone===todayStr() && S.history.length) return 'خلص: '+S.history[S.history.length-1].day;
-  if(S.split==="free") return 'تمرين حر';
-  return SPLITS[S.split].days[S.dayIndex%SPLITS[S.split].days.length].label;
+  if(S.lastDone===todayStr() && S.history.length) return t('خلص: ','Done: ')+S.history[S.history.length-1].day;
+  if(S.split==="free") return t('تمرين حر','Free Workout');
+  return dayLbl(SPLITS[S.split].days[S.dayIndex%SPLITS[S.split].days.length]);
 }
 async function pushMyStatusUpsert(){
   if(!DB || !S.sharing || !S.name || !S.split)return;
@@ -346,7 +386,7 @@ async function fetchFriends(){
   if(lr.error)throw lr.error;
   const others=(lr.data||[]).map(l=>l.a===S.friendCode?l.b:l.a);
   for(const code of others){const r=await DB.rpc('gym_friend_status',{friend_code:code});if(r.error)throw r.error;
-    if(r.data?.length)out.push({...r.data[0],code});else out.push({code,name:'غير متاح',day:'صاحب الكود مش مشارك حالياً'});}
+    if(r.data?.length)out.push({...r.data[0],code});else out.push({code,name:t('غير متاح','Unavailable'),day:t('صاحب الكود مش مشارك حالياً','This code is not sharing right now')});}
   return out;
 }
 
@@ -355,10 +395,14 @@ const view = document.getElementById("view");
 const navbar = document.getElementById("navbar");
 let nav = "home";
 
+const NAV_LABELS = { home:["الرئيسية","Home"], lib:["التمارين","Exercises"], friends:["الشلة","Crew"], inbody:["InBody","InBody"], settings:["الإعدادات","Settings"] };
 function render(){
+  applyLang();
+  if(!S.lang){ renderLangPick(); return; }
+  [...navbar.children].forEach(b=>{ b.classList.toggle("on", b.dataset.v===nav);
+    const x = NAV_LABELS[b.dataset.v]; if(x){ const nl=b.querySelector(".nl"); if(nl) nl.textContent=t(x[0],x[1]); } });
   if(!S.name || !S.split){ renderOnboard(); navbar.classList.add("hide"); return; }
   navbar.classList.remove("hide");
-  [...navbar.children].forEach(b=>b.classList.toggle("on", b.dataset.v===nav));
   if(nav==="home") renderHome();
   else if(nav==="lib") renderLib();
   else if(nav==="friends") renderFriends();
@@ -370,17 +414,17 @@ let onboardSplit = "arnold";
 function renderOnboard(){
   view.innerHTML = `
     <div class="center" style="margin-top:18px"><span class="brand">الجامد</span> <div class="eyebrow" style="margin-top:14px">LIFT. LOG. REPEAT.</div></div>
-    <p class="sub center" style="margin-top:6px">سجل تمرينك وأوزانك، والتطبيق يفكرك كل يوم عليك إيه.</p>
+    <p class="sub center" style="margin-top:6px">${t("سجل تمرينك وأوزانك، والتطبيق يفكرك كل يوم عليك إيه.","Log your workouts and weights, and the app keeps track of what's on each day.")}</p>
     <div class="card">
-      <label>اسمك</label>
-      <input type="text" id="nm" placeholder="اكتب اسمك" value="${esc(S.name)}">
-      <label>اختار نظام التمرين</label>
+      <label>${t("اسمك","Your name")}</label>
+      <input type="text" id="nm" placeholder="${t("اكتب اسمك","Type your name")}" value="${esc(S.name)}">
+      <label>${t("اختار نظام التمرين","Pick your workout split")}</label>
       ${Object.entries(SPLITS).map(([k,sp])=>`
         <div class="split-card ${k===onboardSplit?'sel':''}" data-k="${k}">
-          <b>${esc(sp.name)}</b><span>${esc(sp.desc)}</span>
+          <b>${esc(spName(sp))}</b><span>${esc(spDesc(sp))}</span>
         </div>`).join("")}
-      <div style="margin-top:16px"><button class="btn" id="start">يلا نبدأ 💪</button></div>
-      <p class="note" style="margin-top:12px">بياناتك بتتحفظ على موبايلك بس — مفيش حسابات ولا تسجيل.</p>
+      <div style="margin-top:16px"><button class="btn" id="start">${t("يلا نبدأ 💪","Let's go 💪")}</button></div>
+      <p class="note" style="margin-top:12px">${t("بياناتك بتتحفظ على موبايلك بس — مفيش حسابات ولا تسجيل.","Your data is stored on your phone only — no accounts, no sign-up.")}</p>
     </div>`;
   view.querySelectorAll(".split-card").forEach(c=>{
     c.onclick = ()=>{ onboardSplit = c.dataset.k;
@@ -388,17 +432,17 @@ function renderOnboard(){
   });
   view.querySelector("#start").onclick = ()=>{
     const nm = view.querySelector("#nm").value.trim();
-    if(!nm || nm.length>50){ toast("اكتب اسمك الأول"); return; }
+    if(!nm || nm.length>50){ toast(t("اكتب اسمك الأول","Type your name first")); return; }
     S.name = nm; S.split = onboardSplit; S.dayIndex = 0; save();
     pushMyStatusUpsert();
-    nav="home"; render(); window.scrollTo(0,0); toast("يلا يا جامد");
+    nav="home"; render(); window.scrollTo(0,0); toast(t("يلا يا جامد","Let's go, beast"));
   };
 }
 
 function dayPartsLabel(p){
-  let lbl = GROUPS[p[0]];
-  if(p[1]==="biceps") lbl += " (باي)";
-  if(p[1]==="triceps") lbl += " (تراي)";
+  let lbl = G(p[0]);
+  if(p[1]==="biceps") lbl += t(" (باي)"," (Biceps)");
+  if(p[1]==="triceps") lbl += t(" (تراي)"," (Triceps)");
   return lbl;
 }
 
@@ -411,13 +455,16 @@ function calendarCard(){
   const days=new Set(S.history.filter(h=>h&&typeof h.date==="string"&&h.date.startsWith(key+"-")).map(h=>h.date));
   const first=new Date(y,m,1), n=new Date(y,m+1,0).getDate();
   const off=(first.getDay()+1)%7; // week starts Saturday
-  const names=["ش","ح","ن","ث","ر","خ","ج"];
-  const mn=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  const names=curLang()==="ar" ? ["ش","ح","ن","ث","ر","خ","ج"] : ["Sa","Su","Mo","Tu","We","Th","Fr"];
+  const mn=curLang()==="ar" ? ["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"] : ["January","February","March","April","May","June","July","August","September","October","November","December"];
   let cells=names.map(x=>`<div class="cal-w">${x}</div>`).join("")+'<div class="cal-d e"></div>'.repeat(off);
   for(let d=1;d<=n;d++){const ds=key+"-"+String(d).padStart(2,"0");cells+=`<div class="cal-d ${days.has(ds)?"on":""} ${ds===todayStr()?"td":""}" data-d="${ds}">${days.has(ds)?"✓":d}</div>`;}
   const isNow=y===now.getFullYear()&&m===now.getMonth(), c=days.size;
-  const txt=c===0?(isNow?"لسه منزلتش":"منزلتش"):c===1?"نزلت مرة واحدة":c===2?"نزلت مرتين":"نزلت "+c+(c<=10?" مرات":" مرة");
-  return `<div class="card" id="calcard"><div class="cal-h"><button id="calnext" aria-label="الشهر الجاي" ${isNow?"disabled":""}>›</button><b>${mn[m]} ${y}</b><button id="calprev" aria-label="الشهر اللي فات">‹</button></div><div class="cal-g">${cells}</div><div class="cal-cnt">${txt} ${isNow?"الشهر ده":"في الشهر ده"} 💪 <span class="mut" style="font-weight:600">(${c} يوم)</span></div></div>`;
+  const txt=curLang()==="ar"
+    ? (c===0?(isNow?"لسه منزلتش":"منزلتش"):c===1?"نزلت مرة واحدة":c===2?"نزلت مرتين":"نزلت "+c+(c<=10?" مرات":" مرة"))
+    : (c===0?"No workouts":"Worked out "+c+(c===1?" time":" times"));
+  const cnt=curLang()==="ar" ? `(${c} يوم)` : `(${c} ${c===1?"day":"days"})`;
+  return `<div class="card" id="calcard"><div class="cal-h"><button id="calnext" aria-label="${t("الشهر الجاي","Next month")}" ${isNow?"disabled":""}>›</button><b>${mn[m]} ${y}</b><button id="calprev" aria-label="${t("الشهر اللي فات","Previous month")}">‹</button></div><div class="cal-g">${cells}</div><div class="cal-cnt">${txt} ${isNow?t("الشهر ده","this month"):t("في الشهر ده","that month")} 💪 <span class="mut" style="font-weight:600">${cnt}</span></div></div>`;
 }
 function bindCalendar(){
   const pv=view.querySelector("#calprev"), nx=view.querySelector("#calnext");
@@ -434,7 +481,7 @@ function renderHome(){
   const sp = SPLITS[S.split];
   const doneToday = S.lastDone === todayStr();
   const isFree = S.split==="free";
-  const day = isFree ? {label:"تمرين حر", parts:[]} : sp.days[S.dayIndex % sp.days.length];
+  const day = isFree ? {label:"تمرين حر", labelEn:"Free Workout", parts:[]} : sp.days[S.dayIndex % sp.days.length];
   const lastHist = S.history.length ? S.history[S.history.length-1] : null;
   const st = streak();
 
@@ -443,64 +490,65 @@ function renderHome(){
     main = `
       <div class="done-card">
         <div class="plate">DONE</div>
-        <div class="big">خلصت تمرين النهاردة، جامد!</div>
-        <div class="mut" style="font-size:14px;margin-top:4px;position:relative">تمرينك الجاي: <b style="color:#93c5fd">${isFree?"تمرين حر — اللي تحبه":esc(day.label)}</b></div>
+        <div class="big">${t("خلصت تمرين النهاردة، جامد!","Today's workout done, beast!")}</div>
+        <div class="mut" style="font-size:14px;margin-top:4px;position:relative">${t("تمرينك الجاي:","Next up:")} <b style="color:#93c5fd">${isFree?t("تمرين حر — اللي تحبه","Free Workout — your call"):esc(dayLbl(day))}</b></div>
         <div class="rowbtns">
-          <button class="btn small ghost" id="undone">تراجع عن الصح</button>
+          <button class="btn small ghost" id="undone">${t("تراجع عن الصح","Undo the ✓")}</button>
 
         </div>
       </div>`;
   } else if(isFree){
     main = `
       <div class="hero">
-        <div class="eyebrow">TODAY / YOUR RULES</div><div class="kicker">تمرين النهاردة</div>
-        <div class="big">تمرين حر</div>
-        <div class="chips">${S.freeSel.length?S.freeSel.map(g=>`<span class="chip">${esc(GROUPS[g])}</span>`).join(""):`<span class="chip" style="opacity:.55">لسه مختارتش عضلات</span>`}</div>
-        <button class="check" id="done" title="خلصت">✓</button>
-        <div class="mut" style="font-size:12px;position:relative">اختار عضلاتك تحت ودوس صح لما تخلص</div>
+        <div class="eyebrow">TODAY / YOUR RULES</div><div class="kicker">${t("تمرين النهاردة","Today's workout")}</div>
+        <div class="big">${t("تمرين حر","Free Workout")}</div>
+        <div class="chips">${S.freeSel.length?S.freeSel.map(g=>`<span class="chip">${esc(G(g))}</span>`).join(""):`<span class="chip" style="opacity:.55">${t("لسه مختارتش عضلات","No muscles picked yet")}</span>`}</div>
+        <button class="check" id="done" title="${t("خلصت","Done")}">✓</button>
+        <div class="mut" style="font-size:12px;position:relative">${t("اختار عضلاتك تحت ودوس صح لما تخلص","Pick your muscles below and hit ✓ when done")}</div>
       </div>
       <div class="card">
-        <b style="font-size:14px;font-weight:800">اختار عضلات النهاردة</b>
-        <div class="tabs" style="margin-top:10px;flex-wrap:wrap">${Object.keys(GROUPS).map(g=>`<button class="tab ${S.freeSel.includes(g)?'on':''}" data-fg="${g}">${esc(GROUPS[g])}</button>`).join("")}</div>
-        ${S.freeSel.length?S.freeSel.map(g=>`<div class="mut" style="font-size:12px;font-weight:800;margin:10px 0 2px">${esc(GROUPS[g])}</div>`+exByGroup(g).slice(0,6).map(e=>`<button class="plan-ex" data-ex="${esc(e.id)}"><b style="font-weight:700">• ${esc(e.ar)}</b><span>شوف الصورة والفيديو ‹</span></button>`).join("")).join(""):`<p class="mut" style="font-size:12.5px;margin:6px 0 0">مفيش خطة ثابتة — إنت اللي بترتب يومك. اختار عضلة وهتظهرلك تمارينها، ودوس على أي تمرين متعرفوش يفتحلك صورته وفيديوه.</p>`}
+        <b style="font-size:14px;font-weight:800">${t("اختار عضلات النهاردة","Pick today's muscles")}</b>
+        <div class="tabs" style="margin-top:10px;flex-wrap:wrap">${Object.keys(GROUPS).map(g=>`<button class="tab ${S.freeSel.includes(g)?'on':''}" data-fg="${g}">${esc(G(g))}</button>`).join("")}</div>
+        ${S.freeSel.length?S.freeSel.map(g=>`<div class="mut" style="font-size:12px;font-weight:800;margin:10px 0 2px">${esc(G(g))}</div>`+exByGroup(g).slice(0,6).map(e=>`<button class="plan-ex" data-ex="${esc(e.id)}"><b style="font-weight:700">• ${esc(exName(e))}</b><span>${t("شوف الصورة والفيديو ‹","Photo &amp; video ›")}</span></button>`).join("")).join(""):`<p class="mut" style="font-size:12.5px;margin:6px 0 0">${t("مفيش خطة ثابتة — إنت اللي بترتب يومك. اختار عضلة وهتظهرلك تمارينها، ودوس على أي تمرين متعرفوش يفتحلك صورته وفيديوه.","No fixed plan — you arrange your own day. Pick a muscle to see its exercises, and tap any exercise you don't know to open its photo and video.")}</p>`}
       </div>`;
   } else {
     main = `
       <div class="hero">
-        <div class="eyebrow">TODAY / NO EXCUSES</div><div class="kicker">تمرين النهاردة</div>
-        <div class="big">${esc(day.label)}</div>
+        <div class="eyebrow">TODAY / NO EXCUSES</div><div class="kicker">${t("تمرين النهاردة","Today's workout")}</div>
+        <div class="big">${esc(dayLbl(day))}</div>
         <div class="chips">${day.parts.map(p=>`<span class="chip">${esc(dayPartsLabel(p))}</span>`).join("")}</div>
-        <button class="check" id="done" title="خلصت">✓</button>
-        <div class="mut" style="font-size:12px;position:relative">دوس صح لما تخلص</div>
+        <button class="check" id="done" title="${t("خلصت","Done")}">✓</button>
+        <div class="mut" style="font-size:12px;position:relative">${t("دوس صح لما تخلص","Hit ✓ when you're done")}</div>
         <div class="rowbtns">
-          <button class="btn small ghost" id="skip">مش هتمرن ده النهاردة ⏭</button>
+          <button class="btn small ghost" id="skip">${t("مش هتمرن ده النهاردة ⏭","Not training this today ⏭")}</button>
         </div>
       </div>
       <div class="card">
-        <b style="font-size:14px;font-weight:800">مكتبة عضلات يومك</b>
-        <div style="margin-top:9px">${day.parts.map(p=>exByGroup(p[0],p[1]).slice(0,4).map(e=>`<button class="plan-ex" data-ex="${esc(e.id)}"><b style="font-weight:700">• ${esc(e.ar)}</b><span>شوف الصورة والفيديو ‹</span></button>`).join("")).join("")}</div>
-        <div class="mut" style="font-size:12px;margin-top:7px">دوس على أي تمرين متعرفوش وهيفتحلك صورته وفيديو الأداء. دي مش خطة تدريب كاملة. استريح حسب جدولك ومدربك.</div>
+        <b style="font-size:14px;font-weight:800">${t("مكتبة عضلات يومك","Today's muscle library")}</b>
+        <div style="margin-top:9px">${day.parts.map(p=>exByGroup(p[0],p[1]).slice(0,4).map(e=>`<button class="plan-ex" data-ex="${esc(e.id)}"><b style="font-weight:700">• ${esc(exName(e))}</b><span>${t("شوف الصورة والفيديو ‹","Photo &amp; video ›")}</span></button>`).join("")).join("")}</div>
+        <div class="mut" style="font-size:12px;margin-top:7px">${t("دوس على أي تمرين متعرفوش وهيفتحلك صورته وفيديو الأداء. دي مش خطة تدريب كاملة. استريح حسب جدولك ومدربك.","Tap any exercise you don't know to open its photo and demo video. This is not a complete training plan. Rest according to your schedule and coach.")}</div>
       </div>`;
   }
 
   const week = sp.days.map((d,i)=>{
     const cls = i===S.dayIndex%sp.days.length && !doneToday ? "today" : "";
-    return `<div class="wday ${cls}">يوم ${i+1}<b>${esc(d.label)}</b></div>`;
+    return `<div class="wday ${cls}">${t("يوم","Day")} ${i+1}<b>${esc(dayLbl(d))}</b></div>`;
   }).join("");
 
   view.innerHTML = `
-    <div class="brandline"><span class="brand">الجامد</span><small>BUILT BY REPS.</small></div><h1>جاهز يا ${esc(S.name)}؟</h1>
-    <p class="sub">${esc(sp.name)}${lastHist ? " · آخر تمرين: "+esc(lastHist.day)+" ("+dayAgo(lastHist.date)+")" : ""}</p>
-    ${st>1 ? `<div style="margin-bottom:12px"><span class="streak">🔥 ${st} أيام ورا بعض</span></div>` : ""}
+    <div class="brandline"><span class="brand">الجامد</span><small>BUILT BY REPS.</small><button class="langbtn" id="langsw">${t("EN","عربي")}</button></div><h1>${t("جاهز يا ","Ready, ")}${esc(S.name)}${t("؟","?")}</h1>
+    <p class="sub">${esc(spName(sp))}${lastHist ? t(" · آخر تمرين: "," · Last: ")+esc(lastHist.day)+" ("+dayAgo(lastHist.date)+")" : ""}</p>
+    ${st>1 ? `<div style="margin-bottom:12px"><span class="streak">🔥 ${st} ${t("أيام ورا بعض","days in a row")}</span></div>` : ""}
     ${main}
     ${supplementsCard()}
     ${calendarCard()}
     ${isFree?"":`<div class="card">
-      <b style="font-size:14px;font-weight:800">جدول النظام</b>
+      <b style="font-size:14px;font-weight:800">${t("جدول النظام","Split schedule")}</b>
       <div class="week" style="margin-top:10px">${week}</div>
     </div>
-    <p class="note">التطبيق بيعد الأيام بنفسه: لما تدوس صح النهاردة، بكرة هيفتح على اليوم اللي بعده في النظام.</p>`}`;
+    <p class="note">${t("التطبيق بيعد الأيام بنفسه: لما تدوس صح النهاردة، بكرة هيفتح على اليوم اللي بعده في النظام.","The app counts the days by itself: hit ✓ today and tomorrow it opens the next day of the split.")}</p>`}`;
 
+  view.querySelector("#langsw").onclick = ()=>setLang(curLang()==="ar"?"en":"ar");
   bindCalendar();
   bindSupplements();
   view.querySelectorAll(".plan-ex").forEach(b=>b.onclick=()=>openExercise(b.dataset.ex));
@@ -511,12 +559,12 @@ function renderHome(){
   });
   const doneBtn = view.querySelector("#done");
   if(doneBtn) doneBtn.onclick = ()=>{
-    if(isFree && !S.freeSel.length){ toast("اختار عضلة واحدة على الأقل الأول"); return; }
+    if(isFree && !S.freeSel.length){ toast(t("اختار عضلة واحدة على الأقل الأول","Pick at least one muscle first")); return; }
     calM=null;
-    S.history.push({date: todayStr(), day: isFree ? "تمرين حر: "+S.freeSel.map(g=>GROUPS[g]).join(" + ") : day.label});
+    S.history.push({date: todayStr(), day: isFree ? t("تمرين حر: ","Free: ")+S.freeSel.map(g=>G(g)).join(t(" + "," + ")) : dayLbl(day)});
     S.lastDone = todayStr();
     if(!isFree) S.dayIndex = (S.dayIndex+1) % sp.days.length;
-    save(); pushMyStatusUpsert(); render(); toast(isFree ? "جامد ✅" : "جامد ✅ تمرينك الجاي: "+sp.days[S.dayIndex%sp.days.length].label);
+    save(); pushMyStatusUpsert(); render(); toast(isFree ? t("جامد ✅","Beast ✅") : t("جامد ✅ تمرينك الجاي: ","Beast ✅ Next up: ")+dayLbl(sp.days[S.dayIndex%sp.days.length]));
   };
   const undone = view.querySelector("#undone");
   if(undone) undone.onclick = ()=>{
@@ -528,7 +576,7 @@ function renderHome(){
   const sk = view.querySelector("#skip");
   if(sk) sk.onclick = ()=>{
     S.dayIndex = (S.dayIndex+1) % sp.days.length;
-    save(); pushMyStatusUpsert(); render(); toast("اتنقلنا لـ: "+sp.days[S.dayIndex%sp.days.length].label);
+    save(); pushMyStatusUpsert(); render(); toast(t("اتنقلنا لـ: ","Moved to: ")+dayLbl(sp.days[S.dayIndex%sp.days.length]));
   };
 }
 
@@ -536,48 +584,51 @@ let libGroup = "chest", libQuery = "", libSub = "", libAll = true;
 function exCard(e){
   const last = lastLog(e.id);
   const hist = S.log[e.id] || [];
+  const nm = exName(e);
   const img = e.frames.length>1
-    ? `<img class="anim" data-f0="${e.frames[0]}" data-f1="${e.frames[1]}" src="${e.frames[0]}" alt="${esc(e.ar)}" loading="lazy">`
-    : `<img src="${e.frames[0]}" alt="${esc(e.ar)}" loading="lazy">`;
+    ? `<img class="anim" data-f0="${e.frames[0]}" data-f1="${e.frames[1]}" src="${e.frames[0]}" alt="${esc(nm)}" loading="lazy">`
+    : `<img src="${e.frames[0]}" alt="${esc(nm)}" loading="lazy">`;
+  const subLbl = e.group==='arms'&&e.sub ? (e.sub==="biceps"?t("باي","Biceps"):e.sub==="triceps"?t("تراي","Triceps"):t("ساعد","Forearms")) : "";
+  const vNote = curLang()==="en" ? (e.videoNoteEn||"") : (e.videoNote||"");
   return `
   <div class="ex" data-id="${e.id}">
     <div class="head">
       ${img}
       <div>
-        <div class="nm">${esc(e.ar)}${e.group==='arms'&&e.sub?` <span class="mut" style="font-size:11px">(${e.sub==="biceps"?"باي":e.sub==="triceps"?"تراي":"ساعد"})</span>`:""}</div>
-        <div class="cue">${esc(e.cue)}</div>
+        <div class="nm">${esc(nm)}${subLbl?` <span class="mut" style="font-size:11px">(${subLbl})</span>`:""}</div>
+        <div class="cue">${esc(exCue(e))}</div>
       </div>
     </div>
-    <a class="video-link" href="${esc(e.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="فيديو ${esc(e.ar)} (بيفتح في صفحة جديدة)">▶ شوف فيديو التمرين <span>↗</span></a>
-    ${e.videoNote?`<p class="mut" style="font-size:12px;margin:6px 0">${esc(e.videoNote)}</p>`:''}
+    <a class="video-link" href="${esc(e.videoUrl)}" target="_blank" rel="noopener noreferrer" aria-label="${t("فيديو","Video:")} ${esc(nm)} ${t("(بيفتح في صفحة جديدة)","(opens in a new tab)")}">▶ ${t("شوف فيديو التمرين","Watch the exercise video")} <span>↗</span></a>
+    ${vNote?`<p class="mut" style="font-size:12px;margin:6px 0">${esc(vNote)}</p>`:''}
     <div class="logrow">
-      <div class="fld"><label>الوزن (كجم)</label><input type="number" inputmode="decimal" class="w" placeholder="0"></div>
-      <div class="fld"><label>العدات</label><input type="number" inputmode="numeric" class="r" placeholder="0"></div>
-      <div class="fld"><label>المجموعات</label><input type="number" inputmode="numeric" class="s" placeholder="3"></div>
-      <button class="logsave">سجل</button>
+      <div class="fld"><label>${t("الوزن (كجم)","Weight (kg)")}</label><input type="number" inputmode="decimal" class="w" placeholder="0"></div>
+      <div class="fld"><label>${t("العدات","Reps")}</label><input type="number" inputmode="numeric" class="r" placeholder="0"></div>
+      <div class="fld"><label>${t("المجموعات","Sets")}</label><input type="number" inputmode="numeric" class="s" placeholder="3"></div>
+      <button class="logsave">${t("سجل","Log")}</button>
     </div>
-    ${last ? `<div class="last">آخر مرة: ${esc(last.w)} كجم × ${esc(last.r)} عدات${last.s?` × ${esc(last.s)} مجموعات`:""} — ${dayAgo(last.d)}</div>` : `<div class="mut" style="font-size:12px;margin-top:9px">لسه مسجلتش التمرين ده</div>`}
-    ${hist.length ? `<button class="hist-toggle">السجل (${hist.length})</button>
-      <div class="hist">${hist.slice(-5).reverse().map(h=>`${dayAgo(h.d)}: ${esc(h.w)}كجم × ${esc(h.r)}${h.s?` × ${esc(h.s)}`:""}`).join("<br>")}</div>`:""}
+    ${last ? `<div class="last">${t("آخر مرة:","Last time:")} ${esc(last.w)} ${t("كجم","kg")} × ${esc(last.r)} ${t("عدات","reps")}${last.s?` × ${esc(last.s)} ${t("مجموعات","sets")}`:""} — ${dayAgo(last.d)}</div>` : `<div class="mut" style="font-size:12px;margin-top:9px">${t("لسه مسجلتش التمرين ده","Not logged yet")}</div>`}
+    ${hist.length ? `<button class="hist-toggle">${t("السجل","History")} (${hist.length})</button>
+      <div class="hist">${hist.slice(-5).reverse().map(h=>`${dayAgo(h.d)}: ${esc(h.w)}${t("كجم","kg")} × ${esc(h.r)}${h.s?` × ${esc(h.s)}`:""}`).join("<br>")}</div>`:""}
   </div>`;
 }
 
 function renderLib(){
   const count=exByGroup(libGroup).length;
   view.innerHTML = `
-    <h1>التمارين <span class="mut" style="font-size:17px">200 تمرين · V9</span></h1>
-    <p class="sub">المكتبة كلها قدامك من غير حد ٨ تمارين. اختار اللي يناسبك بالجهاز أو العضلة، ومش مطلوب تلعبهم كلهم في يوم واحد. سجلك زي ما هو.</p>
-    <p class="note" style="margin-top:0">دوس «شوف فيديو التمرين» تحت أي حركة. بيفتح شرح للحركة في صفحة جديدة وبيحتاج إنترنت. الفيديوهات الجديدة عرض للحركة، والشرح العربي والصور هنا يساعدوك.</p>
+    <h1>${t("التمارين","Exercises")} <span class="mut" style="font-size:17px">200 ${t("تمرين · V10","exercises · V10")}</span></h1>
+    <p class="sub">${t("المكتبة كلها قدامك من غير حد ٨ تمارين. اختار اللي يناسبك بالجهاز أو العضلة، ومش مطلوب تلعبهم كلهم في يوم واحد. سجلك زي ما هو.","The whole library is here with no 8-exercise cap. Pick what suits you by machine or muscle; you don't have to do them all in one day. Your log is unchanged.")}</p>
+    <p class="note" style="margin-top:0">${t("دوس «شوف فيديو التمرين» تحت أي حركة. بيفتح شرح للحركة في صفحة جديدة وبيحتاج إنترنت. الفيديوهات الجديدة عرض للحركة، والشرح العربي والصور هنا يساعدوك.","Tap «Watch the exercise video» under any move. It opens a demo in a new tab and needs internet. The videos demo the movement; the written cues and photos here help you too.")}</p>
     <div class="tabs">
-      ${Object.entries(GROUPS).map(([k,v])=>`<button class="tab ${k===libGroup?'on':''}" data-g="${k}">${v} <small>${exByGroup(k).length}</small></button>`).join("")}
+      ${Object.keys(GROUPS).map(k=>`<button class="tab ${k===libGroup?'on':''}" data-g="${k}">${G(k)} <small>${exByGroup(k).length}</small></button>`).join("")}
     </div>
-    <label for="exsearch" style="margin-top:0">دور باسم التمرين عربي أو إنجليزي</label>
-    <input type="text" id="exsearch" placeholder="مثلاً: دمبل، كيبل، squat" value="${esc(libQuery)}" style="margin-bottom:12px">
-    <div class="tabs" aria-label="فلتر العضلة"><button class="tab ${!libSub?'on':''}" data-sub="">الكل</button>${[...new Set(exByGroup(libGroup).flatMap(e=>e.tags||[]))].map(k=>`<button class="tab ${libSub===k?'on':''}" data-sub="${k}">${({biceps:'باي',triceps:'تراي',forearms:'ساعد'})[k]||k}</button>`).join('')}</div>
+    <label for="exsearch" style="margin-top:0">${t("دور باسم التمرين عربي أو إنجليزي","Search by exercise name, English or Arabic")}</label>
+    <input type="text" id="exsearch" placeholder="${t("مثلاً: دمبل، كيبل، squat","e.g. dumbbell, cable, بنش")}" value="${esc(libQuery)}" style="margin-bottom:12px">
+    <div class="tabs" aria-label="${t("فلتر العضلة","Muscle filter")}"><button class="tab ${!libSub?'on':''}" data-sub="">${t("الكل","All")}</button>${[...new Set(exByGroup(libGroup).flatMap(e=>e.tags||[]))].map(k=>`<button class="tab ${libSub===k?'on':''}" data-sub="${k}">${esc(tagLabel(k))}</button>`).join('')}</div>
     <p class="mut" id="excount" style="font-size:12px"></p><div id="exlist"></div>
-    <p class="note">ابدأ بوزن خفيف واتعلم الحركة مع مدرب. وقف لو فيه ألم. تمارين وزن الجسم: سجل الوزن 0. تمارين الثبات زي البلانك: اكتب الثواني مكان العدات.</p>`;
-  view.querySelectorAll('[data-g]').forEach(t=>t.onclick=()=>{libGroup=t.dataset.g;libSub='';renderLib();});
-  view.querySelectorAll('[data-sub]').forEach(t=>t.onclick=()=>{libSub=t.dataset.sub;renderLib();});
+    <p class="note">${t("ابدأ بوزن خفيف واتعلم الحركة مع مدرب. وقف لو فيه ألم. تمارين وزن الجسم: سجل الوزن 0. تمارين الثبات زي البلانك: اكتب الثواني مكان العدات.","Start light and learn the movement with a coach. Stop if anything hurts. Bodyweight moves: log weight 0. Holds like plank: write seconds in the reps field.")}</p>`;
+  view.querySelectorAll('[data-g]').forEach(tt=>tt.onclick=()=>{libGroup=tt.dataset.g;libSub='';renderLib();});
+  view.querySelectorAll('[data-sub]').forEach(tt=>tt.onclick=()=>{libSub=tt.dataset.sub;renderLib();});
   view.querySelector('#exsearch').oninput=ev=>{libQuery=ev.target.value;renderExList();};
   renderExList();
 }
@@ -585,8 +636,8 @@ function renderExList(){
   const q=libQuery.trim().toLowerCase().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه');
   const norm=t=>t.toLowerCase().replace(/[أإآ]/g,'ا').replace(/ة/g,'ه');
   const rows=exByGroup(libGroup).filter(e=>(!libSub||(e.tags||[]).includes(libSub))&&(!q||norm(e.ar+' '+e.en+' '+(e.tags||[]).join(' ')).includes(q)));
-  view.querySelector('#excount').textContent=rows.length+' تمرين ظاهر في '+GROUPS[libGroup]+(q?' · البحث في كل التمارين':'');
-  view.querySelector('#exlist').innerHTML=rows.length?rows.map(exCard).join(''):'<p class="note">مفيش نتيجة هنا. جرب اسم تاني أو فلتر عضلة تاني.</p>';
+  view.querySelector('#excount').textContent=rows.length+t(' تمرين ظاهر في ',' shown in ')+G(libGroup)+(q?t(' · البحث في كل التمارين',' · searching all exercises'):'');
+  view.querySelector('#exlist').innerHTML=rows.length?rows.map(exCard).join(''):`<p class="note">${t("مفيش نتيجة هنا. جرب اسم تاني أو فلتر عضلة تاني.","No results here. Try another name or muscle filter.")}</p>`;
   bindExCards();
 }
 
@@ -601,9 +652,9 @@ function bindExCards(){
       const w = card.querySelector(".w").value.trim();
       const r = card.querySelector(".r").value.trim();
       const s = card.querySelector(".s").value.trim();
-      if(w==="" || !Number.isFinite(+w) || +w<0 || !Number.isInteger(+r) || +r<1 || (s && (!Number.isInteger(+s)||+s<1))){ toast("اكتب الوزن والعدات الأول"); return; }
+      if(w==="" || !Number.isFinite(+w) || +w<0 || !Number.isInteger(+r) || +r<1 || (s && (!Number.isInteger(+s)||+s<1))){ toast(t("اكتب الوزن والعدات الأول","Enter weight and reps first")); return; }
       (S.log[id] = S.log[id]||[]).push({d: todayStr(), w:w, r:r, s:s||null});
-      save(); render(); toast("اتسجل ✅");
+      save(); render(); toast(t("اتسجل ✅","Logged ✅"));
     };
     const tg = card.querySelector(".hist-toggle");
     if(tg) tg.onclick = ()=>card.classList.toggle("open");
@@ -611,76 +662,79 @@ function bindExCards(){
 }
 
 async function renderFriends(){
-  view.innerHTML=`<div class="brandline"><span class="brand">الشلة</span><small>TRAIN TOGETHER</small></div>
-    <p class="sub">شارك اسمك ونوع تمرينك بس. الأوزان وسجل التدريب مش بيطلعوا من جهازك.</p>`;
-  if(!DB){view.innerHTML+='<div class="card">المشاركة مش متاحة حالياً، سجلك الشخصي شغال.</div>';return;}
-  if(!S.sharing){view.innerHTML+=`<div class="card"><h2>نتمرن سوا؟</h2><p class="note">لما تفعل المشاركة، Supabase هيحفظ اسمك ونوع يومك وتاريخ تحديثه. اللي تضيفه بكوده يشوفهم، وهو كمان بيشوفك عنده تلقائي. مفيش بحث بالاسم ولا قائمة عامة. تقدر توقف المشاركة وتمسحها في أي وقت.</p><button class="btn" id="enableShare">موافق، فعّل المشاركة</button></div>`;
-    view.querySelector('#enableShare').onclick=async()=>{S.sharing=true;save();const ok=await pushMyStatusUpsert();if(!ok){S.sharing=false;save();toast('المشاركة متوصلتش، جرب تاني');}renderFriends();};return;}
-  view.innerHTML+=`<div class="card"><b>كودك، ابعته بس لأصحابك</b><div class="codebox" id="mycode" style="margin:12px 0">بيجهز...</div>
-    <button class="btn ghost" id="share">انسخ الكود</button><p class="mut" id="sync" style="font-size:12px"></p></div>
-    <div class="card"><label>كود صاحبك</label><input type="text" id="fc" placeholder="الصق الكود هنا" dir="ltr"><button class="btn" id="add" style="margin-top:10px">ضيف صاحبك</button><p class="mut" style="font-size:12px;margin-top:8px">أول ما تضيفه هيظهر عندك، وانت كمان هتظهر في الشلة عنده تلقائي. أي واحد فيكم يقدر يشيل التاني.</p></div>
-    <div class="card"><b>الشلة عليهم إيه؟</b><button class="btn small ghost" id="refresh">تحديث</button><div id="flist" style="margin-top:12px">بيحمّل...</div></div>
-    <button class="btn danger" id="disableShare">إيقاف المشاركة ومسح حالتي</button>`;
-  view.querySelector('#share').onclick=async()=>{if(!S.friendCode)return;try{await navigator.clipboard.writeText(S.friendCode);toast('الكود اتنسخ');}catch(e){toast('حدد الكود وانسخه');}};
+  view.innerHTML=`<div class="brandline"><span class="brand">${t("الشلة","The Crew")}</span><small>TRAIN TOGETHER</small></div>
+    <p class="sub">${t("شارك اسمك ونوع تمرينك بس. الأوزان وسجل التدريب مش بيطلعوا من جهازك.","Share only your name and workout type. Your weights and training log never leave your device.")}</p>`;
+  if(!DB){view.innerHTML+=`<div class="card">${t("المشاركة مش متاحة حالياً، سجلك الشخصي شغال.","Sharing isn't available right now; your personal log still works.")}</div>`;return;}
+  if(!S.sharing){view.innerHTML+=`<div class="card"><h2>${t("نتمرن سوا؟","Train together?")}</h2><p class="note">${t("لما تفعل المشاركة، Supabase هيحفظ اسمك ونوع يومك وتاريخ تحديثه. اللي تضيفه بكوده يشوفهم، وهو كمان بيشوفك عنده تلقائي. مفيش بحث بالاسم ولا قائمة عامة. تقدر توقف المشاركة وتمسحها في أي وقت.","When you turn sharing on, Supabase stores your name, your workout type and its update date. Anyone you add by code sees them, and they automatically see you back. No name search and no public list. You can stop sharing and erase it anytime.")}</p><button class="btn" id="enableShare">${t("موافق، فعّل المشاركة","Agree, turn sharing on")}</button></div>`;
+    view.querySelector('#enableShare').onclick=async()=>{S.sharing=true;save();const ok=await pushMyStatusUpsert();if(!ok){S.sharing=false;save();toast(t('المشاركة متوصلتش، جرب تاني',"Couldn't connect sharing, try again"));}renderFriends();};return;}
+  view.innerHTML+=`<div class="card"><b>${t("كودك، ابعته بس لأصحابك","Your code — send it only to your friends")}</b><div class="codebox" id="mycode" style="margin:12px 0">${t("بيجهز...","Loading...")}</div>
+    <button class="btn ghost" id="share">${t("انسخ الكود","Copy code")}</button><p class="mut" id="sync" style="font-size:12px"></p></div>
+    <div class="card"><label>${t("كود صاحبك","Your friend's code")}</label><input type="text" id="fc" placeholder="${t("الصق الكود هنا","Paste the code here")}" dir="ltr"><button class="btn" id="add" style="margin-top:10px">${t("ضيف صاحبك","Add your friend")}</button><p class="mut" style="font-size:12px;margin-top:8px">${t("أول ما تضيفه هيظهر عندك، وانت كمان هتظهر في الشلة عنده تلقائي. أي واحد فيكم يقدر يشيل التاني.","Once you add him he shows up here, and you automatically show up in his crew too. Either of you can remove the other.")}</p></div>
+    <div class="card"><b>${t("الشلة عليهم إيه؟","What's the crew up to?")}</b><button class="btn small ghost" id="refresh">${t("تحديث","Refresh")}</button><div id="flist" style="margin-top:12px">${t("بيحمّل...","Loading...")}</div></div>
+    <button class="btn danger" id="disableShare">${t("إيقاف المشاركة ومسح حالتي","Stop sharing and erase my status")}</button>`;
+  view.querySelector('#share').onclick=async()=>{if(!S.friendCode)return;try{await navigator.clipboard.writeText(S.friendCode);toast(t('الكود اتنسخ','Code copied'));}catch(e){toast(t('حدد الكود وانسخه','Select the code and copy it'));}};
   view.querySelector('#refresh').onclick=renderFriends;
   view.querySelector('#add').onclick=async()=>{const c=view.querySelector('#fc').value.trim().toLowerCase();
-    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(c)){toast('الكود مش كامل');return;}
-    if(c===S.friendCode){toast('ده كودك انت');return;}
-    try{await identity();const r=await DB.rpc('gym_friend_status',{friend_code:c});if(r.error||!r.data?.length){toast('الكود مش موجود أو المشاركة واقفة');return;}
-      await linkFriend(c);toast('اتضاف، وانت كمان ظهرت عنده');renderFriends();}catch(e){toast('مفيش اتصال، جرب تاني');}};
-  view.querySelector('#disableShare').onclick=async()=>{if(!confirm('تمسح حالتك من النت وتوقف المشاركة؟'))return;
+    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(c)){toast(t('الكود مش كامل','The code is incomplete'));return;}
+    if(c===S.friendCode){toast(t('ده كودك انت',"That's your own code"));return;}
+    try{await identity();const r=await DB.rpc('gym_friend_status',{friend_code:c});if(r.error||!r.data?.length){toast(t('الكود مش موجود أو المشاركة واقفة','Code not found or sharing is off'));return;}
+      await linkFriend(c);toast(t('اتضاف، وانت كمان ظهرت عنده','Added, and you show up on their side too'));renderFriends();}catch(e){toast(t('مفيش اتصال، جرب تاني','No connection, try again'));}};
+  view.querySelector('#disableShare').onclick=async()=>{if(!confirm(t('تمسح حالتك من النت وتوقف المشاركة؟','Erase your status online and stop sharing?')))return;
     try{const uid=await identity();await unlinkAll();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;
-      S.sharing=false;S.friendCode=null;save();renderFriends();}catch(e){toast('المسح متعملش، اتصل بالنت وجرب تاني');}};
+      S.sharing=false;S.friendCode=null;save();renderFriends();}catch(e){toast(t('المسح متعملش، اتصل بالنت وجرب تاني',"Couldn't erase, connect and try again"));}};
   const ok=await pushMyStatusUpsert();if(nav!=='friends'||!document.querySelector('#mycode'))return;
-  view.querySelector('#mycode').textContent=S.friendCode||'تعذر الاتصال';
-  view.querySelector('#sync').textContent=ok?'حالتك اتحدثت دلوقتي':'التحديث متعملش، اتصل بالنت وجرب تاني';
+  view.querySelector('#mycode').textContent=S.friendCode||t('تعذر الاتصال','Connection failed');
+  view.querySelector('#sync').textContent=ok?t('حالتك اتحدثت دلوقتي','Your status was updated just now'):t('التحديث متعملش، اتصل بالنت وجرب تاني',"Couldn't update, connect and try again");
   try{const rows=await fetchFriends();if(nav!=='friends'||!document.querySelector('#mycode'))return;
-    view.querySelector('#flist').innerHTML=rows.length?rows.map(r=>`<div class="friend"><div class="n">${esc(r.name)}</div><span class="badge ${r.status_date===todayStr()?'':'off'}">${r.status_date===todayStr()?esc(r.day):'آخر حالة: '+esc(r.day)}</span><p class="mut" style="font-size:11px">${r.status_date===todayStr()?'محدث النهاردة':r.status_date?'مش متأكدين من تمرين النهاردة، آخر تحديث '+esc(r.status_date):'المشاركة واقفة'}</p><button class="hist-toggle" data-remove="${r.code}">إزالة من الشلة</button></div>`).join(''):'لسه مضفتش حد. خد كود صاحبك وضيفه، وهيظهر عنده تلقائي.';
-    view.querySelectorAll('[data-remove]').forEach(b=>b.onclick=async()=>{try{await unlinkFriend(b.dataset.remove);renderFriends();}catch(e){toast('الإزالة متعملتش، اتصل بالنت وجرب تاني');}});
-  }catch(e){if(nav==='friends'&&view.querySelector('#flist'))view.querySelector('#flist').textContent='التحديث مش متاح، جرب تاني.';}
+    view.querySelector('#flist').innerHTML=rows.length?rows.map(r=>`<div class="friend"><div class="n">${esc(r.name)}</div><span class="badge ${r.status_date===todayStr()?'':'off'}">${r.status_date===todayStr()?esc(r.day):t('آخر حالة: ','Last: ')+esc(r.day)}</span><p class="mut" style="font-size:11px">${r.status_date===todayStr()?t('محدث النهاردة','Updated today'):r.status_date?t('مش متأكدين من تمرين النهاردة، آخر تحديث ',"Not sure about today's workout, last update ")+esc(r.status_date):t('المشاركة واقفة','Sharing off')}</p><button class="hist-toggle" data-remove="${r.code}">${t('إزالة من الشلة','Remove from crew')}</button></div>`).join(''):t('لسه مضفتش حد. خد كود صاحبك وضيفه، وهيظهر عنده تلقائي.',"No one added yet. Get your friend's code and add him, and you'll show up on his side automatically.");
+    view.querySelectorAll('[data-remove]').forEach(b=>b.onclick=async()=>{try{await unlinkFriend(b.dataset.remove);renderFriends();}catch(e){toast(t('الإزالة متعملتش، اتصل بالنت وجرب تاني',"Couldn't remove, connect and try again"));}});
+  }catch(e){if(nav==='friends'&&view.querySelector('#flist'))view.querySelector('#flist').textContent=t('التحديث مش متاح، جرب تاني.','Update unavailable, try again.');}
 }
 
 function renderSettings(){
   view.innerHTML = `
-    <h1>الإعدادات</h1>
-    <p class="sub">الأوزان والسجل على جهازك. مشاركة الاسم ونوع اليوم اختيارية في الشلة.</p>
+    <h1>${t("الإعدادات","Settings")}</h1>
+    <p class="sub">${t("الأوزان والسجل على جهازك. مشاركة الاسم ونوع اليوم اختيارية في الشلة.","Weights and log stay on your device. Sharing your name and workout type with the crew is optional.")}</p>
     <div class="card">
-      <div class="setrow"><div><div class="t">الاسم</div><div class="d">${esc(S.name)}</div></div>
-        <button class="btn small ghost" id="rename">تغيير</button></div>
-      <div class="setrow"><div><div class="t">نظام التمرين</div><div class="d">${esc(SPLITS[S.split].name)}</div></div>
-        <button class="btn small ghost" id="resplit">تغيير</button></div>
+      <div class="setrow"><div><div class="t">${t("اللغة","Language")}</div><div class="d">${t("العربية أو الإنجليزية","Arabic or English")}</div></div>
+        <div class="tabs" style="margin:0"><button class="tab ${curLang()==='ar'?'on':''}" data-lang="ar">عربي</button><button class="tab ${curLang()==='en'?'on':''}" data-lang="en">EN</button></div></div>
+      <div class="setrow"><div><div class="t">${t("الاسم","Name")}</div><div class="d">${esc(S.name)}</div></div>
+        <button class="btn small ghost" id="rename">${t("تغيير","Change")}</button></div>
+      <div class="setrow"><div><div class="t">${t("نظام التمرين","Workout split")}</div><div class="d">${esc(spName(SPLITS[S.split]))}</div></div>
+        <button class="btn small ghost" id="resplit">${t("تغيير","Change")}</button></div>
     </div>
     <div class="card">
-      <b style="font-size:14px;font-weight:800">النسخ الاحتياطي</b>
-      <p class="note" style="margin:10px 0">بياناتك متسجلة على الموبايل ده بس. لو غيرت موبايلك، صدّر نسخة وابعتها لنفسك واستوردها هناك.</p>
-      <button class="btn ghost" id="export" style="margin-bottom:8px">تصدير نسخة احتياطية ⬇️</button>
-      <button class="btn ghost" id="importbtn">استيراد نسخة ⬆️</button>
+      <b style="font-size:14px;font-weight:800">${t("النسخ الاحتياطي","Backup")}</b>
+      <p class="note" style="margin:10px 0">${t("بياناتك متسجلة على الموبايل ده بس. لو غيرت موبايلك، صدّر نسخة وابعتها لنفسك واستوردها هناك.","Your data is saved on this phone only. If you change phones, export a backup, send it to yourself, and import it there.")}</p>
+      <button class="btn ghost" id="export" style="margin-bottom:8px">${t("تصدير نسخة احتياطية ⬇️","Export backup ⬇️")}</button>
+      <button class="btn ghost" id="importbtn">${t("استيراد نسخة ⬆️","Import backup ⬆️")}</button>
       <input type="file" id="importfile" accept="application/json" class="hide">
     </div>
     <div class="card">
-      <b style="font-size:14px;font-weight:800">حقوق الصور</b>
-      <p class="note" style="margin:10px 0">صور وبيانات التمارين من <b>wger.de</b> — قاعدة بيانات تمارين مجانية ومفتوحة المصدر، برخص Creative Commons (CC BY-SA / CC0).</p>
-      <button class="btn small ghost" id="credits">قائمة الحقوق كاملة</button>
+      <b style="font-size:14px;font-weight:800">${t("حقوق الصور","Image credits")}</b>
+      <p class="note" style="margin:10px 0">${t("صور وبيانات التمارين من","Exercise images and data from")} <b>wger.de</b> — ${t("قاعدة بيانات تمارين مجانية ومفتوحة المصدر، برخص Creative Commons (CC BY-SA / CC0).","a free, open-source exercise database, under Creative Commons licenses (CC BY-SA / CC0).")}</p>
+      <button class="btn small ghost" id="credits">${t("قائمة الحقوق كاملة","Full credits list")}</button>
     </div>
-    <button class="btn danger" id="wipe">مسح كل البيانات</button>`;
+    <button class="btn danger" id="wipe">${t("مسح كل البيانات","Erase all data")}</button>`;
 
+  view.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
   view.querySelector("#rename").onclick = ()=>{
-    const nm = prompt("اسمك الجديد:", S.name);
+    const nm = prompt(t("اسمك الجديد:","Your new name:"), S.name);
     if(nm && nm.trim() && nm.trim().length<=50){ S.name = nm.trim(); save(); pushMyStatusUpsert(); render(); }
   };
   view.querySelector("#resplit").onclick = ()=>{
     const keys = Object.keys(SPLITS);
-    const list = keys.map((k,i)=>`${i+1}- ${SPLITS[k].name}`).join("\n");
-    const pick = prompt("اختار رقم النظام:\n"+list, String(keys.indexOf(S.split)+1));
+    const list = keys.map((k,i)=>`${i+1}- ${spName(SPLITS[k])}`).join("\n");
+    const pick = prompt(t("اختار رقم النظام:","Pick a split number:")+"\n"+list, String(keys.indexOf(S.split)+1));
     const i = parseInt(pick,10)-1;
-    if(keys[i] && keys[i]!==S.split){ S.split = keys[i]; S.dayIndex = 0; S.lastDone = null; save(); pushMyStatusUpsert(); render(); toast("النظام اتغير، هنبدأ من أول يوم"); }
+    if(keys[i] && keys[i]!==S.split){ S.split = keys[i]; S.dayIndex = 0; S.lastDone = null; save(); pushMyStatusUpsert(); render(); toast(t("النظام اتغير، هنبدأ من أول يوم","Split changed, starting from day one")); }
   };
   view.querySelector("#export").onclick = ()=>{
-    const blob = new Blob([JSON.stringify({name:S.name,split:S.split,dayIndex:S.dayIndex,lastDone:S.lastDone,history:S.history,log:S.log,sups:S.sups||{},inbody:S.inbody||[],freeSel:S.freeSel||[]},null,1)], {type:"application/json"});
+    const blob = new Blob([JSON.stringify({name:S.name,split:S.split,dayIndex:S.dayIndex,lastDone:S.lastDone,history:S.history,log:S.log,sups:S.sups||{},inbody:S.inbody||[],freeSel:S.freeSel||[],lang:S.lang||"ar"},null,1)], {type:"application/json"});
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = "elgamed-backup-"+todayStr()+".json";
-    a.click(); toast("اتصدرت النسخة ⬇️");
+    a.click(); toast(t("اتصدرت النسخة ⬇️","Backup exported ⬇️"));
   };
   view.querySelector("#importbtn").onclick = ()=>view.querySelector("#importfile").click();
   view.querySelector("#importfile").onchange = ev=>{
@@ -690,15 +744,15 @@ function renderSettings(){
       try{
         const d = JSON.parse(rd.result);
         if(!d || typeof d!=="object" || typeof d.name!=="string" || d.name.length>50 || !SPLITS[d.split] || !Array.isArray(d.history) || !d.log || typeof d.log!=="object" || !Number.isInteger(d.dayIndex) || d.dayIndex<0) throw 0;
-        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:S.friends||[],sharing:!!S.sharing,friendCode:S.friendCode||null,sups:(d.sups&&typeof d.sups==="object")?d.sups:{},inbody:Array.isArray(d.inbody)?d.inbody.filter(x=>x&&typeof x.date==="string").slice(0,500):[],freeSel:Array.isArray(d.freeSel)?d.freeSel.filter(g=>GROUPS[g]):[]}; save(); nav="home"; render(); toast("اتستوردت ✅");
-      }catch(e){ toast("الملف ده مش نسخة صح"); }
+        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:S.friends||[],sharing:!!S.sharing,friendCode:S.friendCode||null,sups:(d.sups&&typeof d.sups==="object")?d.sups:{},inbody:Array.isArray(d.inbody)?d.inbody.filter(x=>x&&typeof x.date==="string").slice(0,500):[],freeSel:Array.isArray(d.freeSel)?d.freeSel.filter(g=>GROUPS[g]):[],lang:(d.lang==="ar"||d.lang==="en")?d.lang:(S.lang||"ar")}; save(); nav="home"; render(); toast(t("اتستوردت ✅","Imported ✅"));
+      }catch(e){ toast(t("الملف ده مش نسخة صح","This file isn't a valid backup")); }
     };
     rd.readAsText(f);
   };
   view.querySelector("#credits").onclick = renderCredits;
   view.querySelector("#wipe").onclick = async ()=>{
-    if(confirm("هتمسح كل حاجة: الاسم، الجدول، وسجل الأوزان. متأكد؟")){
-      if(S.sharing && DB){try{const uid=await identity();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;}catch(e){toast('اتصل بالنت الأول عشان نمسح الحالة المشتركة');return;}}
+    if(confirm(t("هتمسح كل حاجة: الاسم، الجدول، وسجل الأوزان. متأكد؟","This erases everything: name, schedule and weight log. Sure?"))){
+      if(S.sharing && DB){try{const uid=await identity();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;}catch(e){toast(t('اتصل بالنت الأول عشان نمسح الحالة المشتركة','Connect to the internet first to erase the shared status'));return;}}
       localStorage.removeItem(KEY); S = load(); nav="home"; render();
     }
   };
@@ -706,39 +760,39 @@ function renderSettings(){
 
 function renderCredits(){
   view.innerHTML = `
-    <h1>حقوق الصور 📄</h1>
-    <p class="sub">الصور الأصلية من wger.de برخص Creative Commons، والإضافات من Free Exercise DB المتاح للملكية العامة برخصة The Unlicense. حقوق ومصدر كل صورة تحت تمرينها.</p>
+    <h1>${t("حقوق الصور 📄","Image credits 📄")}</h1>
+    <p class="sub">${t("الصور الأصلية من wger.de برخص Creative Commons، والإضافات من Free Exercise DB المتاح للملكية العامة برخصة The Unlicense. حقوق ومصدر كل صورة تحت تمرينها.","Original images from wger.de under Creative Commons licenses, with additions from Free Exercise DB, public domain under The Unlicense. Each image's license and source appear under its exercise.")}</p>
     <div class="card">
-      ${EXERCISES.map(e=>`<div class="credit"><b style="color:var(--txt)">${esc(e.ar)}</b> (${esc(e.en)})<br>الصورة: ${(e.imageCredits||[]).map(c=>`${esc(c.author)} <a href="${c.url}" style="color:var(--acc)">${esc(c.license)}</a> <a href="${c.source}" style="color:var(--mut)">المصدر</a>`).join("<br>")}<br>الفيديو: <a href="${esc(e.videoSource||e.videoUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">${esc(e.videoTitle||e.en)}</a></div>`).join("")}
+      ${EXERCISES.map(e=>`<div class="credit"><b style="color:var(--txt)">${esc(exName(e))}</b> (${esc(curLang()==="en"?e.ar:e.en)})<br>${t("الصورة:","Image:")} ${(e.imageCredits||[]).map(c=>`${esc(c.author)} <a href="${c.url}" style="color:var(--acc)">${esc(c.license)}</a> <a href="${c.source}" style="color:var(--mut)">${t("المصدر","Source")}</a>`).join("<br>")}<br>${t("الفيديو:","Video:")} <a href="${esc(e.videoSource||e.videoUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--acc)">${esc(e.videoTitle||e.en)}</a></div>`).join("")}
     </div>
-    <button class="btn ghost" id="back">رجوع</button>`;
+    <button class="btn ghost" id="back">${t("رجوع","Back")}</button>`;
   view.querySelector("#back").onclick = renderSettings;
 }
 
 /* ---------- supplements (local only) ---------- */
-const SUPS = [ ["protein","بروتين","🥛"], ["creatine","كرياتين","⚡"], ["pre","بري ورك أوت","🔥"] ];
-const SUP_TIMES = [["before","قبل التمرين"],["after","بعد التمرين"],["any","أي وقت"]];
-function supTimeLabel(t){ const x=SUP_TIMES.find(y=>y[0]===t); return x?x[1]:""; }
+const SUPS = [ ["protein","بروتين","Protein","🥛"], ["creatine","كرياتين","Creatine","⚡"], ["pre","بري ورك أوت","Pre-workout","🔥"] ];
+const SUP_TIMES = [["before","قبل التمرين","Before workout"],["after","بعد التمرين","After workout"],["any","أي وقت","Any time"]];
+function supTimeLabel(tv){ const x=SUP_TIMES.find(y=>y[0]===tv); return x?t(x[1],x[2]):""; }
 function supplementsCard(){
   const td=(S.sups||{})[todayStr()]||{};
   const saved=SUPS.some(([k])=>td[k]&&td[k].n>0);
-  const rows=SUPS.map(([k,nm,ic])=>{ const cur=td[k]||{}; return `
+  const rows=SUPS.map(([k,nm,nmEn,ic])=>{ const cur=td[k]||{}; return `
     <div class="sup-row">
-      <div class="sup-nm">${ic} ${nm}</div>
+      <div class="sup-nm">${ic} ${t(nm,nmEn)}</div>
       <div class="sup-ctl" data-sup="${k}">
         ${[1,2,3].map(n=>`<button class="tab ${cur.n===n?'on':''}" data-n="${n}">${n}</button>`).join("")}
-        <span class="mut" style="font-size:11px;align-self:center">سكوب</span>
-        ${SUP_TIMES.map(([tv,tl])=>`<button class="tab ${cur.t===tv?'on':''}" data-t="${tv}">${tl}</button>`).join("")}
+        <span class="mut" style="font-size:11px;align-self:center">${t("سكوب","scoops")}</span>
+        ${SUP_TIMES.map(([tv,tla,tle])=>`<button class="tab ${cur.t===tv?'on':''}" data-t="${tv}">${t(tla,tle)}</button>`).join("")}
       </div>
     </div>`;}).join("");
   const hist=Object.keys(S.sups||{}).filter(d=>d!==todayStr()).sort().reverse().slice(0,3)
-    .map(d=>{const e=S.sups[d]||{};const parts=SUPS.map(([k,nm])=>e[k]&&e[k].n?nm+" "+e[k].n+" سكوب "+supTimeLabel(e[k].t):null).filter(Boolean).join("، ");
+    .map(d=>{const e=S.sups[d]||{};const parts=SUPS.map(([k,nm,nmEn])=>e[k]&&e[k].n?t(nm,nmEn)+" "+e[k].n+" "+t("سكوب","scoops")+" "+supTimeLabel(e[k].t):null).filter(Boolean).join(t("، ",", "));
       return parts?`<div class="mut" style="font-size:12px;margin-top:6px">${dayAgo(d)}: ${esc(parts)}</div>`:"";}).join("");
   return `<div class="card" id="supcard">
-    <b style="font-size:14px;font-weight:800">مكملات النهاردة 💊</b>
-    ${saved?`<div style="font-size:12px;color:#bef264;font-weight:700;margin-top:4px">اتسجلت ✅ — عدل ودوس حفظ لو غيرت رأيك</div>`:""}
+    <b style="font-size:14px;font-weight:800">${t("مكملات النهاردة 💊","Today's supplements 💊")}</b>
+    ${saved?`<div style="font-size:12px;color:#bef264;font-weight:700;margin-top:4px">${t("اتسجلت ✅ — عدل ودوس حفظ لو غيرت رأيك","Logged ✅ — edit and hit save if you change your mind")}</div>`:""}
     ${rows}
-    <button class="btn small" id="supsave" style="margin-top:12px">سجل مكملات النهاردة</button>
+    <button class="btn small" id="supsave" style="margin-top:12px">${t("سجل مكملات النهاردة","Log today's supplements")}</button>
     ${hist}
   </div>`;
 }
@@ -756,24 +810,24 @@ function bindSupplements(){
   card.querySelector("#supsave").onclick=()=>{
     const out={}; let any=false;
     SUPS.forEach(([k])=>{ if(cur[k].n>0){ out[k]={n:cur[k].n, t:cur[k].t||"any"}; any=true; } });
-    if(!any){ toast("اختار عدد السكوب الأول"); return; }
-    S.sups=S.sups||{}; S.sups[todayStr()]=out; save(); render(); toast("اتسجلت المكملات ✅");
+    if(!any){ toast(t("اختار عدد السكوب الأول","Pick the scoops first")); return; }
+    S.sups=S.sups||{}; S.sups[todayStr()]=out; save(); render(); toast(t("اتسجلت المكملات ✅","Supplements logged ✅"));
   };
 }
 
 /* ---------- InBody (local only) ---------- */
 const IB_FIELDS=[
-  ["weight","الوزن","كجم","neu"],
-  ["smm","كتلة العضلات الهيكلية","كجم","up"],
-  ["fat","كتلة الدهون","كجم","down"],
-  ["pbf","نسبة الدهون","%","down"],
-  ["bmi","مؤشر كتلة الجسم BMI","","down"],
-  ["water","ماء الجسم","لتر","up"],
-  ["protein","البروتين","كجم","up"],
-  ["minerals","المعادن","كجم","up"],
-  ["visceral","الدهون الحشوية","مستوى","down"],
-  ["bmr","الحرق الأساسي BMR","سعر","neu"],
-  ["score","درجة InBody","نقطة","up"],
+  ["weight","الوزن","Weight","كجم","kg","neu"],
+  ["smm","كتلة العضلات الهيكلية","Skeletal muscle","كجم","kg","up"],
+  ["fat","كتلة الدهون","Body fat mass","كجم","kg","down"],
+  ["pbf","نسبة الدهون","Body fat","%","%","down"],
+  ["bmi","مؤشر كتلة الجسم BMI","BMI","","","down"],
+  ["water","ماء الجسم","Body water","لتر","L","up"],
+  ["protein","البروتين","Protein","كجم","kg","up"],
+  ["minerals","المعادن","Minerals","كجم","kg","up"],
+  ["visceral","الدهون الحشوية","Visceral fat","مستوى","lvl","down"],
+  ["bmr","الحرق الأساسي BMR","BMR","سعر","kcal","neu"],
+  ["score","درجة InBody","InBody score","نقطة","pts","up"],
 ];
 function r1(x){ return Math.round(x*10)/10; }
 let ibCompare="prev";
@@ -783,57 +837,58 @@ function renderInbody(){
   if(list.length>=2){
     const latest=list[list.length-1];
     const base=ibCompare==="first"?list[0]:list[list.length-2];
-    const rows=IB_FIELDS.filter(([k])=>latest[k]!=null && base[k]!=null).map(([k,nm,unit,kind])=>{
+    const rows=IB_FIELDS.filter(([k])=>latest[k]!=null && base[k]!=null).map(([k,nm,nmEn,unit,unitEn,kind])=>{
       const o=+base[k], nw=+latest[k], d=r1(nw-o);
       const pct=o!==0?r1(d/o*100):null;
       const up=d>0;
       const cls=d===0?"neu":(kind==="neu"?"neu":((kind==="up")===up?"good":"bad"));
       const arrow=d===0?"=":(up?"▲":"▼");
-      return `<div class="ib-row"><span class="ib-nm">${nm}</span><span class="ib-vals">${o} ← ${nw} ${unit}</span><span class="ib-d ${cls}">${arrow} ${d===0?"ثابت":(d>0?"+":"")+d+" "+unit+(pct!=null?` (${pct>0?"+":""}${pct}%)`:"")}</span></div>`;
+      const u=t(unit,unitEn);
+      return `<div class="ib-row"><span class="ib-nm">${t(nm,nmEn)}</span><span class="ib-vals">${o} ${t("←","→")} ${nw} ${u}</span><span class="ib-d ${cls}">${arrow} ${d===0?t("ثابت","same"):(d>0?"+":"")+d+" "+u+(pct!=null?` (${pct>0?"+":""}${pct}%)`:"")}</span></div>`;
     }).join("");
-    report=`<div class="card"><b style="font-size:14px;font-weight:800">التقرير 📊</b>
-      <div class="mut" style="font-size:12.5px;margin-top:4px">${esc(latest.date)} مقارنة بـ ${ibCompare==="first"?"أول قراءة":"القراءة اللي قبلها"} (${esc(base.date)})</div>
-      <div class="tabs" style="margin-top:10px"><button class="tab ${ibCompare==="prev"?"on":""}" data-ib="prev">باللي قبلها</button><button class="tab ${ibCompare==="first"?"on":""}" data-ib="first">بأول قراءة</button></div>
-      ${rows||'<p class="note">مفيش حقول مشتركة بين القراءتين عشان نقارنهم.</p>'}
-      <p class="mut" style="font-size:11.5px;margin-top:10px;line-height:1.8">🟢 أخضر = تحسن · 🔴 أحمر = تراجع · 🔵 أزرق = متابعة من غير حكم. العضلات والمية والبروتين والدرجة: الزيادة كويسة. الدهون ونسبتها والحشوية: النقص كويس.</p>
+    report=`<div class="card"><b style="font-size:14px;font-weight:800">${t("التقرير 📊","Report 📊")}</b>
+      <div class="mut" style="font-size:12.5px;margin-top:4px">${esc(latest.date)} ${t("مقارنة بـ","compared to ")}${ibCompare==="first"?t("أول قراءة","your first reading"):t("القراءة اللي قبلها","the previous reading")} (${esc(base.date)})</div>
+      <div class="tabs" style="margin-top:10px"><button class="tab ${ibCompare==="prev"?"on":""}" data-ib="prev">${t("باللي قبلها","vs previous")}</button><button class="tab ${ibCompare==="first"?"on":""}" data-ib="first">${t("بأول قراءة","vs first")}</button></div>
+      ${rows||`<p class="note">${t("مفيش حقول مشتركة بين القراءتين عشان نقارنهم.","No shared fields between the two readings to compare.")}</p>`}
+      <p class="mut" style="font-size:11.5px;margin-top:10px;line-height:1.8">${t("🟢 أخضر = تحسن · 🔴 أحمر = تراجع · 🔵 أزرق = متابعة من غير حكم. العضلات والمية والبروتين والدرجة: الزيادة كويسة. الدهون ونسبتها والحشوية: النقص كويس.","🟢 Green = improving · 🔴 Red = declining · 🔵 Blue = tracking, no judgment. Muscle, water, protein and score: up is good. Fat mass, fat % and visceral: down is good.")}</p>
     </div>`;
   } else if(list.length===1){
-    report=`<div class="card"><b style="font-size:14px;font-weight:800">أول قراءة اتسجلت ✅</b><p class="note" style="margin-top:8px">سجل قراءة تانية بعد فترة وهيطلعلك هنا تقرير بالفرق: زدت ولا خسيت في الوزن والعضلات والدهون، بالأرقام والنسب.</p></div>`;
+    report=`<div class="card"><b style="font-size:14px;font-weight:800">${t("أول قراءة اتسجلت ✅","First reading saved ✅")}</b><p class="note" style="margin-top:8px">${t("سجل قراءة تانية بعد فترة وهيطلعلك هنا تقرير بالفرق: زدت ولا خسيت في الوزن والعضلات والدهون، بالأرقام والنسب.","Log another reading later and you'll get a report here with the difference: what you gained or lost in weight, muscle and fat, with numbers and percentages.")}</p></div>`;
   }
-  const formCard=`<div class="card"><b style="font-size:14px;font-weight:800">سجل قراءة جديدة</b>
-    <label>التاريخ</label><input type="date" id="ibdate" value="${todayStr()}">
+  const formCard=`<div class="card"><b style="font-size:14px;font-weight:800">${t("سجل قراءة جديدة","Log a new reading")}</b>
+    <label>${t("التاريخ","Date")}</label><input type="date" id="ibdate" value="${todayStr()}">
     <div class="ib-grid">
-      ${IB_FIELDS.map(([k,nm,unit])=>`<div class="fld"><label>${nm}${unit?" ("+unit+")":""}</label><input type="number" inputmode="decimal" step="any" data-ibf="${k}" placeholder="—"></div>`).join("")}
+      ${IB_FIELDS.map(([k,nm,nmEn,unit,unitEn])=>`<div class="fld"><label>${t(nm,nmEn)}${t(unit,unitEn)?" ("+t(unit,unitEn)+")":""}</label><input type="number" inputmode="decimal" step="any" data-ibf="${k}" placeholder="—"></div>`).join("")}
     </div>
-    <label>ملاحظة (اختياري)</label><input type="text" id="ibnote" placeholder="مثلاً: بعد شهر تضخيم">
-    <button class="btn" id="ibsave" style="margin-top:14px">سجل القراءة</button>
-    <p class="note" style="margin-top:10px">املأ اللي موجود في ورقة الجهاز بس وسيب الباقي فاضي. لو سجلت قراءة بنفس التاريخ هتتبدل بالجديدة.</p></div>`;
-  const hist=list.slice().reverse().map(e=>`<div class="friend"><div><div class="n">${dayAgo(e.date)} <span class="mut" style="font-size:11px">${esc(e.date)}</span></div><div class="d">${IB_FIELDS.filter(([k])=>e[k]!=null).slice(0,4).map(([k,nm,u])=>nm+" "+e[k]+(u?" "+u:"")).join(" · ")}${e.note?" · "+esc(e.note):""}</div></div><button class="hist-toggle" data-ibdel="${esc(e.date)}">مسح</button></div>`).join("");
-  view.innerHTML=`<h1>InBody <span class="mut" style="font-size:17px">تتبع جسمك ⚖</span></h1>
-    <p class="sub">سجل قراءة جهاز InBody بالتاريخ، وأول ما تضيف قراءة جديدة هتتقارن باللي قبلها: زدت ولا خسيت، عضلات ودهون وكل التفاصيل بالفرق والنسبة.</p>
+    <label>${t("ملاحظة (اختياري)","Note (optional)")}</label><input type="text" id="ibnote" placeholder="${t("مثلاً: بعد شهر تضخيم","e.g. after a bulking month")}">
+    <button class="btn" id="ibsave" style="margin-top:14px">${t("سجل القراءة","Save reading")}</button>
+    <p class="note" style="margin-top:10px">${t("املأ اللي موجود في ورقة الجهاز بس وسيب الباقي فاضي. لو سجلت قراءة بنفس التاريخ هتتبدل بالجديدة.","Fill only what's on the machine printout and leave the rest empty. A reading on the same date replaces the old one.")}</p></div>`;
+  const hist=list.slice().reverse().map(e=>`<div class="friend"><div><div class="n">${dayAgo(e.date)} <span class="mut" style="font-size:11px">${esc(e.date)}</span></div><div class="d">${IB_FIELDS.filter(([k])=>e[k]!=null).slice(0,4).map(([k,nm,nmEn,u,uEn])=>t(nm,nmEn)+" "+e[k]+(t(u,uEn)?" "+t(u,uEn):"")).join(" · ")}${e.note?" · "+esc(e.note):""}</div></div><button class="hist-toggle" data-ibdel="${esc(e.date)}">${t("مسح","Delete")}</button></div>`).join("");
+  view.innerHTML=`<h1>InBody <span class="mut" style="font-size:17px">${t("تتبع جسمك ⚖","Track your body ⚖")}</span></h1>
+    <p class="sub">${t("سجل قراءة جهاز InBody بالتاريخ، وأول ما تضيف قراءة جديدة هتتقارن باللي قبلها: زدت ولا خسيت، عضلات ودهون وكل التفاصيل بالفرق والنسبة.","Log your InBody scan readings by date, and each new one gets compared to the previous: what you gained or lost — muscle, fat and every detail, with differences and percentages.")}</p>
     ${report}
     ${formCard}
-    ${list.length?`<div class="card"><b style="font-size:14px;font-weight:800">القراءات السابقة</b><div style="margin-top:10px">${hist}</div></div>`:""}
-    <p class="note">القراءات دي على موبايلك بس — مش بتتشارك مع الشلة ولا بتطلع على النت، وبتدخل في النسخة الاحتياطية.</p>`;
+    ${list.length?`<div class="card"><b style="font-size:14px;font-weight:800">${t("القراءات السابقة","Previous readings")}</b><div style="margin-top:10px">${hist}</div></div>`:""}
+    <p class="note">${t("القراءات دي على موبايلك بس — مش بتتشارك مع الشلة ولا بتطلع على النت، وبتدخل في النسخة الاحتياطية.","These readings stay on your phone only — not shared with the crew or sent online, and they're included in backups.")}</p>`;
   view.querySelectorAll("[data-ib]").forEach(b=>b.onclick=()=>{ ibCompare=b.dataset.ib; renderInbody(); });
   view.querySelector("#ibsave").onclick=()=>{
     const date=view.querySelector("#ibdate").value||todayStr();
-    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){ toast("التاريخ مش مظبوط"); return; }
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){ toast(t("التاريخ مش مظبوط","Invalid date")); return; }
     const e={date}; let n=0;
     view.querySelectorAll("[data-ibf]").forEach(inp=>{ const v=inp.value.trim();
       if(v!=="" && Number.isFinite(+v)){ e[inp.dataset.ibf]=+v; n++; } });
     const note=view.querySelector("#ibnote").value.trim();
     if(note) e.note=note.slice(0,200);
-    if(!n){ toast("اكتب رقم واحد على الأقل من ورقة الجهاز"); return; }
+    if(!n){ toast(t("اكتب رقم واحد على الأقل من ورقة الجهاز","Enter at least one number from the printout")); return; }
     S.inbody=(S.inbody||[]).filter(x=>x.date!==date);
     S.inbody.push(e);
     S.inbody.sort((a,b)=>a.date<b.date?-1:1);
-    save(); renderInbody(); window.scrollTo(0,0); toast("اتسجلت قراءة InBody ✅");
+    save(); renderInbody(); window.scrollTo(0,0); toast(t("اتسجلت قراءة InBody ✅","InBody reading saved ✅"));
   };
   view.querySelectorAll("[data-ibdel]").forEach(b=>b.onclick=()=>{
-    if(!confirm("تمسح قراءة "+b.dataset.ibdel+"؟")) return;
+    if(!confirm(t("تمسح قراءة ","Delete the reading from ")+b.dataset.ibdel+t("؟","?"))) return;
     S.inbody=(S.inbody||[]).filter(x=>x.date!==b.dataset.ibdel);
-    save(); renderInbody(); toast("اتمسحت");
+    save(); renderInbody(); toast(t("اتمسحت","Deleted"));
   });
 }
 
@@ -849,6 +904,7 @@ render();
 pushMyStatusUpsert();
 let shownDate=todayStr();document.addEventListener("visibilitychange",()=>{if(!document.hidden && todayStr()!==shownDate){shownDate=todayStr();render();pushMyStatusUpsert();}});
 })();
+
 </script>
 </body>
 </html>
