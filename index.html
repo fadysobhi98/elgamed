@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>الجامد</title>
+<meta name="theme-color" content="#0b0d10">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="الجامد">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAC3UlEQVR4nO3cQU4bMRiA0aTqLoqUSyCuxpG4GuIw6bJsaJmJR+P58t4aovD7i+VBhvPlerufIOLX3m8ARhI0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSRE0KYImRdCkCJoUQZMiaFIETYqgSfm9xYu+f7ws+vq3188t3gYrHXn9zpfr7T7yBZcO46uZBvOsjr5+Q48cjwxjxPfzmML6DQt61A8zw1CeUWX9PBSSImhSBE3KJr+2G+1/57IZnq6PaO/z7ham36F/MvT3j5fk4mypOq+pg1469OoijVae07RBrx16ebFGqM9n2qBhDUGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE3KIe5DL1W/gMP37NCkCJoUQZMiaFKmDNpDHWtNGTSsJWhSBE2KoEkRNCmCJkXQpAialCmD9t9EWWvKoGEtQZMiaFIETUryT7A8VH6vfpPRDk2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCnTBr32PoZ7HP9Wn8+0QcMaUwe9dDep7z6jlOc0ddCn08+G//b6mV6kLVTndYj70NXh7+3rXCv3pKffoWEJQZMyLOhRxwLHi31U1s8OTcrQoB/9dO796X52hfU7X663++gXXfrEPMMg+OvI67dJ0LAXZ2hSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGT8gflG16hP8gw8gAAAABJRU5ErkJggg==">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAADDUlEQVR4nO3cPa7aQBhAUYjSISQ2EWVrWVK2FmUxpHiiiVJgmMkb+55TIwvN5+sfwJwv19v9BFFfPvsNwGcSAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApH2dufGfv75tev2P778nvRNGO8psz5fr7T56o1sX52+rLhbHm+3wS6B3F2jUNhjviLN1D0Da0ABG1r3akaLuqLN1BiBNAKQJgLSp3wPM8Mz142ofte3ZStfrM+wmgC2DeLxWCK87+o7/sItLoFeHURniaKV120UAMMvyAbx7NCodzUaordfyAcBMAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgLTdPA/wjtoPvHieMwBpAiBNAKQJgLSlA3DzymxLBwCzCYA0AZAmANIEQJoASBMAaQIgTQCkCYC0pQPw//7MtnQAMJsASBMAaQIgLfFQvJvp59WewXAGIE0ApAmANAGQJgDSBECaAEgTAGkCIE0ApAmANAGQtnwA7/6QzQ/htqmt1/IBvKM2TLbbRQCv7Mh2/teV1m4XAZxOH0N5djClAc6yZb33bHcPxBSGspLHeh/1QZndnAFgBgGQJgDShgYw8vrctf5ajjrbJc8AKy0QY6022+EB+Ob2uI442/PlervP2vjWj85WXCD+7SiznRoArG7JewD4XwRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBIEwBpAiBNAKQJgDQBkCYA0gRAmgBI+wPCFGQ3EfygDQAAAABJRU5ErkJggg==">
+<style>
+@font-face{font-family:'Cairo';font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/cairo/v31/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hOA-W1Q.ttf) format('truetype')}
+@font-face{font-family:'Cairo';font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/cairo/v31/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hAc5W1Q.ttf) format('truetype')}
+@font-face{font-family:'Cairo';font-weight:800;font-display:swap;src:url(https://fonts.gstatic.com/s/cairo/v31/SLXgc1nY6HkvangtZmpQdkhzfH5lkSs2SgRjCAGMQ1z0hGA5W1Q.ttf) format('truetype')}
+:root{
+  --bg:#0b0d10; --card:#14171d; --card2:#1b1f27; --line:#262c37;
+  --txt:#f4f6fa; --mut:#8f99ab;
+  --acc:#a3e635; --acc2:#22c55e; --grad:linear-gradient(135deg,#a3e635,#22c55e);
+  --warn:#fbbf24; --red:#f87171; --blue:#60a5fa;
+  --r:20px;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--txt);
+  font-family:'Cairo',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{padding-bottom:calc(92px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(600px 300px at 85% -5%, rgba(163,230,53,.10), transparent 60%),
+    radial-gradient(500px 300px at 10% 0%, rgba(34,197,94,.08), transparent 60%),
+    var(--bg)}
+.app{max-width:480px;margin:0 auto;padding:20px 16px 0}
+h1{font-size:26px;font-weight:800;margin:4px 0 2px;letter-spacing:-.3px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 18px;line-height:1.7}
+.brand{font-size:34px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;display:inline-block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:14px}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:15px;font-size:17px;font-weight:800;
+  background:var(--grad);color:#0b1a06;cursor:pointer;font-family:inherit;box-shadow:0 8px 24px rgba(34,197,94,.25)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--card2);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.btn.small{width:auto;padding:9px 16px;font-size:13.5px;display:inline-block;border-radius:12px}
+.btn.danger{background:transparent;color:var(--red);border:1px solid var(--red);box-shadow:none}
+input[type=text],input[type=number]{width:100%;background:var(--card2);border:1.5px solid var(--line);color:var(--txt);
+  border-radius:14px;padding:13px;font-size:17px;font-family:inherit;font-weight:700}
+input:focus{outline:0;border-color:var(--acc2);box-shadow:0 0 0 3px rgba(34,197,94,.18)}
+label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:14px 0 7px}
+.split-card{background:var(--card2);border:2px solid var(--line);border-radius:18px;padding:15px;margin-bottom:10px;
+  cursor:pointer;transition:border-color .15s}
+.split-card.sel{border-color:var(--acc);background:linear-gradient(135deg,rgba(163,230,53,.12),rgba(34,197,94,.06))}
+.split-card b{font-size:16px;font-weight:800;display:block;margin-bottom:3px}
+.split-card span{font-size:13px;color:var(--mut);line-height:1.6}
+.hero{border-radius:26px;padding:26px 18px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#15250f,#10151c 60%);border:1px solid #33512a;margin-bottom:14px}
+.hero::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 70% 0%,rgba(163,230,53,.22),transparent 55%);pointer-events:none}
+.hero .kicker{font-size:13px;font-weight:700;color:#bef264}
+.hero .big{font-size:26px;font-weight:800;margin:6px 0 2px;position:relative}
+.chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin:12px 0 4px;position:relative}
+.chip{background:rgba(163,230,53,.14);border:1px solid rgba(163,230,53,.35);color:#d9f99d;border-radius:999px;
+  padding:6px 14px;font-size:13px;font-weight:700}
+.check{width:84px;height:84px;border-radius:50%;border:0;background:var(--grad);color:#0b1a06;font-size:40px;
+  cursor:pointer;margin:18px auto 6px;display:block;position:relative;
+  box-shadow:0 10px 30px rgba(163,230,53,.4), 0 0 0 8px rgba(163,230,53,.08);
+  animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 10px 30px rgba(163,230,53,.4),0 0 0 6px rgba(163,230,53,.10)}
+  50%{box-shadow:0 10px 30px rgba(163,230,53,.5),0 0 0 14px rgba(163,230,53,.04)}}
+.check:active{transform:scale(.92);animation:none}
+.rowbtns{display:flex;gap:8px;justify-content:center;margin-top:12px;position:relative}
+.done-card{border-radius:26px;text-align:center;padding:26px 18px;margin-bottom:14px;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#0f1f2e,#10151c 60%);border:1px solid #27455f}
+.done-card::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 30% 0%,rgba(96,165,250,.2),transparent 55%);pointer-events:none}
+.done-card .big{font-size:22px;font-weight:800;margin:10px 0 4px;position:relative}
+.streak{display:inline-flex;align-items:center;gap:6px;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35);
+  color:#fde68a;border-radius:999px;padding:5px 14px;font-size:13px;font-weight:800;margin-top:4px}
+.week{display:flex;gap:7px;overflow-x:auto;padding:2px}
+.wday{flex:1;min-width:66px;background:var(--card2);border:1.5px solid var(--line);border-radius:14px;
+  padding:9px 4px;text-align:center;font-size:11px;font-weight:700;color:var(--mut)}
+.wday b{display:block;font-size:12.5px;color:var(--txt);margin-top:4px;font-weight:800}
+.wday.today{border-color:var(--acc);color:#d9f99d;background:linear-gradient(135deg,rgba(163,230,53,.14),transparent)}
+.tabs{display:flex;gap:7px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+.tab{flex:0 0 auto;background:var(--card2);border:1.5px solid var(--line);color:var(--mut);border-radius:999px;
+  padding:9px 17px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.tab.on{background:var(--grad);color:#0b1a06;border-color:transparent}
+.ex{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
+.ex .head{display:flex;gap:12px;align-items:center}
+.ex img{width:76px;height:76px;border-radius:14px;background:#fff;object-fit:contain;flex:0 0 auto;border:1px solid var(--line)}
+.ex .nm{font-weight:800;font-size:15.5px}
+.ex .cue{font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.7}
+.logrow{display:flex;gap:8px;margin-top:12px;align-items:end}
+.logrow .fld{flex:1}
+.logrow label{margin:0 0 5px;font-size:11px}
+.logrow input{padding:10px;font-size:15px;text-align:center}
+.logsave{flex:0 0 auto;background:var(--grad);border:0;color:#0b1a06;border-radius:14px;
+  padding:11px 18px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit}
+.last{font-size:12.5px;color:#bef264;font-weight:700;margin-top:9px}
+.hist{font-size:12px;color:var(--mut);margin-top:7px;border-top:1px dashed var(--line);padding-top:7px;display:none;line-height:1.9}
+.ex.open .hist{display:block}
+.hist-toggle{font-size:11.5px;color:var(--mut);margin-top:7px;cursor:pointer;text-decoration:underline;background:none;border:0;font-family:inherit;padding:0}
+.navbar{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));right:12px;left:12px;max-width:456px;margin:0 auto;
+  background:rgba(20,23,29,.92);border:1px solid var(--line);border-radius:22px;
+  backdrop-filter:blur(14px);display:flex;padding:6px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.navbtn{flex:1;background:none;border:0;color:var(--mut);font-size:11.5px;font-weight:700;padding:8px 0;border-radius:16px;cursor:pointer;font-family:inherit}
+.navbtn .ic{font-size:19px;display:block;margin-bottom:1px}
+.navbtn.on{color:#0b1a06;background:var(--grad)}
+.note{font-size:12.5px;color:var(--mut);background:var(--card2);border-radius:14px;padding:11px 13px;line-height:1.8}
+.setrow{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+.setrow:last-child{border:0}
+.setrow .t{font-size:15px;font-weight:800}
+.setrow .d{font-size:12.5px;color:var(--mut);margin-top:2px}
+.credit{font-size:12px;color:var(--mut);border-bottom:1px dashed var(--line);padding:8px 0;line-height:1.7}
+.center{text-align:center}
+.mut{color:var(--mut)}
+.toast{position:fixed;top:calc(14px + env(safe-area-inset-top));right:50%;transform:translateX(50%);
+  background:var(--grad);color:#0b1a06;font-weight:800;padding:11px 22px;border-radius:999px;
+  font-size:14px;z-index:99;display:none;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.hide{display:none!important}
+.friend{display:flex;align-items:center;justify-content:space-between;background:var(--card2);
+  border:1px solid var(--line);border-radius:16px;padding:13px 15px;margin-bottom:9px}
+.friend .n{font-weight:800;font-size:15px}
+.friend .d{font-size:12.5px;color:var(--mut);margin-top:2px}
+.badge{background:rgba(163,230,53,.14);border:1px solid rgba(163,230,53,.35);color:#d9f99d;
+  border-radius:999px;padding:5px 13px;font-size:12.5px;font-weight:800;white-space:nowrap}
+.badge.off{background:var(--card);border-color:var(--line);color:var(--mut)}
+.codebox{background:#0b0d10;border:1.5px dashed var(--acc2);border-radius:14px;padding:13px;text-align:center;
+  font-size:22px;font-weight:800;letter-spacing:3px;color:#d9f99d}
+
+/* Iron edition */
+:root {--r:12px;--acc:#c4ff30;--grad:linear-gradient(115deg,#d9ff47,#8fdf00)}
+body{background:repeating-linear-gradient(130deg,transparent 0 60px,#ffffff02 60px 61px),radial-gradient(ellipse at 100% 0,#39500030,transparent 50%),#090b0d}
+.app{padding-top:18px}
+.brand{font-size:58px;line-height:1.3;letter-spacing:-3px;font-weight:800;transform:skew(-5deg)}
+.brandline{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid #3c452c;padding-bottom:16px}
+.brandline small{font:800 10px Arial;letter-spacing:3px;color:#afbd9b}
+.brandline .brand{font-size:28px;letter-spacing:-1px}
+h1{font-size:29px;line-height:1.5;font-weight:800}
+.card,.ex{border-radius:12px;border-color:#30352f;background:linear-gradient(140deg,#181c1e,#101315)}
+.hero{border-radius:12px;text-align:right;padding:24px;border-color:#5c702a;border-right:5px solid #c4ff30;background:linear-gradient(120deg,#161c10,#0d110b);isolation:isolate}
+.hero .big{font-size:34px;line-height:1.5;font-weight:800;max-width:77%}
+.hero .kicker{font-size:11px;letter-spacing:2px;color:#d9ff47}
+.hero .chips{justify-content:flex-start;max-width:82%}
+.hero:after{content:"";position:absolute;left:-54px;top:22px;width:170px;height:170px;border:20px solid #637b2a33;border-radius:50%;box-shadow:0 0 0 4px #c4ff3012,0 0 0 24px #c4ff3005;z-index:-1}
+.check{border-radius:16px;width:78px;height:70px;margin:22px 0 8px;transform:skew(-5deg);animation:none;box-shadow:5px 6px 0 #4b6300}
+.check:active{transform:translateY(3px) skew(-5deg);box-shadow:2px 3px 0 #4b6300}
+.hero .rowbtns{justify-content:flex-start}.hero .mut{font-size:11px!important}
+.btn,.logsave{border-radius:8px;box-shadow:none}
+.btn.ghost{border-color:#37422e}
+.split-card{border-radius:10px;border-width:1px;border-right-width:5px}
+.split-card.sel{border-color:#c4ff30}
+.navbar{border-radius:14px;background:#111611f5;border-color:#37432b;box-shadow:0 8px 40px #000}
+.navbtn{border-radius:9px}.navbtn .ic{height:25px;line-height:25px;font-family:Arial;font-size:21px}
+.wday{border-radius:8px}.tab{border-radius:8px}.chip{border-radius:4px;padding:4px 10px}
+.done-card{border-radius:12px;border-color:#536932;background:linear-gradient(135deg,#253213,#101511);text-align:right}
+.done-card .big{font-size:27px}
+.plate{width:62px;height:62px;border:7px double #bff536;border-radius:50%;display:grid;place-items:center;color:#c4ff30;font:900 17px Arial;transform:rotate(-12deg)}
+.eyebrow{font:900 10px Arial;letter-spacing:3px;color:#b8d27c;margin-bottom:10px}
+.logrow .fld{min-width:0}.logrow{gap:5px}.logsave{padding:11px}.ex img{border-radius:8px;width:80px;height:80px}
+.friend{display:block}.friend .badge{display:inline-block;white-space:normal;margin-top:8px}.codebox{font-size:17px;letter-spacing:1px;word-break:break-all}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<div class="app" id="view"></div>
+<div class="navbar hide" id="navbar">
+  <button class="navbtn" data-v="home"><span class="ic">⌂</span>الرئيسية</button>
+  <button class="navbtn" data-v="lib"><span class="ic">━</span>التمارين</button>
+  <button class="navbtn" data-v="friends"><span class="ic">◉</span>الشلة</button>
+  <button class="navbtn" data-v="settings"><span class="ic">⚙</span>الإعدادات</button>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>window.SUPA = {"enabled": true, "url": "https://vyjuinskghnfndvchlkv.supabase.co", "anonKey": "sb_publishable_cazN6xdYu_i1j0GLskPNhA_LRAm__gD"};</script>
+<script>const EXERCISES=[{"id": "incline-bench-press-dumbbell", "en": "Incline Bench Press - Dumbbell", "ar": "بنش ضغط دمبل مائل عالي", "cue": "نايم على بنش مائل، ادفع الدمبلز لفوق لحد ما دراعك يفرد وانزل ببطء لحد مستوى الصدر.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/16/Incline-press-1.png", "https://wger.de/media/exercise-images/537/9f3c7817-3e3d-417d-8b08-2c0a1aa5fe03.jpg"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/16/Incline-press-1.png"}, {"author": "erikocobra", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/537/9f3c7817-3e3d-417d-8b08-2c0a1aa5fe03.jpg"}]}, {"id": "incline-dumbbell-fly", "en": "Incline Dumbbell Fly", "ar": "تفتيح دمبل مائل", "cue": "نايم على بنش مائل، افتح الدمبلز جنباً بعوجية خفيفة في المرفق وارجع اضمهم فوق صدرك.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/308/2ca22a0a-9843-4bb4-9d12-faf5c8c89180.jpg", "https://wger.de/media/exercise-images/308/dd825dd1-8b8c-4db1-bbdd-f2c81e65b7ff.jpg"], "sub": null, "license": "CC-BY-SA 3", "author": "tuckerm", "imageCredits": [{"author": "yuhonas/free-exercise-db", "license": "CC0", "url": "https://creativecommons.org/publicdomain/zero/1.0/", "source": "https://wger.de/media/exercise-images/308/2ca22a0a-9843-4bb4-9d12-faf5c8c89180.jpg"}, {"author": "yuhonas/free-exercise-db", "license": "CC0", "url": "https://creativecommons.org/publicdomain/zero/1.0/", "source": "https://wger.de/media/exercise-images/308/dd825dd1-8b8c-4db1-bbdd-f2c81e65b7ff.jpg"}]}, {"id": "butterfly", "en": "Butterfly", "ar": "تفتيح فراشة (جهاز)", "cue": "قاعد على جهاز الفراشة، ضم الدراعين قدام بعض وارجع ببطء من غير ما الوزن ينزل خالص.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/98/Butterfly-machine-2.png", "https://wger.de/media/exercise-images/98/Butterfly-machine-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/98/Butterfly-machine-2.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/98/Butterfly-machine-1.png"}]}, {"id": "push-ups-decline", "en": "Push-Ups | Decline", "ar": "ضغط أرضي رجلين مرفوعة", "cue": "رجلك على بنش وإيدك على الأرض، انزل بصدرك لحد قرب الأرض واطلع بقوة.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/1112/81f40bee-4adf-4317-8476-1a87706e3031.png"], "sub": null, "license": "CC-BY-SA 4", "author": "anon1337", "imageCredits": [{"author": "anon1337", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1112/81f40bee-4adf-4317-8476-1a87706e3031.png"}]}, {"id": "decline-bench-press-barbell", "en": "Decline Bench Press Barbell", "ar": "بنش ضغط بار مائل سفلي", "cue": "نايم على بنش مائل لتحت، انزل بالبار لأسفل الصدر وادفع لفوق.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/100/Decline-bench-press-1.png", "https://wger.de/media/exercise-images/100/Decline-bench-press-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/100/Decline-bench-press-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/100/Decline-bench-press-2.png"}]}, {"id": "dips", "en": "Dips", "ar": "متوازي (صدر)", "cue": "على جهاز المتوازي، ميل جسمك لقدام شوية وانزل لحد 90 درجة في المرفق واطلع.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/194/34600351-8b0b-4cb0-8daa-583537be15b0.png"], "sub": null, "license": "CC0", "author": "BFad07", "imageCredits": [{"author": "cshep442", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/194/34600351-8b0b-4cb0-8daa-583537be15b0.png"}]}, {"id": "chest-press", "en": "Chest Press", "ar": "ضغط صدر جهاز", "cue": "قاعد على الجهاز، ادفع المقابض لقدام لحد فرد الدراع وارجع ببطء.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/129/b263c968-e067-4750-916a-d8758a7df23e.webp", "https://wger.de/media/exercise-images/129/dbad8cd0-5eeb-4de2-8d9e-80c7770735fd.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "roneydya", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/129/b263c968-e067-4750-916a-d8758a7df23e.webp"}, {"author": "wger.de", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/129/dbad8cd0-5eeb-4de2-8d9e-80c7770735fd.png"}]}, {"id": "bench-press", "en": "Bench Press", "ar": "بنش ضغط بار مستوي", "cue": "نايم على البنش، نزل البار لنص الصدر وادفع لفوق، ضهرك ثابت على البنش.", "group": "chest", "frames": ["https://wger.de/media/exercise-images/192/Bench-press-1.png", "https://wger.de/media/exercise-images/192/Bench-press-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "sistab2", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/192/Bench-press-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/192/Bench-press-2.png"}]}, {"id": "pull-ups", "en": "Pull-ups", "ar": "عقلة", "cue": "ماسك البار بقبضة أوسع من الكتف، اطلع لحد ما دقنك تعدي البار وانزل ببطء.", "group": "back", "frames": ["https://wger.de/media/exercise-images/475/b0554016-16fd-4dbe-be47-a2a17d16ae0e.jpg"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Imobard", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/475/b0554016-16fd-4dbe-be47-a2a17d16ae0e.jpg"}]}, {"id": "close-grip-supinated-lat-pulldown", "en": "Close-grip supinated lat pulldown", "ar": "سحب أمامي قبضة مقلوبة ضيقة", "cue": "ماسك البار قبضة مقلوبة ضيقة، اسحب لأعلى الصدر مع فرد الضهر ورجع ببطء.", "group": "back", "frames": ["https://wger.de/media/exercise-images/1127/4942b7c0-6bda-4983-88e5-86547c3d445e.png"], "sub": null, "license": "CC-BY-SA 4", "author": "Franpol", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1127/4942b7c0-6bda-4983-88e5-86547c3d445e.png"}]}, {"id": "close-grip-lat-pull-down", "en": "Close-grip Lat Pull Down", "ar": "سحب أمامي قبضة ضيقة", "cue": "اسحب المقبض الضيق لأعلى صدرك، اضغط عضلات ضهرك وارجع ببطء.", "group": "back", "frames": ["https://wger.de/media/exercise-images/158/0d51a0f2-622f-434b-beb8-1a003c54712a.png", "https://wger.de/media/exercise-images/158/02e8a7c3-dc67-434e-a4bc-77fdecf84b49.webp"], "sub": null, "license": "CC-BY-SA 3", "author": "tuckerm", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/158/0d51a0f2-622f-434b-beb8-1a003c54712a.png"}, {"author": "tuckerm", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/158/02e8a7c3-dc67-434e-a4bc-77fdecf84b49.webp"}]}, {"id": "bent-over-rowing", "en": "Bent Over Rowing", "ar": "تجديف بار منحني", "cue": "منحني بضهر مستقيم، اسحب البار لبطنك واعصر لوح الكتف وانزل ببطء.", "group": "back", "frames": ["https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-1.png", "https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/109/Barbell-rear-delt-row-2.png"}]}, {"id": "seated-cable-row", "en": "Seated Cable Row", "ar": "سحب كيبل جالس", "cue": "قاعد وضهرك مستقيم، اسحب المقبض لبطنك وارجع ببطء من غير ما تميل ورا.", "group": "back", "frames": ["https://wger.de/media/exercise-images/1117/2555c4c3-a84d-47db-b83b-cbf721f12e45.png", "https://wger.de/media/exercise-images/1117/e74255c0-67a0-4309-b78d-2d79e6ff8c11.png"], "sub": null, "license": "CC-BY-SA 4", "author": "Franpol", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1117/2555c4c3-a84d-47db-b83b-cbf721f12e45.png"}, {"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1117/e74255c0-67a0-4309-b78d-2d79e6ff8c11.png"}]}, {"id": "rack-deadlift", "en": "Rack Deadlift", "ar": "رفعة ميتة من الرف (راك ديدليفت)", "cue": "البار على الرف عند الركب، امسكه واقف بضهر مستقيم، افرد حوضك وشد ضهرك.", "group": "back", "frames": ["https://wger.de/media/exercise-images/161/Dead-lifts-2.png", "https://wger.de/media/exercise-images/161/Dead-lifts-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "Mahoney", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/161/Dead-lifts-2.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/161/Dead-lifts-1.png"}]}, {"id": "single-arm-plank-to-row", "en": "Single Arm Plank to Row", "ar": "بلانك مع سحب دمبل بذراع واحدة", "cue": "في وضع البلانك، اسحب الدمبل بإيد واحدة لجنبك من غير ما جسمك يلف.", "group": "back", "frames": ["https://wger.de/media/exercise-images/1022/f74644fa-f43e-46bd-8603-6e3a2ee8ee2d.jpg", "https://wger.de/media/exercise-images/1022/eef8fb9d-ae72-4e23-81da-4d62f2734332.jpg"], "sub": null, "license": "CC-BY-SA 4", "author": "wger.de", "imageCredits": [{"author": "wger community", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1022/f74644fa-f43e-46bd-8603-6e3a2ee8ee2d.jpg"}, {"author": "wger community", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1022/eef8fb9d-ae72-4e23-81da-4d62f2734332.jpg"}]}, {"id": "hyperextensions", "en": "Hyperextensions", "ar": "هايبر إكستنشين (أسفل الظهر)", "cue": "على جهاز الهايبر، انزل بجسمك لتحت واطلع لحد ما ضهرك يبقى مستقيم.", "group": "back", "frames": ["https://wger.de/media/exercise-images/301/2d5c2f99-b8ff-4095-b515-4c2a85afde70.png", "https://wger.de/media/exercise-images/128/Hyperextensions-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "wger.de", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/301/2d5c2f99-b8ff-4095-b515-4c2a85afde70.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/128/Hyperextensions-1.png"}]}, {"id": "shoulder-press-on-machine", "en": "Shoulder Press, on Machine", "ar": "ضغط كتف جهاز", "cue": "قاعد على الجهاز، ادفع المقابض لفوق لحد فرد الدراع وانزل ببطء لمستوى الأذن.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/53/Shoulder-press-machine-2.png", "https://wger.de/media/exercise-images/53/Shoulder-press-machine-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "wger.de", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/53/Shoulder-press-machine-2.png"}, {"author": "wger.de", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/53/Shoulder-press-machine-1.png"}]}, {"id": "military-press-mit-sz-bar", "en": "Military Press mit SZ-Bar", "ar": "ضغط عسكري بار SZ", "cue": "واقف أو قاعد، ادفع البار من أمام الكتف لفوق راسك وانزل ببطء.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/418/fa2a2207-43cb-4dc0-bc2a-039e32544790.png"], "sub": null, "license": "CC-BY-SA 3", "author": "mbozi1", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/418/fa2a2207-43cb-4dc0-bc2a-039e32544790.png"}]}, {"id": "lateral-raises", "en": "Lateral Raises", "ar": "رفرفة جانبي", "cue": "واقف ماسك دمبلز، ارفعهم جنباً لمستوى الكتف بمرفق مبوعج خفيف وانزل ببطء.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-2.png", "https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-2.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/148/lateral-dumbbell-raises-large-1.png"}]}, {"id": "front-raises", "en": "Front Raises", "ar": "رفعة أمامي", "cue": "ارفع الدمبل أو البار قدامك لمستوى الكتف من غير ما تمايل بجسمك.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/256/b7def5bc-2352-499b-b9e5-fff741003831.png"], "sub": null, "license": "CC-BY-SA 3", "author": "Manu, wikipedia", "imageCredits": [{"author": "philip", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/256/b7def5bc-2352-499b-b9e5-fff741003831.png"}]}, {"id": "upright-row-on-multi-press", "en": "Upright Row, on Multi Press", "ar": "سحب عمودي (سميث)", "cue": "ماسك البار قبضة ضيقة، اسحبه لفوق لحد مستوى الصدر بمرفقك لفوق.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/691/297d4ce1-7e9e-4adb-8f5c-7d54054be885.jpg", "https://wger.de/media/exercise-images/691/72bb8231-8994-453f-8a3f-85b061dcffb8.jpg"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "anto.kreegyr", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/691/297d4ce1-7e9e-4adb-8f5c-7d54054be885.jpg"}, {"author": "anto.kreegyr", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/691/72bb8231-8994-453f-8a3f-85b061dcffb8.jpg"}]}, {"id": "shrugs-barbells", "en": "Shrugs, Barbells", "ar": "شراج بار (ترابيس)", "cue": "واقف ماسك البار، ارفع كتفك لودانك (هزة كتف) واثبت ثانية وانزل.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/150/Barbell-shrugs-1.png", "https://wger.de/media/exercise-images/150/Barbell-shrugs-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/150/Barbell-shrugs-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/150/Barbell-shrugs-2.png"}]}, {"id": "lateral-rows-on-cable-one-armed", "en": "Lateral Rows on Cable, One Armed", "ar": "رفرفة جانبي كيبل بذراع واحدة", "cue": "جنب الكيبل، اسحب المقبض جنباً لمستوى الكتف بذراع واحدة وانزل ببطء.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/349/9d969203-9cb6-4d47-9c31-fef53bfe1de5.png", "https://wger.de/media/exercise-images/349/8dc5ad63-a93a-496f-9473-ac414236e58d.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "philip", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/349/9d969203-9cb6-4d47-9c31-fef53bfe1de5.png"}, {"author": "philip", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/349/8dc5ad63-a93a-496f-9473-ac414236e58d.png"}]}, {"id": "rear-delt-raises", "en": "Rear Delt Raises", "ar": "رفرفة كتف خلفي", "cue": "منحني لقدام، افتح الدمبلز جنباً مع التركيز على الكتف الخلفي.", "group": "shoulders", "frames": ["https://wger.de/media/exercise-images/487/ad724e5c-b1ed-49e8-9279-a17545b0dd0b.png", "https://wger.de/media/exercise-images/487/692c598c-0493-42a5-be8b-b9d2e9adcd00.png"], "sub": null, "license": "CC-BY-SA 3", "author": "YYCfit", "imageCredits": [{"author": "cshep442", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/487/ad724e5c-b1ed-49e8-9279-a17545b0dd0b.png"}, {"author": "cshep442", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/487/692c598c-0493-42a5-be8b-b9d2e9adcd00.png"}]}, {"id": "reverse-grip-barbell-curls", "en": "Reverse Grip Barbell Curls", "ar": "كيرل بار قبضة معكوسة", "cue": "ماسك البار قبضة معكوسة، اعمل كيرل كامل مع تثبيت المرفق جنب جسمك.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/1290/c05818bf-1c81-46df-9f24-42e354265388.png"], "sub": "biceps", "license": "CC-BY-SA 4", "author": "sTiKyt", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1290/c05818bf-1c81-46df-9f24-42e354265388.png"}]}, {"id": "biceps-curls-with-barbell", "en": "Biceps Curls With Barbell", "ar": "باي كيرل بار", "cue": "واقف ماسك البار، اثني المرفق لحد فوق وثبت وانزل ببطء، المرفق ثابت.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/74/Bicep-curls-1.png", "https://wger.de/media/exercise-images/74/Bicep-curls-2.png"], "sub": "biceps", "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/74/Bicep-curls-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/74/Bicep-curls-2.png"}]}, {"id": "biceps-curls-with-dumbbell", "en": "Biceps Curls With Dumbbell", "ar": "باي كيرل دمبل", "cue": "بالتبادل أو الاتنين مع بعض، اثني الدمبل لفوق مع لف الرسغ وانزل ببطء.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/81/Biceps-curl-1.png", "https://wger.de/media/exercise-images/81/Biceps-curl-2.png"], "sub": "biceps", "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/81/Biceps-curl-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/81/Biceps-curl-2.png"}]}, {"id": "hammer-curls", "en": "Hammer Curls", "ar": "هامر كيرل", "cue": "ماسك الدمبلز بقبضة محايدة (زي الشاكوش)، ارفعهم مع تثبيت المرفق.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/86/Bicep-hammer-curl-1.png", "https://wger.de/media/exercise-images/86/Bicep-hammer-curl-2.png"], "sub": "biceps", "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/86/Bicep-hammer-curl-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/86/Bicep-hammer-curl-2.png"}]}, {"id": "preacher-curls", "en": "Preacher Curls", "ar": "كيرل بريتشر (منصة)", "cue": "دراعك على منصة البريتشر، اعمل كيرل كامل وانزل ببطء لحد الفرد.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/193/Preacher-curl-3-1.png", "https://wger.de/media/exercise-images/193/Preacher-curl-3-2.png"], "sub": "biceps", "license": "CC-BY-SA 3", "author": "cgoob883", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/193/Preacher-curl-3-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/193/Preacher-curl-3-2.png"}]}, {"id": "cable-concentration-curl", "en": "Cable Concentration Curl", "ar": "كيرل تركيز كيبل", "cue": "منحني شوية، اعمل كيرل بتركيز على الباي بذراع واحدة من الكيبل السفلي.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/1109/00b0a0bf-c14a-4f13-bb14-62c09030a1aa.png"], "sub": "biceps", "license": "CC-BY-SA 4", "author": "cshep442", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1109/00b0a0bf-c14a-4f13-bb14-62c09030a1aa.png"}]}, {"id": "triceps-pushdown", "en": "Triceps Pushdown", "ar": "تراي بوش داون", "cue": "مرفقك مثبت جنب جسمك، ادفع المقبض لتحت لحد فرد الدراع كامل.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/1185/c5ca283d-8958-4fd8-9d59-a3f52a3ac66b.jpg"], "sub": "triceps", "license": "CC-BY-SA 4", "author": "anto.kreegyr", "imageCredits": [{"author": "anto.kreegyr", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1185/c5ca283d-8958-4fd8-9d59-a3f52a3ac66b.jpg"}]}, {"id": "tricep-pushdown-on-cable", "en": "Tricep Pushdown on Cable", "ar": "تراي كيبل (حبل)", "cue": "بمرفق ثابت، مد الحبل لتحت وافتح الطرفين في آخر الحركة.", "group": "arms", "frames": ["https://wger.de/media/exercise-images/805/7a437824-e2cc-46e1-804a-674f0ea31d25.png"], "sub": "triceps", "license": "CC-BY-SA 4", "author": "cshep442", "imageCredits": [{"author": "cshep442", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/805/7a437824-e2cc-46e1-804a-674f0ea31d25.png"}]}, {"id": "dumbbell-goblet-squat", "en": "Dumbbell Goblet Squat", "ar": "سكوات جوبليت دمبل", "cue": "ماسك دمبل قدام صدرك، انزل سكوات عميق بضهر مستقيم وركب على خط الرجل.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/203/1c052351-2af0-4227-aeb0-244008e4b0a8.jpeg", "https://wger.de/media/exercise-images/203/2ab30113-4e08-4d39-9d23-d901ce2c0971.jpeg"], "sub": null, "license": "CC-BY-SA 4", "author": "ataraxie67", "imageCredits": [{"author": "philip", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/203/1c052351-2af0-4227-aeb0-244008e4b0a8.jpeg"}, {"author": "philip", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/203/2ab30113-4e08-4d39-9d23-d901ce2c0971.jpeg"}]}, {"id": "leg-press-on-hackenschmidt-machine", "en": "Leg Press on Hackenschmidt Machine", "ar": "ليج بريس (دفع أرجل)", "cue": "على جهاز الدفع، انزل بالوزن لحد 90 درجة في الركبة وادفع من غير قفل كامل.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-1-1024x721.png", "https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-2-1024x721.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-1-1024x721.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/130/Narrow-stance-hack-squats-2-1024x721.png"}]}, {"id": "dumbbell-lunges-walking", "en": "Dumbbell Lunges Walking", "ar": "لانجز مشي دمبل", "cue": "خطوة كبيرة لقدام وانزل لحد ما ركبتك الخلفية تقرب من الأرض، وكمل مشي.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/113/Walking-lunges-1.png", "https://wger.de/media/exercise-images/206/6ec66efd-e74f-4142-bed1-0a0ac74e3294.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/113/Walking-lunges-1.png"}, {"author": "nishant0712", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/206/6ec66efd-e74f-4142-bed1-0a0ac74e3294.png"}]}, {"id": "leg-extension", "en": "Leg Extension", "ar": "فرد أرجل (ليج إكستنشين)", "cue": "قاعد على الجهاز، افرد رجلك كامل لفوق واعصر العضلة الأمامية وانزل ببطء.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/369/78c915d1-e46d-4d30-8124-65d68664c3ef.png", "https://wger.de/media/exercise-images/369/4d621b17-f6cb-4107-97c0-9f44e9a2dbc6.webp"], "sub": null, "license": "CC0", "author": "BFad07", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/369/78c915d1-e46d-4d30-8124-65d68664c3ef.png"}, {"author": "BFad07", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/369/4d621b17-f6cb-4107-97c0-9f44e9a2dbc6.webp"}]}, {"id": "leg-curls-laying", "en": "Leg Curls (laying)", "ar": "ثني أرجل نايم (ليج كيرل)", "cue": "نايم على الجهاز، اثني رجلك لمؤخرتك وارجع ببطء من غير رفع الحوض.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-1.png", "https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/154/lying-leg-curl-machine-large-2.png"}]}, {"id": "romanian-deadlift", "en": "Romanian Deadlift", "ar": "رفعة رومانية", "cue": "ماسك البار، انزل بانحناء من الحوض بضهر مستقيم لحد تحت الركبة وارجع شد الحوض.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/507/13d526ab-12fc-461e-828a-051dd7c13fb1.png"], "sub": null, "license": "CC-BY-SA 4", "author": "pjwirth", "imageCredits": [{"author": "pjwirth", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/507/13d526ab-12fc-461e-828a-051dd7c13fb1.png"}]}, {"id": "double-leg-calf-raise", "en": "Double Leg Calf Raise", "ar": "رفع سمانة (كالف)", "cue": "واقف على حرفة، ارفع على مشط الرجل لأعلى نقطة وانزل ببطء لتحت.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/1243/53d4fabe-c994-4907-873f-8d82813a9832.png"], "sub": null, "license": "CC-BY-SA 4", "author": "erikocobra", "imageCredits": [{"author": "erikocobra", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1243/53d4fabe-c994-4907-873f-8d82813a9832.png"}]}, {"id": "bulgarian-split-squats-left", "en": "Bulgarian split squats left", "ar": "سكوات بلغاري", "cue": "رجل ورا على بنش، انزل بالرجل الأمامية لحد 90 درجة واطلع، وبدّل رجلين.", "group": "legs", "frames": ["https://wger.de/media/exercise-images/988/6283b258-a4d7-4833-84f7-a38987022d3d.png"], "sub": null, "license": "CC-BY-SA 4", "author": "wger.de", "imageCredits": [{"author": "Franpol", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/988/6283b258-a4d7-4833-84f7-a38987022d3d.png"}]}, {"id": "crunches", "en": "Crunches", "ar": "كرانش", "cue": "نايم وركبك مثنية، ارفع كتفك لركبك مع عصر البطن وانزل ببطء.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/91/Crunches-1.png", "https://wger.de/media/exercise-images/91/Crunches-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "wger.de", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/91/Crunches-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/91/Crunches-2.png"}]}, {"id": "plank", "en": "Plank", "ar": "بلانك", "cue": "على مرفقك ومشط رجلك، جسمك خط مستقيم وبطنك مشدودة، اثبت.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/458/b7bd9c28-9f1d-4647-bd17-ab6a3adf5770.png", "https://wger.de/media/exercise-images/458/902e6836-394e-458b-b94e-101d714294e2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "YYCfit / BFad07", "imageCredits": [{"author": "utkb", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/458/b7bd9c28-9f1d-4647-bd17-ab6a3adf5770.png"}, {"author": "utkb", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/458/902e6836-394e-458b-b94e-101d714294e2.png"}]}, {"id": "leg-raises-lying", "en": "Leg Raises, Lying", "ar": "رفع رجلين نايم", "cue": "نايم وإيدك تحت مؤخرتك، ارفع رجلك مستقيمة لحد 90 درجة وانزل ببطء من غير لمس الأرض.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/125/Leg-raises-2.png", "https://wger.de/media/exercise-images/125/Leg-raises-1.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/125/Leg-raises-2.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/125/Leg-raises-1.png"}]}, {"id": "russian-twist", "en": "Russian Twist", "ar": "راشيان تويست", "cue": "قاعد مائل ورا شوية، لف جسمك يمين وشمال وانت ماسك وزن أو بدونه.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/1193/70ca5d80-3847-4a8c-8882-c6e9e485e29e.png"], "sub": null, "license": "CC-BY-SA 4", "author": "lion", "imageCredits": [{"author": "lion", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1193/70ca5d80-3847-4a8c-8882-c6e9e485e29e.png"}]}, {"id": "sit-up-elbow-thrust", "en": "Sit Up Elbow Thrust", "ar": "سيت أب مع لمس المرفق", "cue": "اطلع سيت أب كامل ولمس مرفقك بالركبة المعاكسة وانزل ببطء.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/1479/0305d98e-0887-4c0c-8992-7c220814efc2.webp"], "sub": null, "license": "CC-BY-SA 4", "author": "Moffi", "imageCredits": [{"author": "Moffi", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1479/0305d98e-0887-4c0c-8992-7c220814efc2.webp"}]}, {"id": "ab-wheel", "en": "Ab wheel", "ar": "عجلة البطن (آب ويل)", "cue": "على ركبك، دحرج العجلة لقدام ببطن مشدودة لحد ما جسمك يمتد وارجع.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/1573/a9ab402b-61ef-4d60-b91a-df52bf7f41a9.jpg", "https://wger.de/media/exercise-images/1573/662db55d-68d0-4297-8215-3dcf6c21c778.jpg"], "sub": null, "license": "CC-BY-SA 4", "author": "lhegedus", "imageCredits": [{"author": "lhegedus", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1573/a9ab402b-61ef-4d60-b91a-df52bf7f41a9.jpg"}, {"author": "lhegedus", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/1573/662db55d-68d0-4297-8215-3dcf6c21c778.jpg"}]}, {"id": "barbell-ab-rollout", "en": "Barbell Ab Rollout", "ar": "رول أوت بالبار", "cue": "نفس حركة العجلة بس بالبار، دحرج لقدام وارجع بقوة البطن.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/41/34b37423-269f-43d4-9d29-d2a90eeaa6b4.png"], "sub": null, "license": "CC-BY-SA 4", "author": "sevae", "imageCredits": [{"author": "sevae", "license": "CC BY-SA 4.0", "url": "https://creativecommons.org/licenses/by-sa/4.0/", "source": "https://wger.de/media/exercise-images/41/34b37423-269f-43d4-9d29-d2a90eeaa6b4.png"}]}, {"id": "incline-crunches", "en": "Incline Crunches", "ar": "كرانش على بنش مائل", "cue": "نايم على بنش مائل، اعمل كرانش مركز على الجزء العلوي من البطن.", "group": "abs", "frames": ["https://wger.de/media/exercise-images/56/Decline-crunch-1.png", "https://wger.de/media/exercise-images/56/Decline-crunch-2.png"], "sub": null, "license": "CC-BY-SA 3", "author": "wger.de", "imageCredits": [{"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/56/Decline-crunch-1.png"}, {"author": "Everkinetic", "license": "CC BY-SA 3.0", "url": "https://creativecommons.org/licenses/by-sa/3.0/", "source": "https://wger.de/media/exercise-images/56/Decline-crunch-2.png"}]}];</script>
+<script>/* الجامد — gym tracker. Local-first; optional friends sync via Supabase (name + today's day only). */
+(function(){
+"use strict";
+
+const KEY = "gymtracker.v1";
+const SUPA = window.SUPA || {enabled:false};
+
+const GROUPS = { chest:"صدر", back:"ضهر", shoulders:"كتف", arms:"دراع", legs:"أرجل", abs:"بطن" };
+const GROUP_ICONS = { chest:"🦅", back:"🧗", shoulders:"🤷", arms:"💪", legs:"🦵", abs:"🧱" };
+
+const SPLITS = {
+  arnold: { name:"أرنولد سبليت", desc:"صدر+ضهر / كتف+دراع / أرجل — أسلوب أرنولد شوارزنيجر",
+    days:[
+      {label:"صدر + ضهر", parts:[["chest"],["back"]]},
+      {label:"كتف + دراع", parts:[["shoulders"],["arms"]]},
+      {label:"أرجل + بطن", parts:[["legs"],["abs"]]},
+    ]},
+  ppl: { name:"بوش بول ليج (Push Pull Legs)", desc:"دفع (صدر+كتف+تراي) / سحب (ضهر+باي) / أرجل",
+    days:[
+      {label:"دفع — صدر + كتف + تراي", parts:[["chest"],["shoulders"],["arms","triceps"]]},
+      {label:"سحب — ضهر + باي", parts:[["back"],["arms","biceps"]]},
+      {label:"أرجل + بطن", parts:[["legs"],["abs"]]},
+    ]},
+  bro: { name:"برو سبليت (عضلة كل يوم)", desc:"كل يوم عضلة واحدة: صدر، ضهر، كتف، دراع، أرجل، بطن",
+    days:[
+      {label:"صدر", parts:[["chest"]]},
+      {label:"ضهر", parts:[["back"]]},
+      {label:"كتف", parts:[["shoulders"]]},
+      {label:"دراع", parts:[["arms"]]},
+      {label:"أرجل", parts:[["legs"]]},
+      {label:"بطن", parts:[["abs"]]},
+    ]},
+  upperlower: { name:"علوي / سفلي", desc:"يوم جسم علوي ويوم جسم سفلي بالتبادل",
+    days:[
+      {label:"جسم علوي", parts:[["chest"],["back"],["shoulders"],["arms"]]},
+      {label:"جسم سفلي + بطن", parts:[["legs"],["abs"]]},
+    ]},
+  fullbody: { name:"جسم كامل", desc:"كل المجموعات في كل تمرين",
+    days:[
+      {label:"جسم كامل", parts:[["chest"],["back"],["shoulders"],["arms"],["legs"],["abs"]]},
+    ]},
+};
+
+let S = load();
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){ const s = JSON.parse(raw); if(s && typeof s==="object" && Array.isArray(s.history) && s.log) return Object.assign({friends:[],sharing:false},s); }
+  }catch(e){}
+  return { name:"", split:null, dayIndex:0, lastDone:null, log:{}, history:[], friendCode:null, friends:[] };
+}
+function save(){ localStorage.setItem(KEY, JSON.stringify(S)); }
+
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function dayAgo(str){
+  const t = todayStr();
+  if(str===t) return "النهاردة";
+  const a = new Date(str+"T12:00:00"), b = new Date(t+"T12:00:00");
+  const diff = Math.round((b-a)/86400000);
+  if(diff===1) return "إمبارح";
+  if(diff>1 && diff<=10) return "من "+diff+" أيام";
+  if(diff>10) return "من "+diff+" يوم";
+  return str;
+}
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.style.display="block";
+  clearTimeout(t._h); t._h = setTimeout(()=>t.style.display="none", 2200);
+}
+function streak(){
+  if(!S.history.length) return 0;
+  const days = new Set(S.history.map(h=>h.date));
+  let n = 0;
+  const d = new Date();
+  if(!days.has(todayStr())) d.setDate(d.getDate()-1); // today not done yet: count back from yesterday
+  while(days.has(d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"))){
+    n++; d.setDate(d.getDate()-1);
+  }
+  return n;
+}
+
+/* ---------- exercise helpers ---------- */
+function exByGroup(group, sub){
+  return EXERCISES.filter(e=>e.group===group && (!sub || e.sub===sub || (group!=="arms")));
+}
+function lastLog(id){
+  const arr = S.log[id];
+  return arr && arr.length ? arr[arr.length-1] : null;
+}
+
+/* ---------- friends: opt-in, anonymous per-device ownership, code-only lookup ---------- */
+const DB = SUPA.enabled && window.supabase ? window.supabase.createClient(SUPA.url,SUPA.anonKey) : null;
+let authReady;
+async function identity(){
+  if(!DB) throw Error('unavailable');
+  if(!authReady) authReady=(async()=>{let {data:{session}}=await DB.auth.getSession();
+    if(!session){const r=await DB.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session;}return session.user.id;})();
+  try{return await authReady;}catch(e){authReady=null;throw e;}
+}
+function todayLabel(){
+  if(S.lastDone===todayStr() && S.history.length) return 'خلص: '+S.history[S.history.length-1].day;
+  return SPLITS[S.split].days[S.dayIndex%SPLITS[S.split].days.length].label;
+}
+async function pushMyStatusUpsert(){
+  if(!DB || !S.sharing || !S.name || !S.split)return;
+  try{const uid=await identity();
+    const r=await DB.from('gym_status').upsert({owner_id:uid,name:S.name.slice(0,50),day:todayLabel(),status_date:todayStr(),updated_at:new Date().toISOString()},{onConflict:'owner_id'}).select('code').single();
+    if(r.error)throw r.error; S.friendCode=r.data.code;save();return true;
+  }catch(e){return false;}
+}
+async function fetchFriends(){
+  await identity();const out=[];
+  for(const code of S.friends||[]){const r=await DB.rpc('gym_friend_status',{friend_code:code});if(r.error)throw r.error;
+    if(r.data?.length)out.push({...r.data[0],code});else out.push({code,name:'غير متاح',day:'صاحب الكود مش مشارك حالياً'});}
+  return out;
+}
+
+/* ---------- views ---------- */
+const view = document.getElementById("view");
+const navbar = document.getElementById("navbar");
+let nav = "home";
+
+function render(){
+  if(!S.name || !S.split){ renderOnboard(); navbar.classList.add("hide"); return; }
+  navbar.classList.remove("hide");
+  [...navbar.children].forEach(b=>b.classList.toggle("on", b.dataset.v===nav));
+  if(nav==="home") renderHome();
+  else if(nav==="lib") renderLib();
+  else if(nav==="friends") renderFriends();
+  else renderSettings();
+}
+
+let onboardSplit = "arnold";
+function renderOnboard(){
+  view.innerHTML = `
+    <div class="center" style="margin-top:18px"><span class="brand">الجامد</span> <div class="eyebrow" style="margin-top:14px">LIFT. LOG. REPEAT.</div></div>
+    <p class="sub center" style="margin-top:6px">سجل تمرينك وأوزانك، والتطبيق يفكرك كل يوم عليك إيه.</p>
+    <div class="card">
+      <label>اسمك</label>
+      <input type="text" id="nm" placeholder="اكتب اسمك" value="${esc(S.name)}">
+      <label>اختار نظام التمرين</label>
+      ${Object.entries(SPLITS).map(([k,sp])=>`
+        <div class="split-card ${k===onboardSplit?'sel':''}" data-k="${k}">
+          <b>${esc(sp.name)}</b><span>${esc(sp.desc)}</span>
+        </div>`).join("")}
+      <div style="margin-top:16px"><button class="btn" id="start">يلا نبدأ 💪</button></div>
+      <p class="note" style="margin-top:12px">بياناتك بتتحفظ على موبايلك بس — مفيش حسابات ولا تسجيل.</p>
+    </div>`;
+  view.querySelectorAll(".split-card").forEach(c=>{
+    c.onclick = ()=>{ onboardSplit = c.dataset.k;
+      view.querySelectorAll(".split-card").forEach(x=>x.classList.toggle("sel", x===c)); };
+  });
+  view.querySelector("#start").onclick = ()=>{
+    const nm = view.querySelector("#nm").value.trim();
+    if(!nm || nm.length>50){ toast("اكتب اسمك الأول"); return; }
+    S.name = nm; S.split = onboardSplit; S.dayIndex = 0; save();
+    pushMyStatusUpsert();
+    nav="home"; render(); window.scrollTo(0,0); toast("يلا يا جامد");
+  };
+}
+
+function dayPartsLabel(p){
+  let lbl = GROUPS[p[0]];
+  if(p[1]==="biceps") lbl += " (باي)";
+  if(p[1]==="triceps") lbl += " (تراي)";
+  return lbl;
+}
+
+function renderHome(){
+  const sp = SPLITS[S.split];
+  const doneToday = S.lastDone === todayStr();
+  const day = sp.days[S.dayIndex % sp.days.length];
+  const lastHist = S.history.length ? S.history[S.history.length-1] : null;
+  const st = streak();
+
+  let main;
+  if(doneToday){
+    main = `
+      <div class="done-card">
+        <div class="plate">DONE</div>
+        <div class="big">خلصت تمرين النهاردة، جامد!</div>
+        <div class="mut" style="font-size:14px;margin-top:4px;position:relative">تمرينك الجاي: <b style="color:#93c5fd">${esc(day.label)}</b></div>
+        <div class="rowbtns">
+          <button class="btn small ghost" id="undone">تراجع عن الصح</button>
+
+        </div>
+      </div>`;
+  } else {
+    main = `
+      <div class="hero">
+        <div class="eyebrow">TODAY / NO EXCUSES</div><div class="kicker">تمرين النهاردة</div>
+        <div class="big">${esc(day.label)}</div>
+        <div class="chips">${day.parts.map(p=>`<span class="chip">${esc(dayPartsLabel(p))}</span>`).join("")}</div>
+        <button class="check" id="done" title="خلصت">✓</button>
+        <div class="mut" style="font-size:12px;position:relative">دوس صح لما تخلص</div>
+        <div class="rowbtns">
+          <button class="btn small ghost" id="skip">مش هتمرن ده النهاردة ⏭</button>
+        </div>
+      </div>
+      <div class="card">
+        <b style="font-size:14px;font-weight:800">مكتبة عضلات يومك</b>
+        <div style="margin-top:9px">${day.parts.map(p=>exByGroup(p[0],p[1]).slice(0,4).map(e=>`<div class="mut" style="font-size:13px;padding:2px 0">• ${esc(e.ar)}</div>`).join("")).join("")}</div>
+        <div class="mut" style="font-size:12px;margin-top:7px">اختار المناسب من المكتبة، دي مش خطة تدريب كاملة. استريح حسب جدولك ومدربك.</div>
+      </div>`;
+  }
+
+  const week = sp.days.map((d,i)=>{
+    const cls = i===S.dayIndex%sp.days.length && !doneToday ? "today" : "";
+    return `<div class="wday ${cls}">يوم ${i+1}<b>${esc(d.label)}</b></div>`;
+  }).join("");
+
+  view.innerHTML = `
+    <div class="brandline"><span class="brand">الجامد</span><small>BUILT BY REPS.</small></div><h1>جاهز يا ${esc(S.name)}؟</h1>
+    <p class="sub">${esc(sp.name)}${lastHist ? " · آخر تمرين: "+esc(lastHist.day)+" ("+dayAgo(lastHist.date)+")" : ""}</p>
+    ${st>1 ? `<div style="margin-bottom:12px"><span class="streak">🔥 ${st} أيام ورا بعض</span></div>` : ""}
+    ${main}
+    <div class="card">
+      <b style="font-size:14px;font-weight:800">جدول النظام</b>
+      <div class="week" style="margin-top:10px">${week}</div>
+    </div>
+    <p class="note">التطبيق بيعد الأيام بنفسه: لما تدوس صح النهاردة، بكرة هيفتح على اليوم اللي بعده في النظام.</p>`;
+
+  const doneBtn = view.querySelector("#done");
+  if(doneBtn) doneBtn.onclick = ()=>{
+    S.history.push({date: todayStr(), day: day.label});
+    S.lastDone = todayStr();
+    S.dayIndex = (S.dayIndex+1) % sp.days.length;
+    save(); pushMyStatusUpsert(); render(); toast("جامد ✅ تمرينك الجاي: "+sp.days[S.dayIndex%sp.days.length].label);
+  };
+  const undone = view.querySelector("#undone");
+  if(undone) undone.onclick = ()=>{
+    S.lastDone = null;
+    S.dayIndex = (S.dayIndex-1+sp.days.length) % sp.days.length;
+    if(S.history.length) S.history.pop();
+    save(); pushMyStatusUpsert(); render();
+  };
+  const sk = view.querySelector("#skip");
+  if(sk) sk.onclick = ()=>{
+    S.dayIndex = (S.dayIndex+1) % sp.days.length;
+    save(); pushMyStatusUpsert(); render(); toast("اتنقلنا لـ: "+sp.days[S.dayIndex%sp.days.length].label);
+  };
+}
+
+let libGroup = "chest";
+function exCard(e){
+  const last = lastLog(e.id);
+  const hist = S.log[e.id] || [];
+  const img = e.frames.length>1
+    ? `<img class="anim" data-f0="${e.frames[0]}" data-f1="${e.frames[1]}" src="${e.frames[0]}" alt="${esc(e.ar)}" loading="lazy">`
+    : `<img src="${e.frames[0]}" alt="${esc(e.ar)}" loading="lazy">`;
+  return `
+  <div class="ex" data-id="${e.id}">
+    <div class="head">
+      ${img}
+      <div>
+        <div class="nm">${esc(e.ar)}${e.sub?` <span class="mut" style="font-size:11px">(${e.sub==="biceps"?"باي":"تراي"})</span>`:""}</div>
+        <div class="cue">${esc(e.cue)}</div>
+      </div>
+    </div>
+    <div class="logrow">
+      <div class="fld"><label>الوزن (كجم)</label><input type="number" inputmode="decimal" class="w" placeholder="0"></div>
+      <div class="fld"><label>العدات</label><input type="number" inputmode="numeric" class="r" placeholder="0"></div>
+      <div class="fld"><label>المجموعات</label><input type="number" inputmode="numeric" class="s" placeholder="3"></div>
+      <button class="logsave">سجل</button>
+    </div>
+    ${last ? `<div class="last">آخر مرة: ${esc(last.w)} كجم × ${esc(last.r)} عدات${last.s?` × ${esc(last.s)} مجموعات`:""} — ${dayAgo(last.d)}</div>` : `<div class="mut" style="font-size:12px;margin-top:9px">لسه مسجلتش التمرين ده</div>`}
+    ${hist.length ? `<button class="hist-toggle">السجل (${hist.length})</button>
+      <div class="hist">${hist.slice(-5).reverse().map(h=>`${dayAgo(h.d)}: ${esc(h.w)}كجم × ${esc(h.r)}${h.s?` × ${esc(h.s)}`:""}`).join("<br>")}</div>`:""}
+  </div>`;
+}
+
+function renderLib(){
+  view.innerHTML = `
+    <h1>التمارين</h1>
+    <p class="sub">مقسمة بالعضلة، بصورها بتتلعب إزاي، وسجل وزنك في كل تمرين.</p>
+    <div class="tabs">
+      ${Object.entries(GROUPS).map(([k,v])=>`<button class="tab ${k===libGroup?'on':''}" data-g="${k}">${v}</button>`).join("")}
+    </div>
+    <div id="exlist">${exByGroup(libGroup).map(e=>exCard(e)).join("")}</div>`;
+  view.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{ libGroup=t.dataset.g; renderLib(); });
+  bindExCards();
+}
+
+let animTimer;
+function bindExCards(){
+  clearInterval(animTimer);
+  let frame = false;
+  animTimer = setInterval(()=>{frame=!frame; document.querySelectorAll(".anim").forEach(img=>img.src=frame?img.dataset.f1:img.dataset.f0);},1200);
+  view.querySelectorAll(".ex").forEach(card=>{
+    const id = card.dataset.id;
+    card.querySelector(".logsave").onclick = ()=>{
+      const w = card.querySelector(".w").value.trim();
+      const r = card.querySelector(".r").value.trim();
+      const s = card.querySelector(".s").value.trim();
+      if(w==="" || !Number.isFinite(+w) || +w<0 || !Number.isInteger(+r) || +r<1 || (s && (!Number.isInteger(+s)||+s<1))){ toast("اكتب الوزن والعدات الأول"); return; }
+      (S.log[id] = S.log[id]||[]).push({d: todayStr(), w:w, r:r, s:s||null});
+      save(); render(); toast("اتسجل ✅");
+    };
+    const tg = card.querySelector(".hist-toggle");
+    if(tg) tg.onclick = ()=>card.classList.toggle("open");
+  });
+}
+
+async function renderFriends(){
+  view.innerHTML=`<div class="brandline"><span class="brand">الشلة</span><small>TRAIN TOGETHER</small></div>
+    <p class="sub">شارك اسمك ونوع تمرينك بس. الأوزان وسجل التدريب مش بيطلعوا من جهازك.</p>`;
+  if(!DB){view.innerHTML+='<div class="card">المشاركة مش متاحة حالياً، سجلك الشخصي شغال.</div>';return;}
+  if(!S.sharing){view.innerHTML+=`<div class="card"><h2>نتمرن سوا؟</h2><p class="note">لما تفعل المشاركة، Supabase هيحفظ اسمك ونوع يومك وتاريخ تحديثه. أي شخص معاه كودك يقدر يشوفهم. مفيش بحث بالاسم ولا قائمة عامة. تقدر توقف المشاركة وتمسحها في أي وقت.</p><button class="btn" id="enableShare">موافق، فعّل المشاركة</button></div>`;
+    view.querySelector('#enableShare').onclick=async()=>{S.sharing=true;save();const ok=await pushMyStatusUpsert();if(!ok){S.sharing=false;save();toast('المشاركة متوصلتش، جرب تاني');}renderFriends();};return;}
+  view.innerHTML+=`<div class="card"><b>كودك، ابعته بس لأصحابك</b><div class="codebox" id="mycode" style="margin:12px 0">بيجهز...</div>
+    <button class="btn ghost" id="share">انسخ الكود</button><p class="mut" id="sync" style="font-size:12px"></p></div>
+    <div class="card"><label>كود صاحبك</label><input type="text" id="fc" placeholder="الصق الكود هنا" dir="ltr"><button class="btn" id="add" style="margin-top:10px">ضيف صاحبك</button></div>
+    <div class="card"><b>الشلة عليهم إيه؟</b><button class="btn small ghost" id="refresh">تحديث</button><div id="flist" style="margin-top:12px">بيحمّل...</div></div>
+    <button class="btn danger" id="disableShare">إيقاف المشاركة ومسح حالتي</button>`;
+  view.querySelector('#share').onclick=async()=>{if(!S.friendCode)return;try{await navigator.clipboard.writeText(S.friendCode);toast('الكود اتنسخ');}catch(e){toast('حدد الكود وانسخه');}};
+  view.querySelector('#refresh').onclick=renderFriends;
+  view.querySelector('#add').onclick=async()=>{const c=view.querySelector('#fc').value.trim().toLowerCase();
+    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(c)){toast('الكود مش كامل');return;}
+    if(c===S.friendCode){toast('ده كودك انت');return;}
+    if((S.friends||[]).length>=30){toast('أقصى عدد 30 صاحب');return;}
+    try{await identity();const r=await DB.rpc('gym_friend_status',{friend_code:c});if(r.error||!r.data?.length){toast('الكود مش موجود أو المشاركة واقفة');return;}
+      S.friends=S.friends||[];if(!S.friends.includes(c))S.friends.push(c);save();renderFriends();}catch(e){toast('مفيش اتصال، جرب تاني');}};
+  view.querySelector('#disableShare').onclick=async()=>{if(!confirm('تمسح حالتك من النت وتوقف المشاركة؟'))return;
+    try{const uid=await identity();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;
+      S.sharing=false;S.friendCode=null;save();renderFriends();}catch(e){toast('المسح متعملش، اتصل بالنت وجرب تاني');}};
+  const ok=await pushMyStatusUpsert();if(nav!=='friends')return;
+  view.querySelector('#mycode').textContent=S.friendCode||'تعذر الاتصال';
+  view.querySelector('#sync').textContent=ok?'حالتك اتحدثت دلوقتي':'التحديث متعملش، اتصل بالنت وجرب تاني';
+  try{const rows=await fetchFriends();if(nav!=='friends')return;
+    view.querySelector('#flist').innerHTML=rows.length?rows.map(r=>`<div class="friend"><div class="n">${esc(r.name)}</div><span class="badge ${r.status_date===todayStr()?'':'off'}">${r.status_date===todayStr()?esc(r.day):'آخر حالة: '+esc(r.day)}</span><p class="mut" style="font-size:11px">${r.status_date===todayStr()?'محدث النهاردة':r.status_date?'مش متأكدين من تمرين النهاردة، آخر تحديث '+esc(r.status_date):'المشاركة واقفة'}</p><button class="hist-toggle" data-remove="${r.code}">إزالة من الشلة</button></div>`).join(''):'لسه مضفتش حد. خد الكود من صاحبك.';
+    view.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>{S.friends=S.friends.filter(x=>x!==b.dataset.remove);save();renderFriends();});
+  }catch(e){if(nav==='friends')view.querySelector('#flist').textContent='التحديث مش متاح، جرب تاني.';}
+}
+
+function renderSettings(){
+  view.innerHTML = `
+    <h1>الإعدادات</h1>
+    <p class="sub">الأوزان والسجل على جهازك. مشاركة الاسم ونوع اليوم اختيارية في الشلة.</p>
+    <div class="card">
+      <div class="setrow"><div><div class="t">الاسم</div><div class="d">${esc(S.name)}</div></div>
+        <button class="btn small ghost" id="rename">تغيير</button></div>
+      <div class="setrow"><div><div class="t">نظام التمرين</div><div class="d">${esc(SPLITS[S.split].name)}</div></div>
+        <button class="btn small ghost" id="resplit">تغيير</button></div>
+    </div>
+    <div class="card">
+      <b style="font-size:14px;font-weight:800">النسخ الاحتياطي</b>
+      <p class="note" style="margin:10px 0">بياناتك متسجلة على الموبايل ده بس. لو غيرت موبايلك، صدّر نسخة وابعتها لنفسك واستوردها هناك.</p>
+      <button class="btn ghost" id="export" style="margin-bottom:8px">تصدير نسخة احتياطية ⬇️</button>
+      <button class="btn ghost" id="importbtn">استيراد نسخة ⬆️</button>
+      <input type="file" id="importfile" accept="application/json" class="hide">
+    </div>
+    <div class="card">
+      <b style="font-size:14px;font-weight:800">حقوق الصور</b>
+      <p class="note" style="margin:10px 0">صور وبيانات التمارين من <b>wger.de</b> — قاعدة بيانات تمارين مجانية ومفتوحة المصدر، برخص Creative Commons (CC BY-SA / CC0).</p>
+      <button class="btn small ghost" id="credits">قائمة الحقوق كاملة</button>
+    </div>
+    <button class="btn danger" id="wipe">مسح كل البيانات</button>`;
+
+  view.querySelector("#rename").onclick = ()=>{
+    const nm = prompt("اسمك الجديد:", S.name);
+    if(nm && nm.trim() && nm.trim().length<=50){ S.name = nm.trim(); save(); pushMyStatusUpsert(); render(); }
+  };
+  view.querySelector("#resplit").onclick = ()=>{
+    const keys = Object.keys(SPLITS);
+    const list = keys.map((k,i)=>`${i+1}- ${SPLITS[k].name}`).join("\n");
+    const pick = prompt("اختار رقم النظام:\n"+list, String(keys.indexOf(S.split)+1));
+    const i = parseInt(pick,10)-1;
+    if(keys[i] && keys[i]!==S.split){ S.split = keys[i]; S.dayIndex = 0; S.lastDone = null; save(); pushMyStatusUpsert(); render(); toast("النظام اتغير، هنبدأ من أول يوم"); }
+  };
+  view.querySelector("#export").onclick = ()=>{
+    const blob = new Blob([JSON.stringify({name:S.name,split:S.split,dayIndex:S.dayIndex,lastDone:S.lastDone,history:S.history,log:S.log},null,1)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "elgamed-backup-"+todayStr()+".json";
+    a.click(); toast("اتصدرت النسخة ⬇️");
+  };
+  view.querySelector("#importbtn").onclick = ()=>view.querySelector("#importfile").click();
+  view.querySelector("#importfile").onchange = ev=>{
+    const f = ev.target.files[0]; if(!f) return;
+    const rd = new FileReader();
+    rd.onload = ()=>{
+      try{
+        const d = JSON.parse(rd.result);
+        if(!d || typeof d!=="object" || typeof d.name!=="string" || d.name.length>50 || !SPLITS[d.split] || !Array.isArray(d.history) || !d.log || typeof d.log!=="object" || !Number.isInteger(d.dayIndex) || d.dayIndex<0) throw 0;
+        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:[],sharing:false}; save(); nav="home"; render(); toast("اتستوردت ✅");
+      }catch(e){ toast("الملف ده مش نسخة صح"); }
+    };
+    rd.readAsText(f);
+  };
+  view.querySelector("#credits").onclick = renderCredits;
+  view.querySelector("#wipe").onclick = async ()=>{
+    if(confirm("هتمسح كل حاجة: الاسم، الجدول، وسجل الأوزان. متأكد؟")){
+      if(S.sharing && DB){try{const uid=await identity();const r=await DB.from('gym_status').delete().eq('owner_id',uid);if(r.error)throw r.error;}catch(e){toast('اتصل بالنت الأول عشان نمسح الحالة المشتركة');return;}}
+      localStorage.removeItem(KEY); S = load(); nav="home"; render();
+    }
+  };
+}
+
+function renderCredits(){
+  view.innerHTML = `
+    <h1>حقوق الصور 📄</h1>
+    <p class="sub">كل صور التمارين من wger.de برخص Creative Commons حرّة.</p>
+    <div class="card">
+      ${EXERCISES.map(e=>`<div class="credit"><b style="color:var(--txt)">${esc(e.ar)}</b> (${esc(e.en)})<br>الصورة: ${(e.imageCredits||[]).map(c=>`${esc(c.author)} <a href="${c.url}" style="color:var(--acc)">${esc(c.license)}</a> <a href="${c.source}" style="color:var(--mut)">المصدر</a>`).join("<br>")}</div>`).join("")}
+    </div>
+    <button class="btn ghost" id="back">رجوع</button>`;
+  view.querySelector("#back").onclick = renderSettings;
+}
+
+/* ---------- nav + boot ---------- */
+navbar.querySelectorAll(".navbtn").forEach(b=>{
+  b.onclick = ()=>{ nav = b.dataset.v; render(); window.scrollTo(0,0); };
+});
+
+if("serviceWorker" in navigator && location.protocol.indexOf("http")===0){
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+}
+render();
+pushMyStatusUpsert();
+let shownDate=todayStr();document.addEventListener("visibilitychange",()=>{if(!document.hidden && todayStr()!==shownDate){shownDate=todayStr();render();pushMyStatusUpsert();}});
+})();
+</script>
+</body>
+</html>
