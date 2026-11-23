@@ -238,7 +238,7 @@ function dayAgo(str){
   if(diff===1) return "إمبارح";
   if(diff>1 && diff<=10) return "من "+diff+" أيام";
   if(diff>10) return "من "+diff+" يوم";
-  return str;
+  return esc(str);
 }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function toast(msg){
@@ -561,7 +561,7 @@ function renderSettings(){
       try{
         const d = JSON.parse(rd.result);
         if(!d || typeof d!=="object" || typeof d.name!=="string" || d.name.length>50 || !SPLITS[d.split] || !Array.isArray(d.history) || !d.log || typeof d.log!=="object" || !Number.isInteger(d.dayIndex) || d.dayIndex<0) throw 0;
-        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:[],sharing:false}; save(); nav="home"; render(); toast("اتستوردت ✅");
+        S = {name:d.name,split:d.split,dayIndex:d.dayIndex,lastDone:d.lastDone,history:d.history,log:d.log,friends:S.friends||[],sharing:!!S.sharing,friendCode:S.friendCode||null}; save(); nav="home"; render(); toast("اتستوردت ✅");
       }catch(e){ toast("الملف ده مش نسخة صح"); }
     };
     rd.readAsText(f);
