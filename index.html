@@ -98,6 +98,15 @@ label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:14px 
 .hist{font-size:12px;color:var(--mut);margin-top:7px;border-top:1px dashed var(--line);padding-top:7px;display:none;line-height:1.9}
 .ex.open .hist{display:block}
 .hist-toggle{font-size:11.5px;color:var(--mut);margin-top:7px;cursor:pointer;text-decoration:underline;background:none;border:0;font-family:inherit;padding:0}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-h b{font-size:15px;font-weight:800}.cal-h button{background:var(--card2);border:1.5px solid var(--line);color:var(--txt,#fff);border-radius:10px;width:38px;height:36px;font-size:18px;cursor:pointer;font-family:inherit}
+.cal-h button:disabled{opacity:.35}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;direction:rtl}
+.cal-w{font-size:10.5px;color:var(--mut);text-align:center;padding-bottom:2px}
+.cal-d{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:9px;font-size:13px;font-weight:700;background:var(--card2);color:var(--mut);border:1.5px solid transparent}
+.cal-d.on{background:var(--grad);color:#0b1a06;border-color:transparent}
+.cal-d.td{border-color:#93c5fd}.cal-d.e{background:none}
+.cal-cnt{margin-top:10px;font-size:14px;font-weight:800;text-align:center}
 .navbar{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));right:12px;left:12px;max-width:456px;margin:0 auto;
   background:rgba(20,23,29,.92);border:1px solid var(--line);border-radius:22px;
   backdrop-filter:blur(14px);display:flex;padding:6px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
@@ -372,6 +381,28 @@ function dayPartsLabel(p){
   return lbl;
 }
 
+
+let calM=null;
+function ymKey(y,m){return y+"-"+String(m+1).padStart(2,"0");}
+function calendarCard(){
+  const now=new Date(); if(!calM) calM={y:now.getFullYear(),m:now.getMonth()};
+  const {y,m}=calM, key=ymKey(y,m);
+  const days=new Set(S.history.filter(h=>h&&typeof h.date==="string"&&h.date.startsWith(key+"-")).map(h=>h.date));
+  const first=new Date(y,m,1), n=new Date(y,m+1,0).getDate();
+  const off=(first.getDay()+1)%7; // week starts Saturday
+  const names=["ش","ح","ن","ث","ر","خ","ج"];
+  const mn=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  let cells=names.map(x=>`<div class="cal-w">${x}</div>`).join("")+'<div class="cal-d e"></div>'.repeat(off);
+  for(let d=1;d<=n;d++){const ds=key+"-"+String(d).padStart(2,"0");cells+=`<div class="cal-d ${days.has(ds)?"on":""} ${ds===todayStr()?"td":""}" data-d="${ds}">${days.has(ds)?"✓":d}</div>`;}
+  const isNow=y===now.getFullYear()&&m===now.getMonth(), c=days.size;
+  const txt=c===0?(isNow?"لسه منزلتش":"منزلتش"):c===1?"نزلت مرة واحدة":c===2?"نزلت مرتين":"نزلت "+c+(c<=10?" مرات":" مرة");
+  return `<div class="card" id="calcard"><div class="cal-h"><button id="calnext" aria-label="الشهر الجاي" ${isNow?"disabled":""}>›</button><b>${mn[m]} ${y}</b><button id="calprev" aria-label="الشهر اللي فات">‹</button></div><div class="cal-g">${cells}</div><div class="cal-cnt">${txt} ${isNow?"الشهر ده":"في الشهر ده"} 💪 <span class="mut" style="font-weight:600">(${c} يوم)</span></div></div>`;
+}
+function bindCalendar(){
+  const pv=view.querySelector("#calprev"), nx=view.querySelector("#calnext");
+  if(pv) pv.onclick=()=>{calM.m--; if(calM.m<0){calM.m=11;calM.y--;} render();};
+  if(nx) nx.onclick=()=>{calM.m++; if(calM.m>11){calM.m=0;calM.y++;} render();};
+}
 function renderHome(){
   const sp = SPLITS[S.split];
   const doneToday = S.lastDone === todayStr();
@@ -420,15 +451,17 @@ function renderHome(){
     <p class="sub">${esc(sp.name)}${lastHist ? " · آخر تمرين: "+esc(lastHist.day)+" ("+dayAgo(lastHist.date)+")" : ""}</p>
     ${st>1 ? `<div style="margin-bottom:12px"><span class="streak">🔥 ${st} أيام ورا بعض</span></div>` : ""}
     ${main}
+    ${calendarCard()}
     <div class="card">
       <b style="font-size:14px;font-weight:800">جدول النظام</b>
       <div class="week" style="margin-top:10px">${week}</div>
     </div>
     <p class="note">التطبيق بيعد الأيام بنفسه: لما تدوس صح النهاردة، بكرة هيفتح على اليوم اللي بعده في النظام.</p>`;
 
+  bindCalendar();
   const doneBtn = view.querySelector("#done");
   if(doneBtn) doneBtn.onclick = ()=>{
-    S.history.push({date: todayStr(), day: day.label});
+    calM=null; S.history.push({date: todayStr(), day: day.label});
     S.lastDone = todayStr();
     S.dayIndex = (S.dayIndex+1) % sp.days.length;
     save(); pushMyStatusUpsert(); render(); toast("جامد ✅ تمرينك الجاي: "+sp.days[S.dayIndex%sp.days.length].label);
@@ -480,7 +513,7 @@ function exCard(e){
 function renderLib(){
   const count=exByGroup(libGroup).length;
   view.innerHTML = `
-    <h1>التمارين <span class="mut" style="font-size:17px">200 تمرين · V6</span></h1>
+    <h1>التمارين <span class="mut" style="font-size:17px">200 تمرين · V7</span></h1>
     <p class="sub">المكتبة كلها قدامك من غير حد ٨ تمارين. اختار اللي يناسبك بالجهاز أو العضلة، ومش مطلوب تلعبهم كلهم في يوم واحد. سجلك زي ما هو.</p>
     <p class="note" style="margin-top:0">دوس «شوف فيديو التمرين» تحت أي حركة. بيفتح شرح للحركة في صفحة جديدة وبيحتاج إنترنت. الفيديوهات الجديدة عرض للحركة، والشرح العربي والصور هنا يساعدوك.</p>
     <div class="tabs">
