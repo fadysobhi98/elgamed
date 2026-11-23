@@ -107,6 +107,9 @@ label{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:14px 
 .cal-d.on{background:var(--grad);color:#0b1a06;border-color:transparent}
 .cal-d.td{border-color:#93c5fd}.cal-d.e{background:none}
 .cal-cnt{margin-top:10px;font-size:14px;font-weight:800;text-align:center}
+.plan-ex{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;background:none;border:0;border-bottom:1px solid var(--line);color:var(--txt);font:inherit;font-size:13.5px;padding:9px 2px;text-align:right;cursor:pointer}
+.plan-ex span{color:#93c5fd;font-size:11px;white-space:nowrap}
+.ex.hl{outline:2px solid #c7ff3d;box-shadow:0 0 0 4px rgba(199,255,61,.18)}
 .navbar{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));right:12px;left:12px;max-width:456px;margin:0 auto;
   background:rgba(20,23,29,.92);border:1px solid var(--line);border-radius:22px;
   backdrop-filter:blur(14px);display:flex;padding:6px;box-shadow:0 12px 32px rgba(0,0,0,.5)}
@@ -403,6 +406,12 @@ function bindCalendar(){
   if(pv) pv.onclick=()=>{calM.m--; if(calM.m<0){calM.m=11;calM.y--;} render();};
   if(nx) nx.onclick=()=>{calM.m++; if(calM.m>11){calM.m=0;calM.y++;} render();};
 }
+function openExercise(id){
+  const e=EXERCISES.find(x=>x.id===id); if(!e) return;
+  libGroup=e.group; libSub=''; libQuery=''; nav='lib'; render();
+  const c=view.querySelector('.ex[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]');
+  if(c){ c.classList.add('hl'); c.scrollIntoView({block:'start'}); window.scrollBy(0,-12); setTimeout(()=>c.classList.remove('hl'),4000); }
+}
 function renderHome(){
   const sp = SPLITS[S.split];
   const doneToday = S.lastDone === todayStr();
@@ -436,8 +445,8 @@ function renderHome(){
       </div>
       <div class="card">
         <b style="font-size:14px;font-weight:800">مكتبة عضلات يومك</b>
-        <div style="margin-top:9px">${day.parts.map(p=>exByGroup(p[0],p[1]).slice(0,4).map(e=>`<div class="mut" style="font-size:13px;padding:2px 0">• ${esc(e.ar)}</div>`).join("")).join("")}</div>
-        <div class="mut" style="font-size:12px;margin-top:7px">اختار المناسب من المكتبة، دي مش خطة تدريب كاملة. استريح حسب جدولك ومدربك.</div>
+        <div style="margin-top:9px">${day.parts.map(p=>exByGroup(p[0],p[1]).slice(0,4).map(e=>`<button class="plan-ex" data-ex="${esc(e.id)}"><b style="font-weight:700">• ${esc(e.ar)}</b><span>شوف الصورة والفيديو ‹</span></button>`).join("")).join("")}</div>
+        <div class="mut" style="font-size:12px;margin-top:7px">دوس على أي تمرين متعرفوش وهيفتحلك صورته وفيديو الأداء. دي مش خطة تدريب كاملة. استريح حسب جدولك ومدربك.</div>
       </div>`;
   }
 
@@ -459,6 +468,7 @@ function renderHome(){
     <p class="note">التطبيق بيعد الأيام بنفسه: لما تدوس صح النهاردة، بكرة هيفتح على اليوم اللي بعده في النظام.</p>`;
 
   bindCalendar();
+  view.querySelectorAll(".plan-ex").forEach(b=>b.onclick=()=>openExercise(b.dataset.ex));
   const doneBtn = view.querySelector("#done");
   if(doneBtn) doneBtn.onclick = ()=>{
     calM=null; S.history.push({date: todayStr(), day: day.label});
@@ -513,7 +523,7 @@ function exCard(e){
 function renderLib(){
   const count=exByGroup(libGroup).length;
   view.innerHTML = `
-    <h1>التمارين <span class="mut" style="font-size:17px">200 تمرين · V7</span></h1>
+    <h1>التمارين <span class="mut" style="font-size:17px">200 تمرين · V8</span></h1>
     <p class="sub">المكتبة كلها قدامك من غير حد ٨ تمارين. اختار اللي يناسبك بالجهاز أو العضلة، ومش مطلوب تلعبهم كلهم في يوم واحد. سجلك زي ما هو.</p>
     <p class="note" style="margin-top:0">دوس «شوف فيديو التمرين» تحت أي حركة. بيفتح شرح للحركة في صفحة جديدة وبيحتاج إنترنت. الفيديوهات الجديدة عرض للحركة، والشرح العربي والصور هنا يساعدوك.</p>
     <div class="tabs">
